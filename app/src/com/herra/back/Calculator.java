@@ -100,7 +100,7 @@ public class Calculator implements Observer, Observable {
 //==========================================================================================
 
 /**
- * Test the expression:<p>
+ * This function test the expression to evaluate
  * 
  * @return returns {@code true} if the actual input is correct
  */
