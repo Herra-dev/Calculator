@@ -173,15 +173,18 @@ public class Calculator implements Observer, Observable {
 
             if(first > 0) {
                 Object before = _listN.get(first-1);
-                if(before.equals("+") && before.equals("-") && before.equals("*") && before.equals("/")) {
+                if(before.equals("+") || before.equals("-") ||
+                     before.equals("*") || before.equals("/")) {
+                    if(_listNumberCopy.contains("(")) 
+                    _listN.add(first, _calcul(_listNumberCopy));
+
+                } else {
                     _listN.add(first, "*");
 
                     if(_listNumberCopy.contains("(")) 
                         _listN.add(first+1, _calcul(_listNumberCopy));
-                        
-                } else 
-                    if(_listNumberCopy.contains("(")) 
-                        _listN.add(first, _calcul(_listNumberCopy));
+                }
+                    
                 
             }
 
@@ -353,7 +356,7 @@ public class Calculator implements Observer, Observable {
             this._cOutPut = "SYNTAX ERROR";
             this._canProcess = false;
             throw new _SyntaxErrorException("verify your syntax: closed parenthesis > open parenthesis");
-        } else if(_openParenthesis > _closedParenthesis) { // add some closed parenthesis when his number is less than open parenthesis
+        } else if(_openParenthesis > _closedParenthesis) { // add some closed parenthesis into the list's back when open parenthesis is more than closed
             for(int i = _openParenthesis-_closedParenthesis; i > 0; i--) {
                 _closedParenthesis++;
                 _cInput += ')';
@@ -380,7 +383,7 @@ public class Calculator implements Observer, Observable {
                 }
             }         
         }
-        
+
         _canProcess = true;
         return true;
     }
