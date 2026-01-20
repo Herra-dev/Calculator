@@ -163,38 +163,46 @@ public class Calculator implements Observer, Observable {
                 _listNumberCopy.add(_listN.get(i)); // adding all value between first and last into an another List named _listNumberCopy
             }
 
+            for(Object obs: _listN)
+                System.out.print(obs);
+            System.out.println();
+
             for(int i = last; i >= first; i--) {
                 _listN.remove(i);
             }
 
             if(first > 0) {
                 Object before = _listN.get(first-1);
-                if(before != "+" && before != "-" && before != "*" && before != "/") {
+                if(before.equals("+") && before.equals("-") && before.equals("*") && before.equals("/")) {
                     _listN.add(first, "*");
 
                     if(_listNumberCopy.contains("(")) 
                         _listN.add(first+1, _calcul(_listNumberCopy));
                         
-                }
+                } else 
+                    if(_listNumberCopy.contains("(")) 
+                        _listN.add(first, _calcul(_listNumberCopy));
+                
             }
+
+            for(Object obs: _listN)
+                System.out.print(obs);
+            System.out.println();
 
             
         }
 
-        _operatorPlus(_listNumberCopy);
         
-        return 0.0d;
+        return 1d;
     }
 
 //==========================================================================================
 
-    // @SuppressWarnings("unused")
+    @SuppressWarnings("unused")
     private String _operatorPlus(List<Object> _listN) {
 
         int indxOfPlusSign = _listN.indexOf("+");
-        @SuppressWarnings("unused")
         int indxOfFirstNbr = indxOfPlusSign-1;
-        @SuppressWarnings("unused")
         int indxOfLastNbr = indxOfPlusSign+1;
 
 
