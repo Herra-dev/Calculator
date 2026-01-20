@@ -137,6 +137,7 @@ public class Calculator implements Observer, Observable {
     public void _calcul(List<Object> _listN) {
         
         boolean withParenthesis = _listN.contains("(");
+        List<Object> _listNumberCopy = new LinkedList<Object>();
 
         // with parenthesis
         if(withParenthesis) {
@@ -157,7 +158,7 @@ public class Calculator implements Observer, Observable {
                 }else if (_listN.get(i).equals("(")) ++anotherOneOpen;
             }
 
-            List<Object> _listNumberCopy = new LinkedList<Object>();
+            
             for(int i = first+1; i < last; i++){
                 _listNumberCopy.add(_listN.get(i)); // adding all value between first and last into an another List named _listNumberCopy
             }
@@ -168,13 +169,22 @@ public class Calculator implements Observer, Observable {
 
             if(_listNumberCopy.contains("(")) _calcul(_listNumberCopy);
         }
+
+        _operatorPlus(_listNumberCopy);
     }
 
-    @SuppressWarnings("unused")
+//==========================================================================================
+
+    // @SuppressWarnings("unused")
     private String _operatorPlus(List<Object> _listN) {
+
+        int indxOfPlusSign = _listN.indexOf("*");
+        System.out.println("index of plus sign = " + indxOfPlusSign);
 
         return "";
     }
+
+//==========================================================================================    
 
     @SuppressWarnings("unused")
     private String _operatorMinus(List<Object> _listN) {
@@ -182,11 +192,15 @@ public class Calculator implements Observer, Observable {
         return "";
     }
 
+//==========================================================================================
+
     @SuppressWarnings("unused")
     private String _operatorMultiply(List<Object> _listN) {
 
         return "";
     }
+
+//==========================================================================================
 
     @SuppressWarnings("unused")
     private String _operatorDivide(List<Object> _listN) {
