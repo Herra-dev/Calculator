@@ -134,7 +134,7 @@ public class Calculator implements Observer, Observable {
 
 //==========================================================================================
 
-    public void _calcul(List<Object> _listN) {
+    public double _calcul(List<Object> _listN) {
         
         boolean withParenthesis = _listN.contains("(");
         List<Object> _listNumberCopy = new LinkedList<Object>();
@@ -163,14 +163,27 @@ public class Calculator implements Observer, Observable {
                 _listNumberCopy.add(_listN.get(i)); // adding all value between first and last into an another List named _listNumberCopy
             }
 
-            for(Object obs: _listNumberCopy)
-                System.out.print(obs);
-            System.out.println();
+            for(int i = last; i >= first; i--) {
+                _listN.remove(i);
+            }
 
-            if(_listNumberCopy.contains("(")) _calcul(_listNumberCopy);
+            if(first > 0) {
+                Object before = _listN.get(first-1);
+                if(before != "+" && before != "-" && before != "*" && before != "/") {
+                    _listN.add(first, "*");
+
+                    if(_listNumberCopy.contains("(")) 
+                        _listN.add(first+1, _calcul(_listNumberCopy));
+                        
+                }
+            }
+
+            
         }
 
         _operatorPlus(_listNumberCopy);
+        
+        return 0.0d;
     }
 
 //==========================================================================================
@@ -178,8 +191,12 @@ public class Calculator implements Observer, Observable {
     // @SuppressWarnings("unused")
     private String _operatorPlus(List<Object> _listN) {
 
-        int indxOfPlusSign = _listN.indexOf("*");
-        System.out.println("index of plus sign = " + indxOfPlusSign);
+        int indxOfPlusSign = _listN.indexOf("+");
+        @SuppressWarnings("unused")
+        int indxOfFirstNbr = indxOfPlusSign-1;
+        @SuppressWarnings("unused")
+        int indxOfLastNbr = indxOfPlusSign+1;
+
 
         return "";
     }
@@ -189,6 +206,10 @@ public class Calculator implements Observer, Observable {
     @SuppressWarnings("unused")
     private String _operatorMinus(List<Object> _listN) {
 
+        int indxOfMinuxSign = _listN.indexOf("-");
+        int indxOfFirstNbr = indxOfMinuxSign-1;
+        int indxOfLastNbr = indxOfMinuxSign+1;
+
         return "";
     }
 
@@ -197,6 +218,10 @@ public class Calculator implements Observer, Observable {
     @SuppressWarnings("unused")
     private String _operatorMultiply(List<Object> _listN) {
 
+        int indxOfMulSign = _listN.indexOf("*");
+        int indxOfFirstNbr = indxOfMulSign-1;
+        int indxOfLastNbr = ((_listN.get(indxOfMulSign+1)).equals("-")) ? indxOfMulSign+2 : indxOfMulSign+1;
+
         return "";
     }
 
@@ -204,6 +229,10 @@ public class Calculator implements Observer, Observable {
 
     @SuppressWarnings("unused")
     private String _operatorDivide(List<Object> _listN) {
+
+        int indxOfDivSign = _listN.indexOf("/");
+        int indxOfFirstNbr = indxOfDivSign-1;
+        int indxOfLastNbr = ((_listN.get(indxOfDivSign+1)).equals("-")) ? indxOfDivSign+2 : indxOfDivSign+1;
 
         return "";
     }
