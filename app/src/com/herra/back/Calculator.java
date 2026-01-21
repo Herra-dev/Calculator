@@ -137,7 +137,7 @@ public class Calculator implements Observer, Observable {
     public double _calcul(List<Object> _listN) {
         
         boolean withParenthesis = _listN.contains("(");
-        List<Object> _listNumberCopy = new LinkedList<Object>();
+        List<Object> _listNumberCopy = _listN;
 
         // with parenthesis
         if(withParenthesis) {
@@ -190,62 +190,89 @@ public class Calculator implements Observer, Observable {
 
             for(Object obs: _listN)
                 System.out.print(obs);
-            System.out.println();
-
-            
+            System.out.println();            
         }
 
+        // while(_listN.indexOf("+") != -1 &&  _listN.indexOf("+") != -1 && 
+        //         _listN.indexOf("+") != -1 && _listN.indexOf("+") != -1) {
+        //         System.out.println(_operatorMultiply(_listNumberCopy));
+
+        // }
+        System.out.println(_operatorMultiply(_listNumberCopy));
         
         return 1d;
     }
 
 //==========================================================================================
 
-    @SuppressWarnings("unused")
-    private String _operatorPlus(List<Object> _listN) {
+@SuppressWarnings("unused")
+    private double _operatorPlus(List<Object> _listN) {
+
 
         int indxOfPlusSign = _listN.indexOf("+");
+        if(indxOfPlusSign == -1) return 0;
+
         int indxOfFirstNbr = indxOfPlusSign-1;
         int indxOfLastNbr = indxOfPlusSign+1;
 
+        double fistNbr = java.lang.Double.parseDouble((String)_listN.get(indxOfFirstNbr));
+        double secondNbr = java.lang.Double.parseDouble((String)_listN.get(indxOfLastNbr));
 
-        return "";
+        return fistNbr + secondNbr;
     }
 
 //==========================================================================================    
 
     @SuppressWarnings("unused")
-    private String _operatorMinus(List<Object> _listN) {
+    private double _operatorMinus(List<Object> _listN) {
 
         int indxOfMinuxSign = _listN.indexOf("-");
+        if(indxOfMinuxSign == -1) return 0;
+
         int indxOfFirstNbr = indxOfMinuxSign-1;
         int indxOfLastNbr = indxOfMinuxSign+1;
 
-        return "";
+        double fistNbr = java.lang.Double.parseDouble((String)_listN.get(indxOfFirstNbr));
+        double secondNbr = java.lang.Double.parseDouble((String)_listN.get(indxOfLastNbr));
+
+        return fistNbr - secondNbr;
+
     }
 
 //==========================================================================================
 
     @SuppressWarnings("unused")
-    private String _operatorMultiply(List<Object> _listN) {
+    private double _operatorMultiply(List<Object> _listN) {
 
         int indxOfMulSign = _listN.indexOf("*");
+        if(indxOfMulSign == -1) return 0;
+
         int indxOfFirstNbr = indxOfMulSign-1;
         int indxOfLastNbr = ((_listN.get(indxOfMulSign+1)).equals("-")) ? indxOfMulSign+2 : indxOfMulSign+1;
+        byte negative = ((_listN.get(indxOfMulSign+1)).equals("-")) ? (byte)-1 : (byte)1;
 
-        return "";
+        double fistNbr = java.lang.Double.parseDouble((String)_listN.get(indxOfFirstNbr));
+        double secondNbr = java.lang.Double.parseDouble((String)_listN.get(indxOfLastNbr));
+
+        return fistNbr * (negative*secondNbr);
     }
 
 //==========================================================================================
 
     @SuppressWarnings("unused")
-    private String _operatorDivide(List<Object> _listN) {
+    private double _operatorDivide(List<Object> _listN) {
 
         int indxOfDivSign = _listN.indexOf("/");
+        if(indxOfDivSign == -1) return 0;
+
         int indxOfFirstNbr = indxOfDivSign-1;
         int indxOfLastNbr = ((_listN.get(indxOfDivSign+1)).equals("-")) ? indxOfDivSign+2 : indxOfDivSign+1;
+        byte negative = ((_listN.get(indxOfDivSign+1)).equals("-")) ? (byte)-1 : (byte)1;
 
-        return "";
+        double fistNbr = java.lang.Double.parseDouble((String)_listN.get(indxOfFirstNbr));
+        double secondNbr = java.lang.Double.parseDouble((String)_listN.get(indxOfLastNbr));
+
+        return fistNbr / (negative*secondNbr);
     }
 
 //==========================================================================================
