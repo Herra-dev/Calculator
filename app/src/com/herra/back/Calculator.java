@@ -209,6 +209,12 @@ public class Calculator implements Observer, Observable {
     private double _operatorPlus(List<Object> _listN) {
 
 
+        //  (5
+        //  (5
+        //  (5
+        //  (5
+        //  (5
+
         int indxOfPlusSign = _listN.indexOf("+");
         if(indxOfPlusSign == -1) return 0;
 
