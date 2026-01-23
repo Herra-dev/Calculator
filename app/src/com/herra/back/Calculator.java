@@ -194,12 +194,12 @@ public class Calculator implements Observer, Observable {
         }
 
         do {
-            _operatorDivide(_listNumberCopy);
+            //_listNumberCopy = _operatorDivide(_listNumberCopy);
             _operatorMultiply(_listNumberCopy);
-            _operatorPlus(_listNumberCopy);
+            _listNumberCopy = _operatorPlus(_listNumberCopy);
             _operatorMinus(_listNumberCopy);
-        }while(_listN.contains("+") && _listN.contains("-") && 
-                _listN.contains("*") && _listN.contains("/"));
+        }while(_listNumberCopy.contains("+") && _listNumberCopy.contains("-") && 
+                _listNumberCopy.contains("*") && _listNumberCopy.contains("/"));
         
         return 1d;
     }
