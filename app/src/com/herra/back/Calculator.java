@@ -209,8 +209,8 @@ public class Calculator implements Observer, Observable {
     private double _operatorPlus(List<Object> _listN) {
 
 
-        //  (5
-        //  (5
+        //  (5 +
+        //  (-d5 -
         //  (5
         //  (5
         //  (5
