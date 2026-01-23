@@ -185,7 +185,6 @@ public class Calculator implements Observer, Observable {
                         _listN.add(first+1, _calcul(_listNumberCopy));
                 }
                     
-                
             }
 
             for(Object obs: _listN)
@@ -193,19 +192,20 @@ public class Calculator implements Observer, Observable {
             System.out.println();            
         }
 
-        // while(_listN.indexOf("+") != -1 &&  _listN.indexOf("+") != -1 && 
-        //         _listN.indexOf("+") != -1 && _listN.indexOf("+") != -1) {
-        //         System.out.println(_operatorMultiply(_listNumberCopy));
+        while(_listN.indexOf("+") != -1 &&  _listN.indexOf("-") != -1 && 
+                _listN.indexOf("*") != -1 && _listN.indexOf("/") != -1) {
+            System.out.println(_operatorDivide(_listNumberCopy));
+            System.out.println(_operatorMultiply(_listNumberCopy));
+            System.out.println(_operatorPlus(_listNumberCopy));
+            System.out.println(_operatorMinus(_listNumberCopy));
 
-        // }
-        System.out.println(_operatorDivide(_listNumberCopy));
+        }
         
         return 1d;
     }
 
 //==========================================================================================
 
-@SuppressWarnings("unused")
     private double _operatorPlus(List<Object> _listN) {
 
 
@@ -229,7 +229,6 @@ public class Calculator implements Observer, Observable {
 
 //==========================================================================================    
 
-    @SuppressWarnings("unused")
     private double _operatorMinus(List<Object> _listN) {
 
         int indxOfMinuxSign = _listN.indexOf("-");
@@ -247,7 +246,6 @@ public class Calculator implements Observer, Observable {
 
 //==========================================================================================
 
-    @SuppressWarnings("unused")
     private double _operatorMultiply(List<Object> _listN) {
 
         int indxOfMulSign = _listN.indexOf("*");
@@ -270,7 +268,6 @@ public class Calculator implements Observer, Observable {
 
 //==========================================================================================
 
-    @SuppressWarnings("unused")
     private double _operatorDivide(List<Object> _listN) {
 
         int indxOfDivSign = _listN.indexOf("/");
