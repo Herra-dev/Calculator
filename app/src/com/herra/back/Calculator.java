@@ -198,8 +198,9 @@ public class Calculator implements Observer, Observable {
             _listNumberCopy = _operatorMultiply(_listNumberCopy);
             _listNumberCopy = _operatorPlus(_listNumberCopy);
             _listNumberCopy = _operatorMinus(_listNumberCopy);
-        }while(_listNumberCopy.contains("+") && _listNumberCopy.contains("-") && 
-                _listNumberCopy.contains("*") && _listNumberCopy.contains("/"));
+            System.out.println("here");
+        }while(_listNumberCopy.contains("+") || _listNumberCopy.contains("-") || 
+                _listNumberCopy.contains("*") || _listNumberCopy.contains("/"));
         
         return 1d;
     }
