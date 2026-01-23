@@ -187,36 +187,33 @@ public class Calculator implements Observer, Observable {
                     
             }
 
+            
             for(Object obs: _listN)
                 System.out.print(obs);
             System.out.println();            
         }
 
-        while(_listN.indexOf("+") != -1 &&  _listN.indexOf("-") != -1 && 
-                _listN.indexOf("*") != -1 && _listN.indexOf("/") != -1) {
-            System.out.println(_operatorDivide(_listNumberCopy));
-            System.out.println(_operatorMultiply(_listNumberCopy));
-            System.out.println(_operatorPlus(_listNumberCopy));
-            System.out.println(_operatorMinus(_listNumberCopy));
-
-        }
+        do {
+            _operatorDivide(_listNumberCopy);
+            _operatorMultiply(_listNumberCopy);
+            _operatorPlus(_listNumberCopy);
+            _operatorMinus(_listNumberCopy);
+        }while(_listN.contains("+") && _listN.contains("-") && 
+                _listN.contains("*") && _listN.contains("/"));
         
         return 1d;
     }
 
 //==========================================================================================
 
-    private double _operatorPlus(List<Object> _listN) {
+    private List<Object> _operatorPlus(List<Object> _listN) {
 
-
-        //  (5 +
-        //  (-d5 -
-        //  (5
-        //  (5
-        //  (5
+        for(Object obs: _listN)
+            System.out.print(obs);
+        System.out.println();      
 
         int indxOfPlusSign = _listN.indexOf("+");
-        if(indxOfPlusSign == -1) return 0;
+        if(indxOfPlusSign == -1) return _listN;
 
         int indxOfFirstNbr = indxOfPlusSign-1;
         int indxOfLastNbr = indxOfPlusSign+1;
@@ -224,7 +221,18 @@ public class Calculator implements Observer, Observable {
         double fistNbr = java.lang.Double.parseDouble((String)_listN.get(indxOfFirstNbr));
         double secondNbr = java.lang.Double.parseDouble((String)_listN.get(indxOfLastNbr));
 
-        return fistNbr + secondNbr;
+        for(int i = indxOfLastNbr; i >= indxOfFirstNbr; i--) {
+            _listN.remove(i);
+        }
+
+        _listN.add(indxOfFirstNbr, fistNbr+secondNbr);
+
+        for(Object obs: _listN)
+            System.out.print(obs);
+        System.out.println();      
+
+        // return fistNbr + secondNbr;
+        return _listN;
     }
 
 //==========================================================================================    
