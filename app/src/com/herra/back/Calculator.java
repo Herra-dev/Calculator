@@ -247,6 +247,7 @@ public class Calculator implements Observer, Observable {
 
 //==========================================================================================
 
+    @SuppressWarnings("unused")
     private double _operatorMultiply(List<Object> _listN) {
 
         int indxOfMulSign = _listN.indexOf("*");
