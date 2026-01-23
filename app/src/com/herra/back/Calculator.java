@@ -134,7 +134,7 @@ public class Calculator implements Observer, Observable {
 
 //==========================================================================================
 
-    public double _calcul(List<Object> _listN) {
+    public List<Object> _calcul(List<Object> _listN) {
         
         boolean withParenthesis = _listN.contains("(");
         List<Object> _listNumberCopy = _listN;
@@ -193,16 +193,12 @@ public class Calculator implements Observer, Observable {
             System.out.println();            
         }
 
-        do {
-            _listNumberCopy = _operatorDivide(_listNumberCopy);
-            _listNumberCopy = _operatorMultiply(_listNumberCopy);
-            _listNumberCopy = _operatorPlus(_listNumberCopy);
-            _listNumberCopy = _operatorMinus(_listNumberCopy);
-            System.out.println("here");
-        }while(_listNumberCopy.contains("+") || _listNumberCopy.contains("-") || 
-                _listNumberCopy.contains("*") || _listNumberCopy.contains("/"));
+        while(_listNumberCopy.contains("/")) _listNumberCopy = _operatorDivide(_listNumberCopy);
+        while(_listNumberCopy.contains("*")) _listNumberCopy = _operatorMultiply(_listNumberCopy);
+        while(_listNumberCopy.contains("+")) _listNumberCopy = _operatorPlus(_listNumberCopy);
+        while(_listNumberCopy.contains("-")) _listNumberCopy = _operatorMinus(_listNumberCopy);
         
-        return 1d;
+        return _listNumberCopy;
     }
 
 //==========================================================================================
@@ -214,6 +210,7 @@ public class Calculator implements Observer, Observable {
         System.out.println();      
 
         int indxOfPlusSign = _listN.indexOf("+");
+        
         if(indxOfPlusSign == -1) return _listN;
 
         int indxOfFirstNbr = indxOfPlusSign-1;
@@ -227,6 +224,7 @@ public class Calculator implements Observer, Observable {
         }
 
         _listN.add(indxOfFirstNbr, fistNbr+secondNbr);
+        _listN.set(indxOfFirstNbr, "" + _listN.get(indxOfFirstNbr));
 
         for(Object obs: _listN)
             System.out.print(obs);
@@ -253,6 +251,7 @@ public class Calculator implements Observer, Observable {
         }
 
         _listN.add(indxOfFirstNbr, fistNbr+secondNbr);
+        _listN.set(indxOfFirstNbr, "" + _listN.get(indxOfFirstNbr));
 
         return _listN;
     }
@@ -281,6 +280,7 @@ public class Calculator implements Observer, Observable {
         }
 
         _listN.add(indxOfFirstNbr, (firstNbrNegative*fistNbr) * (secondNbrNegative*secondNbr));
+        _listN.set(indxOfFirstNbr, "" + _listN.get(indxOfFirstNbr));
 
         return _listN;
     }
@@ -309,7 +309,7 @@ public class Calculator implements Observer, Observable {
         }
 
         _listN.add(indxOfFirstNbr, (firstNbrNegative*fistNbr) / (secondNbrNegative*secondNbr));
-
+        _listN.set(indxOfFirstNbr, "" + _listN.get(indxOfFirstNbr));
 
         return _listN;
     }
