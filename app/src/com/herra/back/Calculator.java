@@ -198,7 +198,7 @@ public class Calculator implements Observer, Observable {
         //         System.out.println(_operatorMultiply(_listNumberCopy));
 
         // }
-        System.out.println(_operatorMultiply(_listNumberCopy));
+        System.out.println(_operatorDivide(_listNumberCopy));
         
         return 1d;
     }
@@ -247,7 +247,6 @@ public class Calculator implements Observer, Observable {
 
 //==========================================================================================
 
-    @SuppressWarnings("unused")
     private double _operatorMultiply(List<Object> _listN) {
 
         int indxOfMulSign = _listN.indexOf("*");
@@ -255,12 +254,17 @@ public class Calculator implements Observer, Observable {
 
         int indxOfFirstNbr = indxOfMulSign-1;
         int indxOfLastNbr = ((_listN.get(indxOfMulSign+1)).equals("-")) ? indxOfMulSign+2 : indxOfMulSign+1;
-        byte negative = ((_listN.get(indxOfMulSign+1)).equals("-")) ? (byte)-1 : (byte)1;
+        
+        int i = indxOfFirstNbr;
+        byte firstNbrNegative = 1; // positive
+        if(i-1 >= 0)
+            firstNbrNegative = ((_listN.get(indxOfFirstNbr-1)).equals("-")) ? (byte)-1 : (byte)1;
+        byte secondNbrNegative = ((_listN.get(indxOfMulSign+1)).equals("-")) ? (byte)-1 : (byte)1;
 
         double fistNbr = java.lang.Double.parseDouble((String)_listN.get(indxOfFirstNbr));
         double secondNbr = java.lang.Double.parseDouble((String)_listN.get(indxOfLastNbr));
 
-        return fistNbr * (negative*secondNbr);
+        return (firstNbrNegative*fistNbr) * (secondNbrNegative*secondNbr);
     }
 
 //==========================================================================================
@@ -273,12 +277,17 @@ public class Calculator implements Observer, Observable {
 
         int indxOfFirstNbr = indxOfDivSign-1;
         int indxOfLastNbr = ((_listN.get(indxOfDivSign+1)).equals("-")) ? indxOfDivSign+2 : indxOfDivSign+1;
-        byte negative = ((_listN.get(indxOfDivSign+1)).equals("-")) ? (byte)-1 : (byte)1;
+        
+        int i = indxOfFirstNbr;
+        byte firstNbrNegative = 1; // positive
+        if(i-1 >= 0)
+            firstNbrNegative = ((_listN.get(indxOfFirstNbr-1)).equals("-")) ? (byte)-1 : (byte)1;
+        byte secondNbrNegative = ((_listN.get(indxOfDivSign+1)).equals("-")) ? (byte)-1 : (byte)1;
 
         double fistNbr = java.lang.Double.parseDouble((String)_listN.get(indxOfFirstNbr));
         double secondNbr = java.lang.Double.parseDouble((String)_listN.get(indxOfLastNbr));
 
-        return fistNbr / (negative*secondNbr);
+        return (firstNbrNegative*fistNbr) / (secondNbrNegative*secondNbr);
     }
 
 //==========================================================================================
