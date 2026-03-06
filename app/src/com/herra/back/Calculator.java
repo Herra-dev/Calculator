@@ -10,6 +10,9 @@ public class Calculator implements Observer, Observable{
 
     protected List<Observer> _cObservers = new LinkedList<Observer>();
     protected String _cNumbers = "";
+    protected List<Object> _listNumber = new LinkedList<Object>();
+
+//==========================================================================================
 
     public boolean update(Object _obj) {
         this._cNumbers = (String)_obj;
@@ -17,15 +20,23 @@ public class Calculator implements Observer, Observable{
         return true;
     }
 
+//==========================================================================================
+
     public boolean _addObserver(Observer _observer) {
         this._cObservers.add(_observer);
 
         return true;
     }
+
+//==========================================================================================
+
     public boolean _updateObserver() {
         for(Observer obs: _cObservers)
             obs.update(obs);
 
         return true;
     }
+
+//==========================================================================================
+
 }
