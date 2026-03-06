@@ -12,8 +12,7 @@ public class InputDisplayer extends JLabel implements Observable{
 
     protected List<Observer> _c_observer = new LinkedList<Observer>();
 
-    public InputDisplayer()
-    {
+    public InputDisplayer() {
         this.setHorizontalAlignment(RIGHT);
     }
 
