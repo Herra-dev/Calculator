@@ -6,23 +6,87 @@ import java.util.List;
 import com.interfaces.sh.Observable;
 import com.interfaces.sh.Observer;
 
-public class Calculator implements Observer, Observable{
+public class Calculator implements Observer, Observable {
 
     protected List<Observer> _cObservers = new LinkedList<Observer>();
-    protected String _cNumbers = "";
-    protected List<Object> _listNumber = new LinkedList<Object>();
+    protected String _cInput = "";
+    protected List<Object> _cListNumber = new LinkedList<Object>();
 
 //==========================================================================================
 
-    public boolean update(Object _obj) {
-        this._cNumbers = (String)_obj;
+/**
+ * Construct new Calculator object
+ * 
+ * @param _expression {@code the expression to evaluate}
+ * 
+ * @author Heriniaina - {@see https://github.com/Herra-dev}
+ */
+    public Calculator(String _expression) {
+        _cInput = _expression;
+        _cListNumber = this._separeInput();
+    }
+
+//==========================================================================================
+// GETTERS et SETTERS
+//==========================================================================================
+
+    public List<Observer> _get_cObservers() { return this._cObservers; }
+    public String _get_cInput()             { return this._cInput; }
+    public List<Object> _get_cListNumber()   { return this._cListNumber; }
+
+    public void _set_cObservers(List<Observer> observers)   { this._cObservers = observers; }
+    public void _set_cInput(String input)                   { this._cInput = input; }
+    public void _set_cListNumber(List<Object> listNumber)   { this._cListNumber = listNumber; }
+
+//==========================================================================================
+//
+//==========================================================================================
+
+@SuppressWarnings("unused")
+    private boolean _testInput() {
+        String _input = _cInput;
+        System.out.println(_input);
+
+        return true;
+    }
+
+//==========================================================================================    
+
+    private List<Object> _separeInput() {
+        _cListNumber.removeAll(_cListNumber);
+        _cListNumber.add("");
+        for(int i = 0; i < _cInput.length(); i++)
+        {
+            if(_cInput.charAt(i) == '+')      { _cListNumber.add(_cInput.charAt(i)); continue;}
+            else if(_cInput.charAt(i) == '-') { _cListNumber.add(_cInput.charAt(i)); continue;}
+            else if(_cInput.charAt(i) == '*') { _cListNumber.add(_cInput.charAt(i)); continue;}
+            else if(_cInput.charAt(i) == '/') { _cListNumber.add(_cInput.charAt(i)); continue;}
+            else if(_cInput.charAt(i) == '(') { _cListNumber.add(_cInput.charAt(i)); continue;}
+            else if(_cInput.charAt(i) == ')') { _cListNumber.add(_cInput.charAt(i)); continue;}
+            else {
+                _cListNumber.add("");
+                _cListNumber.set((_cListNumber.size() - 1), (_cListNumber.get(_cListNumber.size() - 1) + "" + _cInput.charAt(i)));
+                _cListNumber.set((_cListNumber.size() - 1), java.lang.Integer.parseInt((String)_cListNumber.get((_cListNumber.size() - 1))));
+            }
+        }
+
+        return _cListNumber;
+    }
+
+
+//==========================================================================================
+//
+//==========================================================================================
+
+    @Override public boolean update(Object _obj) {
+        this._cInput = (String)_obj;
 
         return true;
     }
 
 //==========================================================================================
 
-    public boolean _addObserver(Observer _observer) {
+    @Override public boolean _addObserver(Observer _observer) {
         this._cObservers.add(_observer);
 
         return true;
@@ -30,7 +94,7 @@ public class Calculator implements Observer, Observable{
 
 //==========================================================================================
 
-    public boolean _updateObserver() {
+    @Override public boolean _updateObserver() {
         for(Observer obs: _cObservers)
             obs.update(obs);
 
