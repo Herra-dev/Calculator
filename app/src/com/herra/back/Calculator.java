@@ -32,7 +32,7 @@ public class Calculator implements Observer, Observable {
 
     public List<Observer> _get_cObservers() { return this._cObservers; }
     public String _get_cInput()             { return this._cInput; }
-    public List<Object> _get_cListNumber()   { return this._cListNumber; }
+    public List<Object> _get_cListNumber()  { return this._cListNumber; }
 
     public void _set_cObservers(List<Observer> observers)   { this._cObservers = observers; }
     public void _set_cInput(String input)                   { this._cInput = input; }
@@ -53,8 +53,9 @@ public class Calculator implements Observer, Observable {
 //==========================================================================================    
 
     private List<Object> _separeInput() {
-        _cListNumber.removeAll(_cListNumber);
+        _cListNumber.clear();
         _cListNumber.add("");
+
         for(int i = 0; i < _cInput.length(); i++)
         {
             if(_cInput.charAt(i) == '+')      { _cListNumber.add(_cInput.charAt(i)); continue;}
