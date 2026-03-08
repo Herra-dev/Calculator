@@ -27,21 +27,76 @@ public class Calculator implements Observer, Observable {
     }
 
 //==========================================================================================
-// GETTERS et SETTERS
+//================================ GETTERS et SETTERS
 //==========================================================================================
 
-    public List<Observer> _get_cObservers() { return this._cObservers; }
-    public String _get_cInput()             { return this._cInput; }
-    public List<Object> _get_cListNumber()  { return this._cListNumber; }
-
-    public void _set_cObservers(List<Observer> observers)   { this._cObservers = observers; }
-    public void _set_cInput(String input)                   { this._cInput = input; }
-    public void _set_cListNumber(List<Object> listNumber)   { this._cListNumber = listNumber; }
+/**
+ * @return returns the list of Observer 
+ */
+    public List<Observer> _get_cObservers() { 
+        return this._cObservers; 
+    }
 
 //==========================================================================================
-//
+
+/**
+ * @return returns the actual input
+ */
+    public String _get_cInput() { 
+        return this._cInput; 
+    }
+
 //==========================================================================================
 
+/**
+ * @return returns the list of listNumber
+ */
+    public List<Object> _get_cListNumber() { 
+        return this._cListNumber; 
+    }
+
+//==========================================================================================
+
+/**
+ * Update this.cObservers to observers {@code List<Observer>}
+ * 
+ * @param observers {@code List<Observer>}
+ */
+    public void _set_cObservers(List<Observer> observers) {
+        this._cObservers = observers; 
+    }
+
+//==========================================================================================
+
+/**
+ * Update this._cInput to input {@code String}
+ * 
+ * @param input {@String}
+ */
+    public void _set_cInput(String input) { 
+        this._cInput = input; this._separeInput(); 
+    }
+
+//==========================================================================================
+    
+/**
+ * Update this._cListNumber to listNumber{@code List<Object>}
+ * 
+ * @param listNumber {@code List<Object>}
+ */
+    public void _set_cListNumber(List<Object> listNumber) { 
+        this._cListNumber = listNumber; 
+    }
+
+//==========================================================================================
+////================================ CLASS METHODS
+//==========================================================================================
+
+/**
+ * Test the expression
+ * 
+ * @return returns {@code true} if the actual input is correct
+ */
 @SuppressWarnings("unused")
     private boolean _testInput() {
         String _input = _cInput;
@@ -76,7 +131,7 @@ public class Calculator implements Observer, Observable {
 
 
 //==========================================================================================
-//
+////================================ 
 //==========================================================================================
 
     @Override public boolean update(Object _obj) {
