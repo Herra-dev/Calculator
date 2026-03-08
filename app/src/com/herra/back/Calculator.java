@@ -24,6 +24,13 @@ public class Calculator implements Observer, Observable {
     public Calculator(String _expression) {
         _cInput = _expression;
         _cListNumber = this._separeInput();
+        if(_testInput()) {
+            for(Object obs: _cListNumber)
+                System.out.println(obs);
+        }else{
+            for(Object obs: _cListNumber)
+                System.out.println(obs);
+        }
     }
 
 //==========================================================================================
@@ -101,19 +108,24 @@ public class Calculator implements Observer, Observable {
  * 
  * @return returns {@code true} if the actual input is correct
  */
-@SuppressWarnings("unused")
     private boolean _testInput() {
         int index = 0;
-        
-        while(index < this._cListNumber.size()) {
-            if(_cListNumber.get(index).getClass() == _cListNumber.get(index+1).getClass()) {
-                if((_cListNumber.get(index) == (String)"+" || _cListNumber.get(index) == (String)"-") &&
-                        (_cListNumber.get(index+1) == (String)"+" || _cListNumber.get(index+1) == (String)"-")) {
 
+        while(index < _cListNumber.size()-1) {
+            if(_cListNumber.get(index).getClass() == _cListNumber.get(index+1).getClass()) {
+                if(_cListNumber.get(index) == "-" || _cListNumber.get(index) == "+" &&
+                    _cListNumber.get(index+1) == "-" || _cListNumber.get(index+1) == "+") {
+                    if(_cListNumber.get(index) == _cListNumber.get(index+1)) {
+                        _cListNumber.set(index, "+");
+                    }else
+                        _cListNumber.set(index, "+");
+                    _cListNumber.remove(index+1);
+                    index = 0;
                 }
             }
+            index++;
         }
-
+        
         return true;
     }
 
