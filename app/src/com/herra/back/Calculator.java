@@ -107,13 +107,15 @@ public class Calculator implements Observer, Observable {
     private boolean _testInput() {
         int index = 0;
 
-        Object obj0 = _cListNumber.get(index);
-        Object obj1 = _cListNumber.get(index+1);
+        Object obj0 = null;
+        Object obj1 = null;
         while(index < _cListNumber.size()-1) {
-            if(_cListNumber.get(index).getClass() == _cListNumber.get(index+1).getClass()) {
-                if((_cListNumber.get(index).equals('-') || _cListNumber.get(index).equals('+')) &&
-                    (_cListNumber.get(index+1).equals('-') || _cListNumber.get(index+1).equals('+'))) {
-                    if(_cListNumber.get(index) == _cListNumber.get(index+1))
+            obj0 = _cListNumber.get(index);
+            obj1 = _cListNumber.get(index+1);
+            if(obj0.getClass() == obj1.getClass()) {
+                if((obj0.equals('-') || obj0.equals('+')) &&
+                    (obj1.equals('-') || obj1.equals('+'))) {
+                    if(obj0 == obj1)
                         _cListNumber.set(index, '+');
                     else
                         _cListNumber.set(index, '-');
@@ -121,13 +123,13 @@ public class Calculator implements Observer, Observable {
                     _cListNumber.remove(index+1);
                     index = 0;
                 }else {
-                    if((_cListNumber.get(index).equals('+') || _cListNumber.get(index).equals('-')) &&
-                        (!_cListNumber.get(index+1).equals('+') || !_cListNumber.get(index+1).equals('+')) &&
-                            (!_cListNumber.get(index+1).equals('(') || !_cListNumber.get(index+1).equals(')'))) {
+                    if((obj0.equals('+') || obj0.equals('-')) &&
+                        (!obj1.equals('+') || !obj1.equals('+')) &&
+                            (!obj1.equals('(') || !obj1.equals(')'))) {
                                 System.out.println("error");
-                    } else if ((_cListNumber.get(index+1).equals('+') || _cListNumber.get(index+1).equals('-')) &&
-                        (!_cListNumber.get(index).equals('+') || !_cListNumber.get(index).equals('+')) &&
-                            (!_cListNumber.get(index).equals('(') || !_cListNumber.get(index).equals(')'))) {
+                    } else if ((obj1.equals('+') || obj1.equals('-')) &&
+                        (!obj0.equals('+') || !obj0.equals('+')) &&
+                            (!obj0.equals('(') || !obj0.equals(')'))) {
                                 System.out.println("error");
                     }
                 }
