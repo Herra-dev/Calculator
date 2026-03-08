@@ -24,13 +24,9 @@ public class Calculator implements Observer, Observable {
     public Calculator(String _expression) {
         _cInput = _expression;
         _cListNumber = this._separeInput();
-        if(_testInput()) {
-            for(Object obs: _cListNumber)
-                System.out.println(obs);
-        }else{
-            for(Object obs: _cListNumber)
-                System.out.println(obs);
-        }
+        _testInput();
+        for(Object obs: _cListNumber)
+            System.out.println(obs);
     }
 
 //==========================================================================================
@@ -104,13 +100,15 @@ public class Calculator implements Observer, Observable {
 //==========================================================================================
 
 /**
- * Test the expression<p>
+ * Test the expression:<p>
  * 
  * @return returns {@code true} if the actual input is correct
  */
     private boolean _testInput() {
         int index = 0;
 
+        Object obj0 = _cListNumber.get(index);
+        Object obj1 = _cListNumber.get(index+1);
         while(index < _cListNumber.size()-1) {
             if(_cListNumber.get(index).getClass() == _cListNumber.get(index+1).getClass()) {
                 if((_cListNumber.get(index).equals('-') || _cListNumber.get(index).equals('+')) &&
@@ -122,6 +120,16 @@ public class Calculator implements Observer, Observable {
                     
                     _cListNumber.remove(index+1);
                     index = 0;
+                }else {
+                    if((_cListNumber.get(index).equals('+') || _cListNumber.get(index).equals('-')) &&
+                        (!_cListNumber.get(index+1).equals('+') || !_cListNumber.get(index+1).equals('+')) &&
+                            (!_cListNumber.get(index+1).equals('(') || !_cListNumber.get(index+1).equals(')'))) {
+                                System.out.println("error");
+                    } else if ((_cListNumber.get(index+1).equals('+') || _cListNumber.get(index+1).equals('-')) &&
+                        (!_cListNumber.get(index).equals('+') || !_cListNumber.get(index).equals('+')) &&
+                            (!_cListNumber.get(index).equals('(') || !_cListNumber.get(index).equals(')'))) {
+                                System.out.println("error");
+                    }
                 }
             }
             
