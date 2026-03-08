@@ -113,16 +113,18 @@ public class Calculator implements Observer, Observable {
 
         while(index < _cListNumber.size()-1) {
             if(_cListNumber.get(index).getClass() == _cListNumber.get(index+1).getClass()) {
-                if(_cListNumber.get(index) == "-" || _cListNumber.get(index) == "+" &&
-                    _cListNumber.get(index+1) == "-" || _cListNumber.get(index+1) == "+") {
-                    if(_cListNumber.get(index) == _cListNumber.get(index+1)) {
-                        _cListNumber.set(index, "+");
-                    }else
-                        _cListNumber.set(index, "+");
+                if((_cListNumber.get(index).equals('-') || _cListNumber.get(index).equals('+')) &&
+                    (_cListNumber.get(index+1).equals('-') || _cListNumber.get(index+1).equals('+'))) {
+                    if(_cListNumber.get(index) == _cListNumber.get(index+1))
+                        _cListNumber.set(index, '+');
+                    else
+                        _cListNumber.set(index, '-');
+                    
                     _cListNumber.remove(index+1);
                     index = 0;
                 }
             }
+            
             index++;
         }
         
@@ -133,7 +135,6 @@ public class Calculator implements Observer, Observable {
 
     private List<Object> _separeInput() {
         _cListNumber.clear();
-        _cListNumber.add("");
 
         for(int i = 0; i < _cInput.length(); i++)
         {
