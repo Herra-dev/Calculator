@@ -90,6 +90,12 @@ public class Calculator implements Observer, Observable {
 //==========================================================================================
 //==========================================================================================
 
+    public String _calcul() {
+        return "";
+    }
+
+//==========================================================================================
+
 /**
  * Test the expression<p>
  * 
@@ -97,8 +103,16 @@ public class Calculator implements Observer, Observable {
  */
 @SuppressWarnings("unused")
     private boolean _testInput() {
-        String _input = _cInput;
-        System.out.println(_input);
+        int index = 0;
+        
+        while(index < this._cListNumber.size()) {
+            if(_cListNumber.get(index).getClass() == _cListNumber.get(index+1).getClass()) {
+                if((_cListNumber.get(index) == (String)"+" || _cListNumber.get(index) == (String)"-") &&
+                        (_cListNumber.get(index+1) == (String)"+" || _cListNumber.get(index+1) == (String)"-")) {
+
+                }
+            }
+        }
 
         return true;
     }
