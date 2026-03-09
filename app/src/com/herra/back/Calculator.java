@@ -105,6 +105,8 @@ public class Calculator implements Observer, Observable {
  * - if input {@code starts} with: {@code *} or {@code /} or<p>
  * - if input {@code ends} with: {@code *} or {@code /} or {@code +} or {@code -}, returns {@code false}
  * 
+ * <p>After that, 
+ * 
  * @return returns {@code true} if the actual input is correct
  * 
  * @author Heriniaina {@see https://github.com/Herra-dev}
@@ -114,17 +116,12 @@ public class Calculator implements Observer, Observable {
         if(_cInput.endsWith("*") || _cInput.endsWith("/") || 
            _cInput.endsWith("+") || _cInput.endsWith("-"))      return false;
 
-
         do {
             _cInput = _cInput.replaceAll("[+]{2}", "+");
             _cInput = _cInput.replaceAll("[-]{2}", "+");
             _cInput = _cInput.replaceAll("[+]{1}[-]{1}|[-]{1}[+]{1}", "-");
         }while(_cInput.contains("--") || _cInput.contains("++") || _cInput.contains("-+") || _cInput.contains("+-"));
         
-
-        System.out.println(_cInput);
-
-
         return true;
     }
 
