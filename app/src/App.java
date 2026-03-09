@@ -3,6 +3,6 @@ import com.herra.back.Calculator;
 public class App {
     public static void main(String[] args) {
         @SuppressWarnings("unused")
-        Calculator calc = new Calculator("5*+((8-+-5)");
+        Calculator calc = new Calculator("89");
     }
 }

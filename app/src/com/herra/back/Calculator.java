@@ -141,7 +141,7 @@ public class Calculator implements Observer, Observable {
                 }else {
                     if((obj0.equals('+') || obj0.equals('-')) &&
                         (!obj1.equals('+') && !obj1.equals('-') &&
-                            !obj1.equals('(') && !obj1.equals(')'))) {
+                            !obj1.equals('('))) {
                         System.out.println("error 1");
                         return false;
                     } else if ((obj1.equals('+') || obj1.equals('-')) &&
@@ -153,7 +153,7 @@ public class Calculator implements Observer, Observable {
                     } 
                     else if((obj0.equals('*') || obj0.equals('/')) && 
                         (!obj1.equals('(') &&
-                         !obj1.equals('+') && !obj1.equals('-'))) {
+                            !obj1.equals('+') && !obj1.equals('-'))) {
                         System.out.println("error 3");
                         return false;
                     }
@@ -170,6 +170,7 @@ public class Calculator implements Observer, Observable {
 
     private List<Object> _separeInput() {
         _cListNumber.clear();
+        _cListNumber.add("");
 
         for(int i = 0; i < _cInput.length(); i++)
         {
@@ -180,9 +181,12 @@ public class Calculator implements Observer, Observable {
             else if(_cInput.charAt(i) == '(') { _cListNumber.add(_cInput.charAt(i)); continue;}
             else if(_cInput.charAt(i) == ')') { _cListNumber.add(_cInput.charAt(i)); continue;}
             else {
-                _cListNumber.add("");
+                java.lang.Character c = ' ';
+                if(_cListNumber.get(_cListNumber.size()-1).getClass().equals(c.getClass()))
+                    _cListNumber.add("");
+
                 _cListNumber.set((_cListNumber.size() - 1), (_cListNumber.get(_cListNumber.size() - 1) + "" + _cInput.charAt(i)));
-                _cListNumber.set((_cListNumber.size() - 1), java.lang.Integer.parseInt((String)_cListNumber.get((_cListNumber.size() - 1))));
+                _cListNumber.set((_cListNumber.size() - 1), java.lang.Double.parseDouble((String)_cListNumber.get((_cListNumber.size() - 1))));
             }
         }
 
