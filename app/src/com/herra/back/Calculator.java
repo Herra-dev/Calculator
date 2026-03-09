@@ -118,7 +118,13 @@ public class Calculator implements Observer, Observable {
     private boolean _arrangeInput() {
         if(_cInput.startsWith("*") || _cInput.startsWith("/"))  return false;
         if(_cInput.endsWith("*") || _cInput.endsWith("/") || 
-           _cInput.endsWith("+") || _cInput.endsWith("-"))      return false;
+            _cInput.endsWith("+") || _cInput.endsWith("-"))     return false;
+        if(_cInput.contains("-*") || _cInput.contains("-/") ||            
+            _cInput.contains("+*") || _cInput.contains("+/") ||
+            _cInput.contains("**") || _cInput.contains("*/") ||
+            _cInput.contains("//") || _cInput.contains("/*") ||
+            _cInput.contains("+)") || _cInput.contains("-)") ||
+            _cInput.contains("-*"))                                         return false;
 
         do {
             _cInput = _cInput.replaceAll("[+]{2}", "+");
@@ -126,14 +132,6 @@ public class Calculator implements Observer, Observable {
             _cInput = _cInput.replaceAll("[+]{1}[-]{1}|[-]{1}[+]{1}", "-");
         }while(_cInput.contains("--") || _cInput.contains("++") || _cInput.contains("-+") || _cInput.contains("+-"));
         
-        if(_cInput.contains("-*") || _cInput.contains("-/") ||
-           _cInput.contains("+*") || _cInput.contains("+/") ||
-           _cInput.contains("**") || _cInput.contains("*/") ||
-           _cInput.contains("//") || _cInput.contains("/*") ||
-           _cInput.contains("+)") || _cInput.contains("-)") ||
-           _cInput.contains("-*")) {
-
-        }
 
         return true;
     }
