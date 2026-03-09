@@ -24,11 +24,6 @@ public class Calculator implements Observer, Observable {
  */
     public Calculator(String _input) {
         _cInput = _input;
-        _cListNumber = this._separeInput();
-        _arrangeInput();
-        for(Object obs: _cListNumber)
-            System.out.print(obs);
-        System.out.println();
     }
 
 //==========================================================================================
@@ -120,48 +115,8 @@ public class Calculator implements Observer, Observable {
  * 
  * @author Heriniaina {@see https://github.com/Herra-dev}
  */
+    @SuppressWarnings("unused")
     private boolean _arrangeInput() {
-        int index = 0;
-
-        Object obj0 = null;
-        Object obj1 = null;
-        while(index < _cListNumber.size()-1) {
-            obj0 = _cListNumber.get(index);
-            obj1 = _cListNumber.get(index+1);
-            if(obj0.getClass() == obj1.getClass()) {
-                if((obj0.equals('-') || obj0.equals('+')) &&
-                    (obj1.equals('-') || obj1.equals('+'))) {
-                    if(obj0 == obj1)
-                        _cListNumber.set(index, '+');
-                    else
-                        _cListNumber.set(index, '-');
-                    
-                    _cListNumber.remove(index+1);
-                    index = 0;
-                }else {
-                    if((obj0.equals('+') || obj0.equals('-')) &&
-                        (!obj1.equals('+') && !obj1.equals('-') &&
-                            !obj1.equals('('))) {
-                        System.out.println("error 1");
-                        return false;
-                    } else if ((obj1.equals('+') || obj1.equals('-')) &&
-                        (!obj0.equals('+') && !obj0.equals('-') &&
-                            !obj0.equals('(') && !obj0.equals(')') &&
-                                !obj0.equals('*') && !obj0.equals('/'))) {
-                        System.out.println("error 2");
-                        return false;
-                    } 
-                    else if((obj0.equals('*') || obj0.equals('/')) && 
-                        (!obj1.equals('(') &&
-                            !obj1.equals('+') && !obj1.equals('-'))) {
-                        System.out.println("error 3");
-                        return false;
-                    }
-                }
-            }
-            
-            index++;
-        }
         
         return true;
     }
