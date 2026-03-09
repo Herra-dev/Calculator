@@ -146,12 +146,14 @@ public class Calculator implements Observer, Observable {
                         return false;
                     } else if ((obj1.equals('+') || obj1.equals('-')) &&
                         (!obj0.equals('+') && !obj0.equals('-') &&
-                            !obj0.equals('(') && !obj0.equals(')'))) {
+                            !obj0.equals('(') && !obj0.equals(')') &&
+                                !obj0.equals('*') && !obj0.equals('/'))) {
                         System.out.println("error 2");
                         return false;
                     } 
-                    else if(obj0.equals('*') || obj0.equals('/') && 
-                        (!obj1.equals('(') && !obj1.equals(')'))) {
+                    else if((obj0.equals('*') || obj0.equals('/')) && 
+                        (!obj1.equals('(') &&
+                         !obj1.equals('+') && !obj1.equals('-'))) {
                         System.out.println("error 3");
                         return false;
                     }
