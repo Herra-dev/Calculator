@@ -9,8 +9,9 @@ import com.interfaces.sh.Observer;
 public class Calculator implements Observer, Observable {
 
     protected List<Observer> _cObservers = new LinkedList<Observer>();
-    protected String _cInput = "";
+    protected String _cInput = new String();
     protected List<Object> _cListNumber = new LinkedList<Object>();
+    protected String _cOutPut = new String();
 
 //==========================================================================================
 
@@ -21,12 +22,13 @@ public class Calculator implements Observer, Observable {
  * 
  * @author Heriniaina - {@see https://github.com/Herra-dev}
  */
-    public Calculator(String _expression) {
-        _cInput = _expression;
+    public Calculator(String _input) {
+        _cInput = _input;
         _cListNumber = this._separeInput();
-        _testInput();
+        _arrangeInput();
         for(Object obs: _cListNumber)
-            System.out.println(obs);
+            System.out.print(obs);
+        System.out.println();
     }
 
 //==========================================================================================
@@ -51,7 +53,7 @@ public class Calculator implements Observer, Observable {
 //==========================================================================================
 
 /**
- * @return returns the list of listNumber
+ * @return returns the list in listNumber
  */
     public List<Object> _get_cListNumber() { 
         return this._cListNumber; 
@@ -82,7 +84,7 @@ public class Calculator implements Observer, Observable {
 //==========================================================================================
     
 /**
- * Update this._cListNumber to listNumber{@code List<Object>}
+ * Update this._cListNumber to listNumber {@code List<Object>}
  * 
  * @param listNumber {@code List<Object>}
  */
@@ -94,17 +96,31 @@ public class Calculator implements Observer, Observable {
 //==========================================================================================
 
     public String _calcul() {
-        return "";
+        return _cOutPut;
     }
 
 //==========================================================================================
 
 /**
- * This function test the expression to evaluate
+ * This function test the expression to evaluate:<p>
+ * - if there is a succession of operator {@code -} and {@code +}, these last are simplified.<p> 
+ * Rules :<p>
+ * {@code -} * {@code -} = {@code +}<p>
+ * {@code +} * {@code +} = {@code +}<p>
+ * {@code -} * {@code +} = {@code -}<p>
+ * {@code +} * {@code -} = {@code -}<p>
+ * - if there is a succession of operator ({@code -} or {@code +}) and ({@code *} or {@code /}), {@code FALSE} will be the returns value.<p>
+ * example :<p>
+ * {@code +} * {@code *} = {@code error}<p>
+ * {@code -} * {@code /} = {@code error}<p>
+ * {@code /} * {@code +} = {@code error}<p>
+ * {@code *} * {@code -} = {@code error}<p>
  * 
  * @return returns {@code true} if the actual input is correct
+ * 
+ * @author Heriniaina {@see https://github.com/Herra-dev}
  */
-    private boolean _testInput() {
+    private boolean _arrangeInput() {
         int index = 0;
 
         Object obj0 = null;
@@ -124,13 +140,20 @@ public class Calculator implements Observer, Observable {
                     index = 0;
                 }else {
                     if((obj0.equals('+') || obj0.equals('-')) &&
-                        (!obj1.equals('+') || !obj1.equals('+')) &&
-                            (!obj1.equals('(') || !obj1.equals(')'))) {
-                                System.out.println("error");
+                        (!obj1.equals('+') && !obj1.equals('-') &&
+                            !obj1.equals('(') && !obj1.equals(')'))) {
+                        System.out.println("error 1");
+                        return false;
                     } else if ((obj1.equals('+') || obj1.equals('-')) &&
-                        (!obj0.equals('+') || !obj0.equals('+')) &&
-                            (!obj0.equals('(') || !obj0.equals(')'))) {
-                                System.out.println("error");
+                        (!obj0.equals('+') && !obj0.equals('-') &&
+                            !obj0.equals('(') && !obj0.equals(')'))) {
+                        System.out.println("error 2");
+                        return false;
+                    } 
+                    else if(obj0.equals('*') || obj0.equals('/') && 
+                        (!obj1.equals('(') && !obj1.equals(')'))) {
+                        System.out.println("error 3");
+                        return false;
                     }
                 }
             }
