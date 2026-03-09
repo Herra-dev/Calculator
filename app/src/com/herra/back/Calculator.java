@@ -117,7 +117,15 @@ public class Calculator implements Observer, Observable {
  */
     @SuppressWarnings("unused")
     private boolean _arrangeInput() {
-        
+        int index = 0;
+
+        while(index < _cInput.length()) {
+
+
+            index++;
+        }
+
+
         return true;
     }
 
@@ -125,27 +133,7 @@ public class Calculator implements Observer, Observable {
 
     @SuppressWarnings("unused")
     private List<Object> _separeInput() {
-        _cListNumber.clear();
-        _cListNumber.add("");
-
-        for(int i = 0; i < _cInput.length(); i++)
-        {
-            if(_cInput.charAt(i) == '+')      { _cListNumber.add(_cInput.charAt(i)); continue;}
-            else if(_cInput.charAt(i) == '-') { _cListNumber.add(_cInput.charAt(i)); continue;}
-            else if(_cInput.charAt(i) == '*') { _cListNumber.add(_cInput.charAt(i)); continue;}
-            else if(_cInput.charAt(i) == '/') { _cListNumber.add(_cInput.charAt(i)); continue;}
-            else if(_cInput.charAt(i) == '(') { _cListNumber.add(_cInput.charAt(i)); continue;}
-            else if(_cInput.charAt(i) == ')') { _cListNumber.add(_cInput.charAt(i)); continue;}
-            else {
-                java.lang.Character c = ' ';
-                if(_cListNumber.get(_cListNumber.size()-1).getClass().equals(c.getClass()))
-                    _cListNumber.add("");
-
-                _cListNumber.set((_cListNumber.size() - 1), (_cListNumber.get(_cListNumber.size() - 1) + "" + _cInput.charAt(i)));
-                _cListNumber.set((_cListNumber.size() - 1), java.lang.Double.parseDouble((String)_cListNumber.get((_cListNumber.size() - 1))));
-            }
-        }
-
+        
         return _cListNumber;
     }
 
