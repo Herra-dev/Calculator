@@ -117,9 +117,8 @@ public class Calculator implements Observer, Observable {
 
         do {
             _cInput = _cInput.replaceAll("[+]{2}", "+");
-            _cInput = _cInput.replaceAll("[-]{2}", "-");
+            _cInput = _cInput.replaceAll("[-]{2}", "+");
             _cInput = _cInput.replaceAll("[+]{1}[-]{1}|[-]{1}[+]{1}", "-");
-            System.out.println("out");
         }while(_cInput.contains("--") || _cInput.contains("++") || _cInput.contains("-+") || _cInput.contains("+-"));
         
 
