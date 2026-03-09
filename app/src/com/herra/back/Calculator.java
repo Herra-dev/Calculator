@@ -24,6 +24,10 @@ public class Calculator implements Observer, Observable {
  */
     public Calculator(String _input) {
         _cInput = _input;
+        if(_arrangeInput())
+            System.out.println("Correct");
+        else
+            System.out.println("Incorrect");
     }
 
 //==========================================================================================
@@ -97,29 +101,22 @@ public class Calculator implements Observer, Observable {
 //==========================================================================================
 
 /**
- * This function test the expression to evaluate:<p>
- * - if there is a succession of operator {@code -} and {@code +}, these last are simplified.<p> 
- * Rules :<p>
- * {@code -} * {@code -} = {@code +}<p>
- * {@code +} * {@code +} = {@code +}<p>
- * {@code -} * {@code +} = {@code -}<p>
- * {@code +} * {@code -} = {@code -}<p>
- * - if there is a succession of operator ({@code -} or {@code +}) and ({@code *} or {@code /}), {@code FALSE} will be the returns value.<p>
- * example :<p>
- * {@code +} * {@code *} = {@code error}<p>
- * {@code -} * {@code /} = {@code error}<p>
- * {@code /} * {@code +} = {@code error}<p>
- * {@code *} * {@code -} = {@code error}<p>
+ * This function test the user input:<p>
+ * - if input {@code starts} with: {@code *} or {@code /} or<p>
+ * - if input {@code ends} with: {@code *} or {@code /} or {@code +} or {@code -}, returns {@code false}
  * 
  * @return returns {@code true} if the actual input is correct
  * 
  * @author Heriniaina {@see https://github.com/Herra-dev}
  */
-    @SuppressWarnings("unused")
     private boolean _arrangeInput() {
-        int index = 0;
+        if(_cInput.startsWith("*") || _cInput.startsWith("/"))  return false;
+        if(_cInput.endsWith("*") || _cInput.endsWith("/") || 
+           _cInput.endsWith("+") || _cInput.endsWith("-"))      return false;
 
+        int index = 0;
         while(index < _cInput.length()) {
+            _cInput = _cInput.replaceFirst("++", "+");
 
 
             index++;
