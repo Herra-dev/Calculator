@@ -73,7 +73,7 @@ public class Calculator implements Observer, Observable {
  * @param input {@String}
  */
     public void _set_cInput(String input) { 
-        this._cInput = input; this._separeInput(); 
+        this._cInput = input;
     }
 
 //==========================================================================================
@@ -123,6 +123,7 @@ public class Calculator implements Observer, Observable {
 
 //==========================================================================================    
 
+    @SuppressWarnings("unused")
     private List<Object> _separeInput() {
         _cListNumber.clear();
         _cListNumber.add("");
