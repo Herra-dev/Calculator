@@ -102,10 +102,14 @@ public class Calculator implements Observer, Observable {
 
 /**
  * This function test the user input:<p>
- * - if input {@code starts} with: {@code *} or {@code /} or<p>
- * - if input {@code ends} with: {@code *} or {@code /} or {@code +} or {@code -}, returns {@code false}
+ * - if this last {@code starts} with: {@code *} or {@code /} or<p>
+ * - or {@code ends} with: {@code *} or {@code /} or {@code +} or {@code -}, returns {@code false}
  * 
- * <p>After that, 
+ * <p>After that, simplify the expression(user input),as :<p>
+ * - {@code +} * {@code +} = {@code +}<p>
+ * - {@code -} * {@code -} = {@code +}<p>
+ * - {@code +} * {@code -} = {@code -}<p>
+ * - {@code -} * {@code +} = {@code -}<p>
  * 
  * @return returns {@code true} if the actual input is correct
  * 
@@ -122,6 +126,15 @@ public class Calculator implements Observer, Observable {
             _cInput = _cInput.replaceAll("[+]{1}[-]{1}|[-]{1}[+]{1}", "-");
         }while(_cInput.contains("--") || _cInput.contains("++") || _cInput.contains("-+") || _cInput.contains("+-"));
         
+        if(_cInput.contains("-*") || _cInput.contains("-/") ||
+           _cInput.contains("+*") || _cInput.contains("+/") ||
+           _cInput.contains("**") || _cInput.contains("*/") ||
+           _cInput.contains("//") || _cInput.contains("/*") ||
+           _cInput.contains("+)") || _cInput.contains("-)") ||
+           _cInput.contains("-*")) {
+
+        }
+
         return true;
     }
 
