@@ -25,9 +25,9 @@ public class Calculator implements Observer, Observable {
     public Calculator(String _input) {
         _cInput = _input;
         if(_arrangeInput())
-            System.out.println("Correct");
+            System.out.println(_cInput + "is correct");
         else
-            System.out.println("Incorrect");
+            System.out.println(_cInput + " is incorrect");
     }
 
 //==========================================================================================
@@ -116,7 +116,8 @@ public class Calculator implements Observer, Observable {
  * @author Heriniaina {@see https://github.com/Herra-dev}
  */
     private boolean _arrangeInput() {
-        if(_cInput.startsWith("*") || _cInput.startsWith("/")) { return false; }
+        if(_cInput.startsWith("*") || _cInput.startsWith("/") ||
+            _cInput.startsWith(")")) { return false; }
         if(_cInput.endsWith("*") || _cInput.endsWith("/") || 
             _cInput.endsWith("+") || _cInput.endsWith("-"))    { return false; }
         if(_cInput.contains("-*") || _cInput.contains("-/") ||            
