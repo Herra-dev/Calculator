@@ -124,7 +124,8 @@ public class Calculator implements Observer, Observable {
             _cInput.contains("**") || _cInput.contains("*/") ||
             _cInput.contains("//") || _cInput.contains("/*") ||
             _cInput.contains("+)") || _cInput.contains("-)") ||
-            _cInput.contains("-*"))                                         { return false; }
+            _cInput.contains("*)") || _cInput.contains("/)") ||
+            _cInput.contains("(/") || _cInput.contains("(*"))            { return false; }
 
         do {
             _cInput = _cInput.replaceAll("[+]{2}", "+");
