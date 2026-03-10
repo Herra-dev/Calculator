@@ -134,7 +134,6 @@ public class Calculator implements Observer, Observable {
             _cInput = _cInput.replaceAll("[+]{1}[-]{1}|[-]{1}[+]{1}", "-");
         }while(_cInput.contains("--") || _cInput.contains("++") || _cInput.contains("-+") || _cInput.contains("+-"));
         
-
         return true;
     }
 
@@ -142,6 +141,7 @@ public class Calculator implements Observer, Observable {
 
     @SuppressWarnings("unused")
     private List<Object> _separeInput() {
+        
         
         return _cListNumber;
     }
