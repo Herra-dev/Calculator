@@ -25,7 +25,7 @@ public class Calculator implements Observer, Observable {
     public Calculator(String _input) {
         _cInput = _input;
         if(_arrangeInput())
-            System.out.println(_cInput + "is correct");
+            System.out.println(_cInput + " is correct");
         else
             System.out.println(_cInput + " is incorrect");
     }
@@ -102,7 +102,7 @@ public class Calculator implements Observer, Observable {
 
 /**
  * This function test the user input:<p>
- * - if this last {@code starts} with: {@code *} or {@code /} or<p>
+ * - if this last {@code starts} with: {@code *} or {@code /} or {@code )}<p>
  * - or {@code ends} with: {@code *} or {@code /} or {@code +} or {@code -}, returns {@code false}
  * 
  * <p>After that, simplify the expression(user input),as :<p>
@@ -116,17 +116,17 @@ public class Calculator implements Observer, Observable {
  * @author Heriniaina {@see https://github.com/Herra-dev}
  */
     private boolean _arrangeInput() {
-        if(_cInput.startsWith("*") || _cInput.startsWith("/") ||
-            _cInput.startsWith(")")) { return false; }
+        if(_cInput.startsWith("*") || _cInput.startsWith("/") || 
+            _cInput.startsWith(")"))                                      { return false; }
         if(_cInput.endsWith("*") || _cInput.endsWith("/") || 
-            _cInput.endsWith("+") || _cInput.endsWith("-"))    { return false; }
+            _cInput.endsWith("+") || _cInput.endsWith("-"))        { return false; }
         if(_cInput.contains("-*") || _cInput.contains("-/") ||            
             _cInput.contains("+*") || _cInput.contains("+/") ||
             _cInput.contains("**") || _cInput.contains("*/") ||
             _cInput.contains("//") || _cInput.contains("/*") ||
             _cInput.contains("+)") || _cInput.contains("-)") ||
             _cInput.contains("*)") || _cInput.contains("/)") ||
-            _cInput.contains("(/") || _cInput.contains("(*"))            { return false; }
+            _cInput.contains("(/") || _cInput.contains("(*"))                { return false; }
 
         do {
             _cInput = _cInput.replaceAll("[+]{2}", "+");
