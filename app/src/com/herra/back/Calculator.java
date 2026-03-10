@@ -28,6 +28,7 @@ public class Calculator implements Observer, Observable {
             System.out.println(_cInput + " is correct");
         else
             System.out.println(_cInput + " is incorrect");
+        _arrangeParenthesisInput();
     }
 
 //==========================================================================================
@@ -134,6 +135,18 @@ public class Calculator implements Observer, Observable {
             _cInput = _cInput.replaceAll("[+]{1}[-]{1}|[-]{1}[+]{1}", "-");
         }while(_cInput.contains("--") || _cInput.contains("++") || _cInput.contains("-+") || _cInput.contains("+-"));
         
+        return true;
+    }
+
+//==========================================================================================
+
+    private boolean _arrangeParenthesisInput() {
+        // IF THE USER INPUT DOESN'T CONTAINS "(" OR ")" RETURNS true
+        if(!(_cInput.contains("(") || _cInput.contains(")"))) return true;
+
+        int _firstIndex = 0;
+        int _lastIndex = 0;
+
         return true;
     }
 
