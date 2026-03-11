@@ -196,6 +196,8 @@ public class Calculator implements Observer, Observable {
             if(c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')') _cListNumber.add("");
         }
 
+        if(_cListNumber.getLast() == "") _cListNumber.removeLast();
+
         for(Object obs: _cListNumber)
             System.out.println(obs);
         
