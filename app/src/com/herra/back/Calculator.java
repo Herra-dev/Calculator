@@ -134,6 +134,8 @@ public class Calculator implements Observer, Observable {
             _cInput = _cInput.replaceAll("[+]{2}", "+");
             _cInput = _cInput.replaceAll("[-]{2}", "+");
             _cInput = _cInput.replaceAll("[+]{1}[-]{1}|[-]{1}[+]{1}", "-");
+            _cInput = _cInput.replaceAll("[*]{1}[+]{1}", "*");
+            _cInput = _cInput.replaceAll("[/]{1}[+]{1}", "/");
         }while(_cInput.contains("--") || _cInput.contains("++") || _cInput.contains("-+") || _cInput.contains("+-"));
         
         return true;
