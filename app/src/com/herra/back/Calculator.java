@@ -164,7 +164,7 @@ public class Calculator implements Observer, Observable {
             if(_cInput.charAt(i) == '(') { _cListNumber.add(_cInput.charAt(i)); continue; }
             if(_cInput.charAt(i) == ')') { _cListNumber.add(_cInput.charAt(i)); continue; }
 
-            if()
+            
         }
         
         return _cListNumber;
