@@ -5,6 +5,7 @@ public class App {
         // @SuppressWarnings("unused")
         // Calculator calc = new Calculator("-(9*+99.5(+-+-8))");
 
-        System.out.println((char)97);
+        System.out.println(new String("a").getClass());
+        
     }
 }
