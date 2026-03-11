@@ -142,18 +142,24 @@ public class Calculator implements Observer, Observable {
 
     private boolean _arrangeParenthesisInput() {
         // IF THE USER INPUT DOESN'T CONTAINS "(" OR ")" RETURNS true
-        if(!(_cInput.contains("(") || _cInput.contains(")"))) return true;
+        
+        if(!(_cInput.contains("(") || _cInput.contains(")"))) { 
+            System.out.println("No parenthesis");
+            return true;
+        }
 
         int _firstIndex = 0;
         int _lastIndex = 0;
         int _anotherOneOpen = 0;
 
-        _firstIndex = _cInput.indexOf(_cInput);
+        _firstIndex = _cInput.indexOf("(");
+        System.out.println("open parenthesis, at index : " + _firstIndex);
 
         for(int i = _firstIndex; i < _cInput.length(); i++) {
             if(_cInput.charAt(i) == ')') {
                 if(_anotherOneOpen == 0) {
                     _lastIndex = i;
+                    System.out.println("close parenthesis, at index : " + _lastIndex);
                     break;
                 }else if(_anotherOneOpen > 0){
                     --_anotherOneOpen;
