@@ -24,10 +24,8 @@ public class Calculator implements Observer, Observable {
  */
     public Calculator(String _input) {
         _cInput = _input;
-        if(_arrangeOperatorInput())
-            System.out.println(_cInput + " is correct");
-        else
-            System.out.println(_cInput + " is incorrect");
+
+        _arrangeOperatorInput();
         _arrangeParenthesisInput();
 
     }
@@ -164,7 +162,10 @@ public class Calculator implements Observer, Observable {
         
         // IF THE USER INPUT CONTAINS MORE CLOSED THAN OPEN PARENTHESIS, RETURNS false
         int[] _parenthesis = _countParenthesisNumber();
-        if(_parenthesis[0] < _parenthesis[1]) return false;
+        if(_parenthesis[0] < _parenthesis[1]){ 
+            System.out.println("error: SYNTAX ERROR");
+            return false;
+        }
         
 
         return true;
