@@ -154,49 +154,33 @@ public class Calculator implements Observer, Observable {
 
 //==========================================================================================    
 
+    private boolean _addNonNumberToListNumber(int index) {
+        _cListNumber.set(_cListNumber.size()-1, _cListNumber.get(_cListNumber.size()-1)+""+_cInput.charAt(index));
+        _cListNumber.add("");
+
+        return true;
+    }
+
+//==========================================================================================    
+
     private List<Object> _separeInput() {
         _cListNumber.clear();
         _cListNumber.add("");
 
         for(int i = 0; i < _cInput.length(); i++) {
-            
-            if(_cInput.charAt(i) == '+') {
-                _cListNumber.set(_cListNumber.size()-1, _cListNumber.get(_cListNumber.size()-1)+""+_cInput.charAt(i));
-                _cListNumber.add("");
-                continue;
-            }
-            if(_cInput.charAt(i) == '-') {
-                _cListNumber.set(_cListNumber.size()-1, _cListNumber.get(_cListNumber.size()-1)+""+_cInput.charAt(i));
-                _cListNumber.add("");
-                continue;
-            }
-            if(_cInput.charAt(i) == '*') {
-                _cListNumber.set(_cListNumber.size()-1, _cListNumber.get(_cListNumber.size()-1)+""+_cInput.charAt(i));
-                _cListNumber.add("");
-                continue;
-            }
-            if(_cInput.charAt(i) == '/') {
-                _cListNumber.set(_cListNumber.size()-1, _cListNumber.get(_cListNumber.size()-1)+""+_cInput.charAt(i));
-                _cListNumber.add("");
-                continue;
-            }
-            if(_cInput.charAt(i) == '(') {
-                _cListNumber.set(_cListNumber.size()-1, _cListNumber.get(_cListNumber.size()-1)+""+_cInput.charAt(i));
-                _cListNumber.add("");
-                continue;
-            }
-            if(_cInput.charAt(i) == ')') {
-                _cListNumber.set(_cListNumber.size()-1, _cListNumber.get(_cListNumber.size()-1)+""+_cInput.charAt(i));
-                _cListNumber.add("");
-                continue;
-            }
+            if(_cInput.charAt(i) == '+') { _addNonNumberToListNumber(i); continue; }
+            if(_cInput.charAt(i) == '-') { _addNonNumberToListNumber(i); continue; }
+            if(_cInput.charAt(i) == '*') { _addNonNumberToListNumber(i); continue; }
+            if(_cInput.charAt(i) == '/') { _addNonNumberToListNumber(i); continue; }
+            if(_cInput.charAt(i) == '(') { _addNonNumberToListNumber(i); continue; }
+            if(_cInput.charAt(i) == ')') { _addNonNumberToListNumber(i); continue; }
 
             _cListNumber.set(_cListNumber.size()-1, _cListNumber.get(_cListNumber.size()-1)+""+_cInput.charAt(i));
             char c = _cInput.charAt(i+1);
             if(c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')') _cListNumber.add("");
         }
 
-        if(_cListNumber.getLast() == "") _cListNumber.removeLast();
+        if(_cListNumber.get(_cListNumber.size()-1) == (String)"") _cListNumber.remove(_cListNumber.size()-1);
 
         for(Object obs: _cListNumber)
             System.out.println(obs);
