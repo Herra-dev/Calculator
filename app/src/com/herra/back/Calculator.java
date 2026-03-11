@@ -29,7 +29,7 @@ public class Calculator implements Observer, Observable {
         else
             System.out.println(_cInput + " is incorrect");
         _arrangeParenthesisInput();
-        _separeInput();
+
     }
 
 //==========================================================================================
@@ -143,11 +143,29 @@ public class Calculator implements Observer, Observable {
 
 //==========================================================================================
 
+    private int[] _countParenthesisNumber() {
+        int[] _parenthesis = {0, 0};
+
+        for(int i = 0; i < _cInput.length(); i++) {
+            if(_cInput.charAt(i) == '(') _parenthesis[0]++;
+            if(_cInput.charAt(i) == ')') _parenthesis[1]++;
+        }
+        System.out.println("open = " + _parenthesis[0] + ", close = " + _parenthesis[1]);
+
+
+        return _parenthesis;
+    }
+
+//==========================================================================================
+
     private boolean _arrangeParenthesisInput() {
         // IF THE USER INPUT DOESN'T CONTAINS "(" OR ")" RETURNS true
         if(!(_cInput.contains("(") || _cInput.contains(")"))) return true;
-
-
+        
+        // IF THE USER INPUT CONTAINS MORE CLOSED THAN OPEN PARENTHESIS, RETURNS false
+        int[] _parenthesis = _countParenthesisNumber();
+        if(_parenthesis[0] < _parenthesis[1]) return false;
+        
 
         return true;
     }
@@ -163,6 +181,7 @@ public class Calculator implements Observer, Observable {
 
 //==========================================================================================    
 
+@SuppressWarnings("unused")
     private List<Object> _separeInput() {
         _cListNumber.clear();
         _cListNumber.add("");
