@@ -190,7 +190,8 @@ public class Calculator implements Observer, Observable {
             }
 
             _cListNumber.set(_cListNumber.size()-1, _cListNumber.get(_cListNumber.size()-1)+""+_cInput.charAt(i));
-            
+            char c = _cInput.charAt(i+1);
+            if(c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')') _cListNumber.add("");
         }
 
         for(Object obs: _cListNumber)
