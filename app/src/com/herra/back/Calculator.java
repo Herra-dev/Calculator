@@ -157,7 +157,7 @@ public class Calculator implements Observer, Observable {
         _cListNumber.add("");
 
         for(int i = 0; i < _cInput.length(); i++) {
-           
+            
             if(_cInput.charAt(i) == '+') {
                 _cListNumber.set(_cListNumber.size()-1, _cListNumber.get(_cListNumber.size()-1)+""+_cInput.charAt(i));
                 _cListNumber.add("");
@@ -190,6 +190,7 @@ public class Calculator implements Observer, Observable {
             }
 
             _cListNumber.set(_cListNumber.size()-1, _cListNumber.get(_cListNumber.size()-1)+""+_cInput.charAt(i));
+            
         }
 
         for(Object obs: _cListNumber)
