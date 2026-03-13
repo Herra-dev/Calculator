@@ -128,7 +128,7 @@ public class Calculator implements Observer, Observable {
     private boolean _arrangeOperatorInput() 
         throws _DivisionByZeroException, _SyntaxErrorException{
         
-        if(_cInput.contains("/0")) throw new _DivisionByZeroException(_cInput.indexOf("/0") + "");
+        if(_cInput.contains("/0")) throw new _DivisionByZeroException(_cInput.charAt(_cInput.indexOf("/0")) + "");
 
         if(_cInput.startsWith("*") || _cInput.startsWith("/") ||  _cInput.startsWith(")")) { 
             throw new _SyntaxErrorException(_cInput.charAt(0) + "" + _cInput.charAt(1));
