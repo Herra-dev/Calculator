@@ -132,6 +132,9 @@ public class Calculator implements Observer, Observable {
  * 
  * @return returns {@code true} if the actual input is correct and simplified
  * 
+ * @throws _DivisionByZeroException when user ask to calcul {@code number}/{@code 0}
+ * @throws _SyntaxErrorException when there is an error of syntax
+ * 
  * @author Heriniaina {@see https://github.com/Herra-dev}
  */
     private boolean _arrangeOperatorInput() 
@@ -172,14 +175,23 @@ public class Calculator implements Observer, Observable {
 
 //==========================================================================================
 
-    private int _countParenthesis(char toCount) {
-        int _Openparenthesis = 0;
+/**
+ * count and returns number of {@code toCount(char)} in {@code class's variable} {@code _cInput(String)}
+ * 
+ * @param toCount {@code char}, character to count
+ * 
+ * @return number of character
+ * 
+ * @author Heriniaina {@see https://github.com/Herra-dev}
+ */
+    private int _countCharacter(char toCount) {
+        int _nbr = 0;
 
         for(int i = 0; i < _cInput.length(); i++) {
-            if(_cInput.charAt(i) == toCount) _Openparenthesis++;
+            if(_cInput.charAt(i) == toCount) _nbr++;
         }
 
-        return _Openparenthesis;
+        return _nbr;
     }
 
 //==========================================================================================
@@ -189,10 +201,10 @@ public class Calculator implements Observer, Observable {
         if(!(_cInput.contains("(") || _cInput.contains(")"))) return false;
         
 
-        int _openParenthesis = _countParenthesis('(');
-        int _closedParenthesis = _countParenthesis(')');
+        int _openParenthesis = _countCharacter('(');
+        int _closedParenthesis = _countCharacter(')');
 
-        // IF THE USER INPUT CONTAINS MORE CLOSED THAN OPEN PARENTHESIS, RETURNS false
+        // IF THE USER INPUT CONTAINS MORE CLOSED THAN OPEN PARENTHESIS, THROW new _SyntaxErrorException
         if(_openParenthesis < _closedParenthesis){ 
             _cOutPut = "SYNTAX ERROR";
             throw new _SyntaxErrorException("verify your syntax: closed parenthesis > open parenthesis");
