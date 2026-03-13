@@ -107,7 +107,7 @@ public class Calculator implements Observer, Observable {
         boolean withParenthesis = false;
 
         // First, arrange input
-        {try {
+        try {
             proceed = (_arrangeOperatorInput()) ? true : false;
         } catch (_DivisionByZeroException | _SyntaxErrorException e) {
             e.printStackTrace();
@@ -122,7 +122,7 @@ public class Calculator implements Observer, Observable {
             e.printStackTrace();
             _cOutPut = "SYNTAX ERROR";
             return _cOutPut;
-        }}
+        }
 
         // No error!!!, continue
         if(!proceed) return _cOutPut;
@@ -252,7 +252,7 @@ public class Calculator implements Observer, Observable {
  * 
  * @return {@code boolean}
  * 
- * @throws _SyntaxErrorException when user input contains more closed than open parenthesis
+ * @throws _SyntaxErrorException when there user input contains more closed than open parenthesis
  * 
  * @author Heriniaina {@see https://github.com/Herra-dev}
  */
@@ -302,8 +302,12 @@ public class Calculator implements Observer, Observable {
             if(_cInput.charAt(i) == ')') { _addNonNumberToListNumber(_cListNumber, i); continue; }
 
             _cListNumber.set(_cListNumber.size()-1, _cListNumber.get(_cListNumber.size()-1)+""+_cInput.charAt(i));
-            char c = _cInput.charAt(i+1);
-            if(c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')') _cListNumber.add("");
+            
+            if(i+1 < _cInput.length()) {
+                char c = _cInput.charAt(i+1);
+                if(c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')') _cListNumber.add("");
+            }
+            
         }
 
         if(_cListNumber.get(_cListNumber.size()-1) == (String)"") _cListNumber.remove(_cListNumber.size()-1);
