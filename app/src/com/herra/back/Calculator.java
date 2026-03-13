@@ -26,7 +26,7 @@ public class Calculator implements Observer, Observable {
         _cInput = _input;
 
         _arrangeOperatorInput();
-        _detectParrenthesis();
+        _detectParenthesis();
 
     }
 
@@ -153,7 +153,7 @@ public class Calculator implements Observer, Observable {
 
 //==========================================================================================
 
-    private boolean _detectParrenthesis() {
+    private boolean _detectParenthesis() {
         int _openParenthesis = _countParenthesis('(');
         int _closedParenthesis = _countParenthesis(')');
         // IF THE USER INPUT DOESN'T CONTAINS "(" OR ")" RETURNS true
