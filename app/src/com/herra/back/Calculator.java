@@ -140,7 +140,7 @@ public class Calculator implements Observer, Observable {
             last = _cListNumber.size()-1;
 
             for(int i = 0; i < _cListNumber.size(); i++) {
-                if(_cListNumber.get(i).equals(')')) {
+                if(_cListNumber.get(i).equals(")")) {
                     if(anotherOneOpen == 0) {
                         last = i;
                         break;
@@ -150,7 +150,12 @@ public class Calculator implements Observer, Observable {
                 }
             }
 
+            if(first > last) { _cInput = "SYNTAX ERROR"; return _cInput; }
+
             System.out.println("first = " + first + ", last = " + last);
+
+            for(Object obs: _cListNumber)
+                System.out.println(obs);
         }
 
         // /
