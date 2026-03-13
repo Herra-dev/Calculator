@@ -101,7 +101,7 @@ public class Calculator implements Observer, Observable {
 //==========================================================================================
 //==========================================================================================
 
-    public String _calcul() {
+    public String _calcul(List<Object> _listNumber) {
         
         boolean proceed = false;
         boolean withParenthesis = false;
@@ -134,15 +134,23 @@ public class Calculator implements Observer, Observable {
         if(withParenthesis) {
             int first = 0;
             int last = 0;
+            int anotherOneOpen = 0;
 
-            first = _cListNumber.lastIndexOf("(");
-            last = _cListNumber.indexOf(")");
+            first = _cListNumber.indexOf("(");
+            last = _cListNumber.size()-1;
 
-            if(last == 0) last = _cListNumber.size()-1;
-            if(first > last) { _cOutPut = "SYNTAX ERROR"; return _cOutPut; }
+            for(int i = 0; i < _cListNumber.size(); i++) {
+                if(_cListNumber.get(i).equals(')')) {
+                    if(anotherOneOpen == 0) {
+                        last = i;
+                        break;
+                    }else if(anotherOneOpen > 0) {
+                        --anotherOneOpen;
+                    }
+                }
+            }
 
-
-
+            System.out.println("first = " + first + ", last = " + last);
         }
 
         // /
@@ -222,7 +230,7 @@ public class Calculator implements Observer, Observable {
  * 
  * @author Heriniaina {@see https://github.com/Herra-dev}
  */
-    private int _countCharacter(char toCount) {
+    private int _countCharacter(String str, char toCount) {
         int _nbr = 0;
 
         for(int i = 0; i < _cInput.length(); i++) {
@@ -247,8 +255,8 @@ public class Calculator implements Observer, Observable {
         // IF THE USER INPUT DOESN'T CONTAINS "(" OR ")" RETURNS false
         if(!_cInput.contains("(") && !_cInput.contains(")")) return false;
         
-        int _openParenthesis = _countCharacter('(');
-        int _closedParenthesis = _countCharacter(')');
+        int _openParenthesis = _countCharacter(_cInput, '(');
+        int _closedParenthesis = _countCharacter(_cInput, ')');
 
         if(_openParenthesis < _closedParenthesis){ 
             _cOutPut = "SYNTAX ERROR";
@@ -261,7 +269,7 @@ public class Calculator implements Observer, Observable {
 
 //==========================================================================================    
 
-    private boolean _addNonNumberToListNumber(int index) {
+    private boolean _addNonNumberToListNumber(List<Object> _cListNumber, int index) {
         _cListNumber.set(_cListNumber.size()-1, _cListNumber.get(_cListNumber.size()-1)+""+_cInput.charAt(index));
         _cListNumber.add("");
 
@@ -276,17 +284,17 @@ public class Calculator implements Observer, Observable {
  * 
  * @return {@code List<Object>}
  */
-    private List<Object> _separeInput() {
+    public List<Object> _separeInput() {
         _cListNumber.clear();
         _cListNumber.add("");
 
         for(int i = 0; i < _cInput.length(); i++) {
-            if(_cInput.charAt(i) == '+') { _addNonNumberToListNumber(i); continue; }
-            if(_cInput.charAt(i) == '-') { _addNonNumberToListNumber(i); continue; }
-            if(_cInput.charAt(i) == '*') { _addNonNumberToListNumber(i); continue; }
-            if(_cInput.charAt(i) == '/') { _addNonNumberToListNumber(i); continue; }
-            if(_cInput.charAt(i) == '(') { _addNonNumberToListNumber(i); continue; }
-            if(_cInput.charAt(i) == ')') { _addNonNumberToListNumber(i); continue; }
+            if(_cInput.charAt(i) == '+') { _addNonNumberToListNumber(_cListNumber, i); continue; }
+            if(_cInput.charAt(i) == '-') { _addNonNumberToListNumber(_cListNumber, i); continue; }
+            if(_cInput.charAt(i) == '*') { _addNonNumberToListNumber(_cListNumber, i); continue; }
+            if(_cInput.charAt(i) == '/') { _addNonNumberToListNumber(_cListNumber, i); continue; }
+            if(_cInput.charAt(i) == '(') { _addNonNumberToListNumber(_cListNumber, i); continue; }
+            if(_cInput.charAt(i) == ')') { _addNonNumberToListNumber(_cListNumber, i); continue; }
 
             _cListNumber.set(_cListNumber.size()-1, _cListNumber.get(_cListNumber.size()-1)+""+_cInput.charAt(i));
             char c = _cInput.charAt(i+1);
@@ -294,9 +302,6 @@ public class Calculator implements Observer, Observable {
         }
 
         if(_cListNumber.get(_cListNumber.size()-1) == (String)"") _cListNumber.remove(_cListNumber.size()-1);
-
-        for(Object obs: _cListNumber)
-            System.out.println(obs);
         
         return _cListNumber;
     }
