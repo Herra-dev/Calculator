@@ -26,18 +26,6 @@ public class Calculator implements Observer, Observable {
  */
     public Calculator(String _input) {
         _cInput = _input;
-
-        try {
-            _arrangeOperatorInput();
-        } catch (_DivisionByZeroException | _SyntaxErrorException e) {
-            e.printStackTrace();_cOutPut = "SYNTAX ERROR";
-        }
-        try {
-            _detectParenthesis();
-        } catch (_SyntaxErrorException e) {
-            e.printStackTrace();
-        }
-
     }
 
 //==========================================================================================
@@ -114,6 +102,56 @@ public class Calculator implements Observer, Observable {
 //==========================================================================================
 
     public String _calcul() {
+        
+        boolean proceed = false;
+        boolean withParenthesis = false;
+
+        // First, arrange input
+        try {
+            proceed = (_arrangeOperatorInput()) ? true : false;
+        } catch (_DivisionByZeroException | _SyntaxErrorException e) {
+            e.printStackTrace();
+            _cOutPut = "SYNTAX ERROR";
+            return _cOutPut;
+        }
+
+        // Second, detect error probable about parenthesis  
+        try {
+            withParenthesis = (_detectParenthesis()) ? true : false;
+        } catch (_SyntaxErrorException e) {
+            e.printStackTrace();
+            _cOutPut = "SYNTAX ERROR";
+            return _cOutPut;
+        }
+
+        // No error!!!, continue
+        if(!proceed) return _cOutPut;
+
+        // Separe input
+        _cListNumber = _separeInput();
+
+        // with parenthesis
+        if(withParenthesis) {
+            int first = 0;
+            int last = 0;
+
+            first = _cListNumber.lastIndexOf("(");
+            last = _cListNumber.indexOf(")");
+
+            if(last == 0) last = _cListNumber.size()-1;
+            if(first > last) { _cOutPut = "SYNTAX ERROR"; return _cOutPut; }
+
+
+
+        }
+
+        // /
+        // *
+        // +
+        // -
+
+
+
         return _cOutPut;
     }
 
@@ -160,7 +198,7 @@ public class Calculator implements Observer, Observable {
             _cInput.contains("(/") || _cInput.contains("(*")) { 
                 _cOutPut = "SYNTAX ERROR";
                 throw new _SyntaxErrorException(_cInput);
-            }
+        }
 
         do {
             _cInput = _cInput.replaceAll("[+]{2}", "+");
@@ -206,8 +244,8 @@ public class Calculator implements Observer, Observable {
  * @author Heriniaina {@see https://github.com/Herra-dev}
  */
     private boolean _detectParenthesis() throws _SyntaxErrorException {
-        // IF THE USER INPUT DOESN'T CONTAINS "(" OR ")" RETURNS true
-        if(!(_cInput.contains("(") || _cInput.contains(")"))) return false;
+        // IF THE USER INPUT DOESN'T CONTAINS "(" OR ")" RETURNS false
+        if(!_cInput.contains("(") && !_cInput.contains(")")) return false;
         
         int _openParenthesis = _countCharacter('(');
         int _closedParenthesis = _countCharacter(')');
@@ -238,7 +276,6 @@ public class Calculator implements Observer, Observable {
  * 
  * @return {@code List<Object>}
  */
-@SuppressWarnings("unused")
     private List<Object> _separeInput() {
         _cListNumber.clear();
         _cListNumber.add("");
