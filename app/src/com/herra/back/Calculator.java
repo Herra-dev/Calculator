@@ -30,7 +30,7 @@ public class Calculator implements Observer, Observable {
         try {
             _arrangeOperatorInput();
         } catch (_DivisionByZeroException | _SyntaxErrorException e) {
-            e.printStackTrace();
+            e.printStackTrace();_cOutPut = "SYNTAX ERROR";
         }
         try {
             _detectParenthesis();
@@ -69,6 +69,15 @@ public class Calculator implements Observer, Observable {
     }
 
 //==========================================================================================
+
+/**
+ * @return returns the output
+ */
+    public String _get_cOutput() {
+        return this._cOutPut;
+    }
+
+//==========================================================================================    
 
 /**
  * Update this.cObservers to observers {@code List<Observer>}
@@ -128,13 +137,15 @@ public class Calculator implements Observer, Observable {
     private boolean _arrangeOperatorInput() 
         throws _DivisionByZeroException, _SyntaxErrorException{
         
-        if(_cInput.contains("/0")) throw new _DivisionByZeroException(_cInput.charAt(_cInput.indexOf("/0")) + "");
+        if(_cInput.contains("/0")) throw new _DivisionByZeroException(_cInput.charAt(_cInput.indexOf("/0")) + "by zero");
 
         if(_cInput.startsWith("*") || _cInput.startsWith("/") ||  _cInput.startsWith(")")) { 
+            _cOutPut = "SYNTAX ERROR";
             throw new _SyntaxErrorException(_cInput.charAt(0) + "" + _cInput.charAt(1));
         }
         if(_cInput.endsWith("*") || _cInput.endsWith("/") || 
-            _cInput.endsWith("+") || _cInput.endsWith("-")) { 
+            _cInput.endsWith("+") || _cInput.endsWith("-")) {
+            _cOutPut = "SYNTAX ERROR"; 
             throw new _SyntaxErrorException(_cInput.charAt(_cInput.charAt(_cInput.length()-1)) + "" + _cInput.charAt(_cInput.length()));
         }
         if(_cInput.contains("-*") || _cInput.contains("-/") ||            
@@ -144,6 +155,7 @@ public class Calculator implements Observer, Observable {
             _cInput.contains("+)") || _cInput.contains("-)") ||
             _cInput.contains("*)") || _cInput.contains("/)") ||
             _cInput.contains("(/") || _cInput.contains("(*")) { 
+                _cOutPut = "SYNTAX ERROR";
                 throw new _SyntaxErrorException(_cInput);
             }
 
@@ -174,7 +186,7 @@ public class Calculator implements Observer, Observable {
 
     private boolean _detectParenthesis() throws _SyntaxErrorException {
         // IF THE USER INPUT DOESN'T CONTAINS "(" OR ")" RETURNS true
-        if(!(_cInput.contains("(") || _cInput.contains(")"))) return true;
+        if(!(_cInput.contains("(") || _cInput.contains(")"))) return false;
         
 
         int _openParenthesis = _countParenthesis('(');
@@ -182,7 +194,8 @@ public class Calculator implements Observer, Observable {
 
         // IF THE USER INPUT CONTAINS MORE CLOSED THAN OPEN PARENTHESIS, RETURNS false
         if(_openParenthesis < _closedParenthesis){ 
-            throw new _SyntaxErrorException("verify your syntax");
+            _cOutPut = "SYNTAX ERROR";
+            throw new _SyntaxErrorException("verify your syntax: closed parenthesis > open parenthesis");
         }
         
 

@@ -2,7 +2,7 @@ import com.herra.back.Calculator;
 
 public class App {
     public static void main(String[] args) {
-        @SuppressWarnings("unused")
-        Calculator calc = new Calculator("-(9*+99.5(+-+-8/0))");        
+        Calculator calc = new Calculator("-(9*+99.5(+-+-8/0))");   
+        System.out.println(calc._get_cOutput());     
     }
 }
