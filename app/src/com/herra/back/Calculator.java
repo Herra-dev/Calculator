@@ -180,7 +180,7 @@ public class Calculator implements Observer, Observable {
  * 
  * @param toCount {@code char}, character to count
  * 
- * @return number of character
+ * @return {@code int} - number of character
  * 
  * @author Heriniaina {@see https://github.com/Herra-dev}
  */
@@ -196,15 +196,22 @@ public class Calculator implements Observer, Observable {
 
 //==========================================================================================
 
+/**
+ * returns {@code true} if the user input contains {@parenthesis}, otherwise returns {@code false}
+ * 
+ * @return {@code boolean}
+ * 
+ * @throws _SyntaxErrorException when there user input contains more closed than open parenthesis
+ * 
+ * @author Heriniaina {@see https://github.com/Herra-dev}
+ */
     private boolean _detectParenthesis() throws _SyntaxErrorException {
         // IF THE USER INPUT DOESN'T CONTAINS "(" OR ")" RETURNS true
         if(!(_cInput.contains("(") || _cInput.contains(")"))) return false;
         
-
         int _openParenthesis = _countCharacter('(');
         int _closedParenthesis = _countCharacter(')');
 
-        // IF THE USER INPUT CONTAINS MORE CLOSED THAN OPEN PARENTHESIS, THROW new _SyntaxErrorException
         if(_openParenthesis < _closedParenthesis){ 
             _cOutPut = "SYNTAX ERROR";
             throw new _SyntaxErrorException("verify your syntax: closed parenthesis > open parenthesis");
@@ -225,6 +232,12 @@ public class Calculator implements Observer, Observable {
 
 //==========================================================================================    
 
+/**
+ * Separe input, and {@code put} each element in a {@code list of Object}
+ * 
+ * 
+ * @return {@code List<Object>}
+ */
 @SuppressWarnings("unused")
     private List<Object> _separeInput() {
         _cListNumber.clear();
