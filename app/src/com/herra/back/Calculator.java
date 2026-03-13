@@ -26,7 +26,7 @@ public class Calculator implements Observer, Observable {
         _cInput = _input;
 
         _arrangeOperatorInput();
-        _arrangeParenthesisInput();
+        _detectParrenthesis();
 
     }
 
@@ -141,28 +141,27 @@ public class Calculator implements Observer, Observable {
 
 //==========================================================================================
 
-    private int[] _countParenthesisNumber() {
-        int[] _parenthesis = {0, 0};
+    private int _countParenthesis(char toCount) {
+        int _Openparenthesis = 0;
 
         for(int i = 0; i < _cInput.length(); i++) {
-            if(_cInput.charAt(i) == '(') _parenthesis[0]++;
-            if(_cInput.charAt(i) == ')') _parenthesis[1]++;
+            if(_cInput.charAt(i) == toCount) _Openparenthesis++;
         }
-        System.out.println("open = " + _parenthesis[0] + ", close = " + _parenthesis[1]);
 
-
-        return _parenthesis;
+        return _Openparenthesis;
     }
 
 //==========================================================================================
 
-    private boolean _arrangeParenthesisInput() {
+    private boolean _detectParrenthesis() {
+        int _openParenthesis = _countParenthesis('(');
+        int _closedParenthesis = _countParenthesis(')');
         // IF THE USER INPUT DOESN'T CONTAINS "(" OR ")" RETURNS true
         if(!(_cInput.contains("(") || _cInput.contains(")"))) return true;
         
         // IF THE USER INPUT CONTAINS MORE CLOSED THAN OPEN PARENTHESIS, RETURNS false
-        int[] _parenthesis = _countParenthesisNumber();
-        if(_parenthesis[0] < _parenthesis[1]){ 
+        
+        if(_openParenthesis < _closedParenthesis){ 
             System.out.println("error: SYNTAX ERROR");
             return false;
         }
