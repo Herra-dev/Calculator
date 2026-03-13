@@ -3,6 +3,8 @@ package com.herra.back;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.herra.exception._DivisionByZeroException;
+import com.herra.exception._SyntaxErrorException;
 import com.interfaces.sh.Observable;
 import com.interfaces.sh.Observer;
 
@@ -25,8 +27,16 @@ public class Calculator implements Observer, Observable {
     public Calculator(String _input) {
         _cInput = _input;
 
-        _arrangeOperatorInput();
-        _detectParenthesis();
+        try {
+            _arrangeOperatorInput();
+        } catch (_DivisionByZeroException | _SyntaxErrorException e) {
+            e.printStackTrace();
+        }
+        try {
+            _detectParenthesis();
+        } catch (_SyntaxErrorException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -115,18 +125,27 @@ public class Calculator implements Observer, Observable {
  * 
  * @author Heriniaina {@see https://github.com/Herra-dev}
  */
-    private boolean _arrangeOperatorInput() {
-        if(_cInput.startsWith("*") || _cInput.startsWith("/") || 
-            _cInput.startsWith(")"))                                      { return false; }
+    private boolean _arrangeOperatorInput() 
+        throws _DivisionByZeroException, _SyntaxErrorException{
+        
+        if(_cInput.contains("/0")) throw new _DivisionByZeroException(_cInput.indexOf("/0") + "");
+
+        if(_cInput.startsWith("*") || _cInput.startsWith("/") ||  _cInput.startsWith(")")) { 
+            throw new _SyntaxErrorException(_cInput.charAt(0) + "" + _cInput.charAt(1));
+        }
         if(_cInput.endsWith("*") || _cInput.endsWith("/") || 
-            _cInput.endsWith("+") || _cInput.endsWith("-"))        { return false; }
+            _cInput.endsWith("+") || _cInput.endsWith("-")) { 
+            throw new _SyntaxErrorException(_cInput.charAt(_cInput.charAt(_cInput.length()-1)) + "" + _cInput.charAt(_cInput.length()));
+        }
         if(_cInput.contains("-*") || _cInput.contains("-/") ||            
             _cInput.contains("+*") || _cInput.contains("+/") ||
             _cInput.contains("**") || _cInput.contains("*/") ||
             _cInput.contains("//") || _cInput.contains("/*") ||
             _cInput.contains("+)") || _cInput.contains("-)") ||
             _cInput.contains("*)") || _cInput.contains("/)") ||
-            _cInput.contains("(/") || _cInput.contains("(*"))                { return false; }
+            _cInput.contains("(/") || _cInput.contains("(*")) { 
+                throw new _SyntaxErrorException(_cInput);
+            }
 
         do {
             _cInput = _cInput.replaceAll("[+]{2}", "+");
@@ -153,17 +172,17 @@ public class Calculator implements Observer, Observable {
 
 //==========================================================================================
 
-    private boolean _detectParenthesis() {
-        int _openParenthesis = _countParenthesis('(');
-        int _closedParenthesis = _countParenthesis(')');
+    private boolean _detectParenthesis() throws _SyntaxErrorException {
         // IF THE USER INPUT DOESN'T CONTAINS "(" OR ")" RETURNS true
         if(!(_cInput.contains("(") || _cInput.contains(")"))) return true;
         
+
+        int _openParenthesis = _countParenthesis('(');
+        int _closedParenthesis = _countParenthesis(')');
+
         // IF THE USER INPUT CONTAINS MORE CLOSED THAN OPEN PARENTHESIS, RETURNS false
-        
         if(_openParenthesis < _closedParenthesis){ 
-            System.out.println("error: SYNTAX ERROR");
-            return false;
+            throw new _SyntaxErrorException("verify your syntax");
         }
         
 
