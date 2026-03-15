@@ -29,10 +29,17 @@ public class Calculator implements Observer, Observable {
         _cInput = _input;
         try {
             this._arrangeOperatorInput();
-            this._testParenthesis();
         } catch (_DivisionByZeroException | _SyntaxErrorException e) {
             e.printStackTrace();
         }
+
+        try {
+            this._testParenthesis();
+        }catch(_SyntaxErrorException e) {
+            e.printStackTrace();
+        }
+
+        this._separeInput();
 
     }
 
@@ -111,29 +118,7 @@ public class Calculator implements Observer, Observable {
 
     public String _calcul(List<Object> _listNumber) {
         
-        boolean proceed = false;
         boolean withParenthesis = false;
-
-        // First, arrange input
-        try {
-            proceed = (_arrangeOperatorInput()) ? true : false;
-        } catch (_DivisionByZeroException | _SyntaxErrorException e) {
-            e.printStackTrace();
-            _cOutPut = "SYNTAX ERROR";
-            return _cOutPut;
-        }
-
-        // Second, detect error probable about parenthesis  
-        try {
-            withParenthesis = (_testParenthesis()) ? true : false;
-        } catch (_SyntaxErrorException e) {
-            e.printStackTrace();
-            _cOutPut = "SYNTAX ERROR";
-            return _cOutPut;
-        }
-
-        // No error!!!, continue
-        if(!proceed) return _cOutPut;
 
         // Separe input
         _cListNumber = _separeInput();
@@ -304,7 +289,7 @@ public class Calculator implements Observer, Observable {
  * 
  * @return {@code List<Object>}
  */
-    public List<Object> _separeInput() {
+    private List<Object> _separeInput() {
         _cListNumber.clear();
         _cListNumber.add("");
 
