@@ -27,19 +27,7 @@ public class Calculator implements Observer, Observable {
  */
     public Calculator(String _input) {
         _cInput = _input;
-        try {
-            this._arrangeOperatorInput();
-        } catch (_DivisionByZeroException | _SyntaxErrorException e) {
-            e.printStackTrace();
-        }
-
-        try {
-            this._testParenthesis();
-        }catch(_SyntaxErrorException e) {
-            e.printStackTrace();
-        }
-
-        this._separeInput();
+        _initializeCalculator();
 
     }
 
@@ -111,6 +99,24 @@ public class Calculator implements Observer, Observable {
  */
     public void _set_cListNumber(List<Object> listNumber) { 
         this._cListNumber = listNumber; 
+    }
+
+//==========================================================================================    
+
+    private void _initializeCalculator() {
+        try {
+            this._arrangeOperatorInput();
+        } catch (_DivisionByZeroException | _SyntaxErrorException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            this._testParenthesis();
+        }catch(_SyntaxErrorException e) {
+            e.printStackTrace();
+        }
+
+        this._separeInput();
     }
 
 //==========================================================================================
