@@ -275,7 +275,26 @@ public class Calculator implements Observer, Observable {
         int[] _open = new int[_openParenthesis];
         int[] _close = new int[_closedParenthesis];
 
+        for(int i = 0; i < _openParenthesis; i++) {
+            _open[i] = _cInput.indexOf("(", i);
+        }
+        for(int i = 0; i < _closedParenthesis; i++) {
+            _close[i] = _cInput.indexOf(")", i);
+        }
 
+        for(int i: _open)
+            System.out.println(i);
+        System.out.println();
+        
+        for(int i: _close)
+            System.out.println(i);
+        System.out.println();
+
+        this._separeInput();
+
+        for(Object obj: _cListNumber)
+            System.out.println(obj);
+        System.out.println();
 
 
         if(_openParenthesis < _closedParenthesis){ 
