@@ -14,6 +14,7 @@ public class Calculator implements Observer, Observable {
     protected String _cInput = new String();
     protected List<Object> _cListNumber = new LinkedList<Object>();
     protected String _cOutPut = new String();
+    protected boolean _canProcess = false;
 
 //==========================================================================================
 
@@ -26,7 +27,13 @@ public class Calculator implements Observer, Observable {
  */
     public Calculator(String _input) {
         _cInput = _input;
-        
+        try {
+            this._arrangeOperatorInput();
+            this._testParenthesis();
+        } catch (_DivisionByZeroException | _SyntaxErrorException e) {
+            e.printStackTrace();
+        }
+
     }
 
 //==========================================================================================
@@ -118,7 +125,7 @@ public class Calculator implements Observer, Observable {
 
         // Second, detect error probable about parenthesis  
         try {
-            withParenthesis = (_detectParenthesis()) ? true : false;
+            withParenthesis = (_testParenthesis()) ? true : false;
         } catch (_SyntaxErrorException e) {
             e.printStackTrace();
             _cOutPut = "SYNTAX ERROR";
@@ -192,15 +199,19 @@ public class Calculator implements Observer, Observable {
     private boolean _arrangeOperatorInput() 
         throws _DivisionByZeroException, _SyntaxErrorException{
         
-        if(_cInput.contains("/0")) throw new _DivisionByZeroException(_cInput.charAt(_cInput.indexOf("/0")) + "by zero");
-
+        if(_cInput.contains("/0")) {
+            this._cOutPut = "SYNTAX ERROR";
+            this._canProcess = false;
+            throw new _DivisionByZeroException(_cInput.charAt(_cInput.indexOf("/0")) + "by zero");
+        }
         if(_cInput.startsWith("*") || _cInput.startsWith("/") ||  _cInput.startsWith(")")) { 
-            _cOutPut = "SYNTAX ERROR";
+            this._cOutPut = "SYNTAX ERROR";
+            this._canProcess = false;
             throw new _SyntaxErrorException(_cInput.charAt(0) + "" + _cInput.charAt(1));
         }
         if(_cInput.endsWith("*") || _cInput.endsWith("/") || 
-            _cInput.endsWith("+") || _cInput.endsWith("-")) {
-            _cOutPut = "SYNTAX ERROR"; 
+            this._cInput.endsWith("+") || _cInput.endsWith("-")) {
+            this._cOutPut = "SYNTAX ERROR"; 
             throw new _SyntaxErrorException(_cInput.charAt(_cInput.charAt(_cInput.length()-1)) + "" + _cInput.charAt(_cInput.length()));
         }
         if(_cInput.contains("-*") || _cInput.contains("-/") ||            
@@ -211,6 +222,7 @@ public class Calculator implements Observer, Observable {
             _cInput.contains("*)") || _cInput.contains("/)") ||
             _cInput.contains("(/") || _cInput.contains("(*")) { 
                 _cOutPut = "SYNTAX ERROR";
+                this._canProcess = false;
                 throw new _SyntaxErrorException(_cInput);
         }
 
@@ -222,6 +234,7 @@ public class Calculator implements Observer, Observable {
             _cInput = _cInput.replaceAll("[/]{1}[+]{1}", "/");
         }while(_cInput.contains("--") || _cInput.contains("++") || _cInput.contains("-+") || _cInput.contains("+-"));
         
+        this._canProcess = true;
         return true;
     }
 
@@ -257,19 +270,20 @@ public class Calculator implements Observer, Observable {
  * 
  * @author Heriniaina {@see https://github.com/Herra-dev}
  */
-    private boolean _detectParenthesis() throws _SyntaxErrorException {
+    private boolean _testParenthesis() throws _SyntaxErrorException {
         // IF THE USER INPUT DOESN'T CONTAINS "(" OR ")" RETURNS false
         if(!_cInput.contains("(") && !_cInput.contains(")")) return false;
         
         int _openParenthesis = _countCharacter(_cInput, '(');
         int _closedParenthesis = _countCharacter(_cInput, ')');
 
+
         if(_openParenthesis < _closedParenthesis){ 
-            _cOutPut = "SYNTAX ERROR";
+            this._cOutPut = "SYNTAX ERROR";
+            this._canProcess = false;
             throw new _SyntaxErrorException("verify your syntax: closed parenthesis > open parenthesis");
         }
         
-
         return true;
     }
 
