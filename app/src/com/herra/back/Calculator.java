@@ -26,6 +26,7 @@ public class Calculator implements Observer, Observable {
  */
     public Calculator(String _input) {
         _cInput = _input;
+        
     }
 
 //==========================================================================================
