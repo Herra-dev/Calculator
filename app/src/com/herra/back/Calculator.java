@@ -88,6 +88,7 @@ public class Calculator implements Observer, Observable {
  */
     public void _set_cInput(String input) { 
         this._cInput = input;
+        this._initializeCalculator();
     }
 
 //==========================================================================================
@@ -263,10 +264,18 @@ public class Calculator implements Observer, Observable {
  */
     private boolean _testParenthesis() throws _SyntaxErrorException {
         // IF THE USER INPUT DOESN'T CONTAINS "(" OR ")" RETURNS false
-        if(!_cInput.contains("(") && !_cInput.contains(")")) return false;
+        if(!_cInput.contains("(") && !_cInput.contains(")")) {
+            this._canProcess = true;
+            return false;
+        } 
         
         int _openParenthesis = _countCharacter(_cInput, '(');
         int _closedParenthesis = _countCharacter(_cInput, ')');
+
+        int[] _open = new int[_openParenthesis];
+        int[] _close = new int[_closedParenthesis];
+
+
 
 
         if(_openParenthesis < _closedParenthesis){ 
