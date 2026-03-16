@@ -258,7 +258,7 @@ public class Calculator implements Observer, Observable {
  * 
  * @return {@code boolean}
  * 
- * @throws _SyntaxErrorException when there user input contains more closed than open parenthesis
+ * @throws _SyntaxErrorException when the user input contains more closed than open parenthesis
  * 
  * @author Heriniaina {@see https://github.com/Herra-dev}
  */
@@ -272,37 +272,57 @@ public class Calculator implements Observer, Observable {
         int _openParenthesis = _countCharacter(_cInput, '(');
         int _closedParenthesis = _countCharacter(_cInput, ')');
 
-        int[] _open = new int[_openParenthesis];
-        int[] _close = new int[_closedParenthesis];
-
-        for(int i = 0; i < _openParenthesis; i++) {
-            _open[i] = _cInput.indexOf("(", i);
-        }
-        for(int i = 0; i < _closedParenthesis; i++) {
-            _close[i] = _cInput.indexOf(")", i);
-        }
-
-        for(int i: _open)
-            System.out.println(i);
-        System.out.println();
-        
-        for(int i: _close)
-            System.out.println(i);
-        System.out.println();
-
-        this._separeInput();
-
-        for(Object obj: _cListNumber)
-            System.out.println(obj);
-        System.out.println();
-
-
         if(_openParenthesis < _closedParenthesis){ 
             this._cOutPut = "SYNTAX ERROR";
             this._canProcess = false;
             throw new _SyntaxErrorException("verify your syntax: closed parenthesis > open parenthesis");
         }
+
+        int[] _open = new int[_openParenthesis];
+        int[] _close = new int[_closedParenthesis];
+        int o = 0;
+        int c = 0;
+
+        for(int i = 0; i < _cInput.length(); i++) {
+            if(_cInput.charAt(i) == '(') _open[o++] = i;
+            if(_cInput.charAt(i) == ')') _close[c++] = i;
+        }
+
+        // (-9*99)(4(5(1)))
+        // 8+9))((
+
+        boolean _mustBreak = false;
+        for(int _c = 0; _c < _close.length; _c++) {
+            for(int _o = _c; _o >= 0; _o--) {
+                if (_close[_c] < _open[_o]) {
+                    _canProcess = false;
+                    _cOutPut = "SYNTAX ERROR";
+                    _mustBreak = true;
+                    break;
+                }
+            }
+            if(_mustBreak){ 
+                System.out.println("error");
+                break;
+            }else {
+                System.out.println(_close[_c] + "- 0");
+            }
+            
+        }
+
+
+
+
+
+        // for(int i: _open)
+        //     System.out.println(i);
+        // System.out.println();
+
+        // for(int i: _close)
+        //     System.out.println(i);
+        // System.out.println();
         
+        _canProcess = true;
         return true;
     }
 
