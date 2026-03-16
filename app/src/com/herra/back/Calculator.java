@@ -288,39 +288,15 @@ public class Calculator implements Observer, Observable {
             if(_cInput.charAt(i) == ')') _close[c++] = i;
         }
 
-        // (-9*99)(4(5(1)))
-        // 8+9))((
-
-        boolean _mustBreak = false;
         for(int _c = 0; _c < _close.length; _c++) {
             for(int _o = _c; _o >= 0; _o--) {
                 if (_close[_c] < _open[_o]) {
                     _canProcess = false;
                     _cOutPut = "SYNTAX ERROR";
-                    _mustBreak = true;
-                    break;
+                    throw new _SyntaxErrorException("verify your syntax");
                 }
-            }
-            if(_mustBreak){ 
-                System.out.println("error");
-                break;
-            }else {
-                System.out.println(_close[_c] + "- 0");
-            }
-            
+            }         
         }
-
-
-
-
-
-        // for(int i: _open)
-        //     System.out.println(i);
-        // System.out.println();
-
-        // for(int i: _close)
-        //     System.out.println(i);
-        // System.out.println();
         
         _canProcess = true;
         return true;
