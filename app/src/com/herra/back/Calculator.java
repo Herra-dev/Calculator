@@ -125,10 +125,7 @@ public class Calculator implements Observer, Observable {
 
     public String _calcul(List<Object> _listNumber) {
         
-        boolean withParenthesis = false;
-
-        // Separe input
-        _cListNumber = _separeInput();
+        boolean withParenthesis = (_cInput.contains(")") || _cInput.contains("("));
 
         // with parenthesis
         if(withParenthesis) {
