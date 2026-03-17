@@ -101,6 +101,12 @@ public class Calculator implements Observer, Observable {
         this._cListNumber = listNumber; 
     }
 
+//==========================================================================================
+
+    public void _set_cOutput(String output) {
+        this._cOutPut = output;
+    }
+
 //==========================================================================================    
 
     private void _initializeCalculator() {
@@ -122,9 +128,15 @@ public class Calculator implements Observer, Observable {
 //==========================================================================================
 //==========================================================================================
 
-    public String _calcul() {
+    public void _calcul() {
+        _calcul(_cListNumber);
+    }
+
+//==========================================================================================
+
+    public void _calcul(List<Object> _listN) {
         
-        boolean withParenthesis = (_cInput.contains(")") || _cInput.contains("("));
+        boolean withParenthesis = _cInput.contains("(");
 
         // with parenthesis
         if(withParenthesis) {
@@ -132,37 +144,40 @@ public class Calculator implements Observer, Observable {
             int last = 0;
             int anotherOneOpen = 0;
 
-            first = _cListNumber.indexOf("("); // first index of open parenthesis
-            last = _cListNumber.size()-1;
+            first = _listN.indexOf('('); // first index of open parenthesis
+            last = _listN.size()-1;
 
-            for(int i = 0; i < _cListNumber.size(); i++) {
-                if(_cListNumber.get(i).equals(")")) {
+            for(int i = 0; i < _listN.size(); i++) {
+                if(_listN.get(i).equals(')')) {
                     if(anotherOneOpen == 0) {
                         last = i;
                         break;
                     }else if(anotherOneOpen > 0) {
                         --anotherOneOpen;
-                        System.out.println("open");
                     }
-                }else if (_cListNumber.get(i).equals("("))
+                }else if (_listN.get(i).equals('('))
                     ++anotherOneOpen;
 
             }
 
-            System.out.println("first = " + first + ", last = " + last);
+            List<Object> _listNumberCopy = new LinkedList<Object>();
+            for(int i = first+1; i < last; i++){
+                _listNumberCopy.add(_listN.get(i));
+            }
 
-            for(Object obs: _cListNumber)
-                System.out.println(obs);
+            for(Object obs: _listNumberCopy)
+                System.out.print(obs);
+            System.out.println();
+
+            if(_listNumberCopy.contains("(")) _calcul(_listNumberCopy);
         }
+
 
         // /
         // *
         // +
         // -
 
-
-
-        return _cOutPut;
     }
 
 //==========================================================================================
