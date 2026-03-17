@@ -2,8 +2,8 @@ import com.herra.back.Calculator;
 
 public class App {
     public static void main(String[] args) {
-        @SuppressWarnings("unused")
         Calculator calc = new Calculator("(8())");
+        calc._calcul();
     }
 
 }

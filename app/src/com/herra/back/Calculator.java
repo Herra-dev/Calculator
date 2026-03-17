@@ -28,7 +28,6 @@ public class Calculator implements Observer, Observable {
     public Calculator(String _input) {
         _cInput = _input;
         _initializeCalculator();
-
     }
 
 //==========================================================================================
@@ -123,7 +122,7 @@ public class Calculator implements Observer, Observable {
 //==========================================================================================
 //==========================================================================================
 
-    public String _calcul(List<Object> _listNumber) {
+    public String _calcul() {
         
         boolean withParenthesis = (_cInput.contains(")") || _cInput.contains("("));
 
@@ -133,7 +132,7 @@ public class Calculator implements Observer, Observable {
             int last = 0;
             int anotherOneOpen = 0;
 
-            first = _cListNumber.indexOf("(");
+            first = _cListNumber.indexOf("("); // first index of open parenthesis
             last = _cListNumber.size()-1;
 
             for(int i = 0; i < _cListNumber.size(); i++) {
@@ -143,11 +142,12 @@ public class Calculator implements Observer, Observable {
                         break;
                     }else if(anotherOneOpen > 0) {
                         --anotherOneOpen;
+                        System.out.println("open");
                     }
-                }
-            }
+                }else if (_cListNumber.get(i).equals("("))
+                    ++anotherOneOpen;
 
-            if(first > last) { _cInput = "SYNTAX ERROR"; return _cInput; }
+            }
 
             System.out.println("first = " + first + ", last = " + last);
 
