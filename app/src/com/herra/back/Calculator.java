@@ -136,7 +136,7 @@ public class Calculator implements Observer, Observable {
 
     public void _calcul(List<Object> _listN) {
         
-        boolean withParenthesis = _cInput.contains("(");
+        boolean withParenthesis = _listN.contains("(");
 
         // with parenthesis
         if(withParenthesis) {
@@ -144,25 +144,22 @@ public class Calculator implements Observer, Observable {
             int last = 0;
             int anotherOneOpen = 0;
 
-            first = _listN.indexOf('('); // first index of open parenthesis
+            first = _listN.indexOf("("); // first index of open parenthesis
             last = _listN.size()-1;
 
-            for(int i = 0; i < _listN.size(); i++) {
-                if(_listN.get(i).equals(')')) {
+            for(int i = first+1; i < _listN.size(); i++) {
+                if(_listN.get(i).equals(")")) {
                     if(anotherOneOpen == 0) {
                         last = i;
                         break;
-                    }else if(anotherOneOpen > 0) {
-                        --anotherOneOpen;
-                    }
-                }else if (_listN.get(i).equals('('))
-                    ++anotherOneOpen;
+                    }else if(anotherOneOpen > 0) --anotherOneOpen;
 
+                }else if (_listN.get(i).equals("(")) ++anotherOneOpen;
             }
 
             List<Object> _listNumberCopy = new LinkedList<Object>();
             for(int i = first+1; i < last; i++){
-                _listNumberCopy.add(_listN.get(i));
+                _listNumberCopy.add(_listN.get(i)); // adding all value between first and last into an another List named _listNumberCopy
             }
 
             for(Object obs: _listNumberCopy)
@@ -171,13 +168,30 @@ public class Calculator implements Observer, Observable {
 
             if(_listNumberCopy.contains("(")) _calcul(_listNumberCopy);
         }
+    }
 
+    @SuppressWarnings("unused")
+    private String _operatorPlus(List<Object> _listN) {
 
-        // /
-        // *
-        // +
-        // -
+        return "";
+    }
 
+    @SuppressWarnings("unused")
+    private String _operatorMinus(List<Object> _listN) {
+
+        return "";
+    }
+
+    @SuppressWarnings("unused")
+    private String _operatorMultiply(List<Object> _listN) {
+
+        return "";
+    }
+
+    @SuppressWarnings("unused")
+    private String _operatorDivide(List<Object> _listN) {
+
+        return "";
     }
 
 //==========================================================================================
@@ -288,7 +302,13 @@ public class Calculator implements Observer, Observable {
             this._cOutPut = "SYNTAX ERROR";
             this._canProcess = false;
             throw new _SyntaxErrorException("verify your syntax: closed parenthesis > open parenthesis");
+        } else if(_openParenthesis > _closedParenthesis) { // add some closed parenthesis when his number is less than open parenthesis
+            for(int i = _openParenthesis-_closedParenthesis; i > 0; i--) {
+                _closedParenthesis++;
+                _cInput += ')';
+            }
         }
+
 
         int[] _open = new int[_openParenthesis];
         int[] _close = new int[_closedParenthesis];
