@@ -240,11 +240,18 @@ public class Calculator implements Observer, Observable {
 
     private List<Object> _operatorMinus(List<Object> _listN) {
 
-        int indxOfMinuxSign = _listN.indexOf("-");
-        if(indxOfMinuxSign == -1) return _listN;
+        int indxOfMinusSign = _listN.indexOf("-");
+        if(indxOfMinusSign == -1) return _listN;
 
-        int indxOfFirstNbr = indxOfMinuxSign-1;
-        int indxOfLastNbr = indxOfMinuxSign+1;
+
+        int indxOfFirstNbr = indxOfMinusSign-1;
+        int indxOfLastNbr = indxOfMinusSign+1;
+
+        int index = indxOfFirstNbr;
+        byte firstNbrNegative = 1; // positive
+        if(index-1 >= 0)
+            firstNbrNegative = ((_listN.get(indxOfFirstNbr-1)).equals("-")) ? (byte)-1 : (byte)1;
+        byte secondNbrNegative = ((_listN.get(indxOfMinusSign+1)).equals("-")) ? (byte)-1 : (byte)1;
 
         double fistNbr = java.lang.Double.parseDouble((String)_listN.get(indxOfFirstNbr));
         double secondNbr = java.lang.Double.parseDouble((String)_listN.get(indxOfLastNbr));
@@ -253,7 +260,7 @@ public class Calculator implements Observer, Observable {
             _listN.remove(i);
         }
 
-        _listN.add(indxOfFirstNbr, fistNbr - secondNbr);
+        _listN.add(indxOfFirstNbr, (firstNbrNegative*fistNbr) - (secondNbrNegative*secondNbr));
         _listN.set(indxOfFirstNbr, java.lang.Double.toString((double)_listN.get(indxOfFirstNbr)));
 
         for(Object obs: _listN)
