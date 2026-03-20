@@ -193,6 +193,7 @@ public class Calculator implements Observer, Observable {
             System.out.println();            
         }
 
+        // Operation order: priority : '/' , after '*'
         while(_listNumberCopy.contains("/")) _listNumberCopy = _operatorDivide(_listNumberCopy);
         while(_listNumberCopy.contains("*")) _listNumberCopy = _operatorMultiply(_listNumberCopy);
         while(_listNumberCopy.contains("+")) _listNumberCopy = _operatorPlus(_listNumberCopy);
@@ -224,7 +225,7 @@ public class Calculator implements Observer, Observable {
         }
 
         _listN.add(indxOfFirstNbr, fistNbr+secondNbr);
-        _listN.set(indxOfFirstNbr, "" + _listN.get(indxOfFirstNbr));
+        _listN.set(indxOfFirstNbr, java.lang.Double.toString((double)_listN.get(indxOfFirstNbr)));
 
         for(Object obs: _listN)
             System.out.print(obs);
@@ -251,7 +252,7 @@ public class Calculator implements Observer, Observable {
         }
 
         _listN.add(indxOfFirstNbr, fistNbr+secondNbr);
-        _listN.set(indxOfFirstNbr, "" + _listN.get(indxOfFirstNbr));
+        _listN.set(indxOfFirstNbr, java.lang.Double.toString((double)_listN.get(indxOfFirstNbr)));
 
         return _listN;
     }
@@ -280,7 +281,7 @@ public class Calculator implements Observer, Observable {
         }
 
         _listN.add(indxOfFirstNbr, (firstNbrNegative*fistNbr) * (secondNbrNegative*secondNbr));
-        _listN.set(indxOfFirstNbr, "" + _listN.get(indxOfFirstNbr));
+        _listN.set(indxOfFirstNbr, java.lang.Double.toString((double)_listN.get(indxOfFirstNbr)));
 
         return _listN;
     }
@@ -309,8 +310,7 @@ public class Calculator implements Observer, Observable {
         }
 
         _listN.add(indxOfFirstNbr, (firstNbrNegative*fistNbr) / (secondNbrNegative*secondNbr));
-        _listN.set(indxOfFirstNbr, "" + _listN.get(indxOfFirstNbr));
-
+        _listN.set(indxOfFirstNbr, java.lang.Double.toString((double)_listN.get(indxOfFirstNbr)));
         return _listN;
     }
 
