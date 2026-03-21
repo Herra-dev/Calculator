@@ -1,10 +1,17 @@
-import com.herra.back.Calculator1;
+import com.herra.back.Calculator;
+import com.herra.exception._SyntaxErrorException;
 
 public class App {
     public static void main(String[] args) {
-        Calculator1 calc = new Calculator1("*");
+        Calculator calc = new Calculator("9-+-----9");
         
-        calc._calcul();
+        try {
+            calc.testUserInput();
+        } catch (_SyntaxErrorException e) {
+            e.printStackTrace();
+        }
+
+        calc.arrangeUserInput();
 
     }
 

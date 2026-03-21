@@ -89,6 +89,7 @@ public class Calculator implements Observer, Observable {
         }while (_input.contains("--") || _input.contains("++") ||
                     _input.contains("-+") || _input.contains("+-"));
 
+        System.out.println(_input);
         this._canProcess = true;
         
     }
