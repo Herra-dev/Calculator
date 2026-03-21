@@ -8,12 +8,18 @@ public class Calculator implements Observer, Observable {
         return true;
     }
 
+//===================================================================
+
     @Override public boolean _addObserver(Observer _observer) {
         return true;
     }
+
+//===================================================================
     
     @Override public boolean _updateObserver() {
         return true;
     }
+
+//===================================================================
     
 }
