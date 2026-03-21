@@ -63,13 +63,23 @@ public class Calculator implements Observer, Observable {
 /**
  * <h2>arrangeUserInput()</h2> {@link com.herra.back.Calculator#arrangeUserInput()}<p>
  * 
- * Arrange user input, examples:<p>
- * - it contains succession of {@code +} like {@code 8-++--9} becomes {@code 8-9}
+ * Arrange user input:<p>
+ * - if it contains succession of {@code +} like {@code 8++++++++9} becomes {@code 8+9}<p>
+ * - {@code 9-----6} --> {@code 9-6}
+ * - {@code 9+-+-+6} --> {@code 9+6}
+ * - {@code 9*+1}    --> {@code 9*1}
+ * 
+ * <p>
+ * Like we do in math class:
+ * - {@code +} * {@code +} = {@code +}
+ * - {@code -} * {@code -} = {@code +}
+ * - {@code +} * {@code -} = {@code -}
+ * - {@code -} * {@code +} = {@code -}
  * 
  * 
- * @throws _SyntaxErrorException
+ * @author Heriniaina {@link https://github.com/Herra-dev}
  */
-    public void arrangeUserInput() throws _SyntaxErrorException{  
+    public void arrangeUserInput(){  
         do {
             _input = _input.replaceAll("[+]{2}", "+");                      // ++           --> +
             _input = _input.replaceAll("[-]{2}", "+");                      // --           --> +
