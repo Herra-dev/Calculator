@@ -135,7 +135,8 @@ public class Calculator implements Observer, Observable {
 //==========================================================================================
 
     public List<Object> _calcul(List<Object> _listN) {
-        
+        if(!_canProcess) return _listN;
+
         boolean withParenthesis = _listN.contains("(");
         List<Object> _listNumberCopy = _listN;
 
@@ -239,7 +240,7 @@ public class Calculator implements Observer, Observable {
 
         for(Object obs: _listN)
             System.out.print(obs);
-        System.out.println("additin");      
+        System.out.println("addition");      
 
         return _listN;
     }
@@ -249,7 +250,7 @@ public class Calculator implements Observer, Observable {
     private List<Object> _operatorMinus(List<Object> _listN) {
 
         int indxOfMinusSign = _listN.indexOf("-"); 
-        
+
         if(indxOfMinusSign < -1) return _listN; // if no subtraction sign was found quit function and returns the value of parameter _listN
         if(indxOfMinusSign == 0) {
             double d =  java.lang.Double.parseDouble((String)_listN.get(1))*-1;
@@ -390,6 +391,7 @@ public class Calculator implements Observer, Observable {
         }
         if(_cInput.endsWith("*") || _cInput.endsWith("/") || 
             this._cInput.endsWith("+") || _cInput.endsWith("-")) {
+            this._canProcess = false;
             this._cOutPut = "SYNTAX ERROR"; 
             throw new _SyntaxErrorException(_cInput.charAt(_cInput.charAt(_cInput.length()-1)) + "" + _cInput.charAt(_cInput.length()));
         }
