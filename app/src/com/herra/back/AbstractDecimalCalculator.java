@@ -106,7 +106,9 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             _input = _input.replaceAll("[%]{1}[+]{1}", "%");                // %+           --> %
 
             // NUMBER
-            _input = _input.replaceAll("0+", "0");
+            _input = _input.replaceAll("[^1-9]0+", "0");
+            int i = this.getInput().indexOf("0");
+
 
         }while (_input.contains("--") || _input.contains("++") ||
                     _input.contains("-+") || _input.contains("+-"));
