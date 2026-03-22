@@ -97,19 +97,12 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  */
     protected void arrangeUserInput() {  
         do {
-            // OPERATOR
             _input = _input.replaceAll("[+]{2}", "+");                      // ++           --> +
             _input = _input.replaceAll("[-]{2}", "+");                      // --           --> +
             _input = _input.replaceAll("[+]{1}[-]{1}|[-]{1}[+]{1}", "-");   // +- or -+     --> -
             _input = _input.replaceAll("[*]{1}[+]{1}", "*");                // *+           --> *
             _input = _input.replaceAll("[/]{1}[+]{1}", "/");                // /+           --> /
             _input = _input.replaceAll("[%]{1}[+]{1}", "%");                // %+           --> %
-
-            // NUMBER
-            _input = _input.replaceAll("[^1-9]0+", "0");
-            int i = this.getInput().indexOf("0");
-
-
         }while (_input.contains("--") || _input.contains("++") ||
                     _input.contains("-+") || _input.contains("+-"));
 
