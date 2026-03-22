@@ -8,7 +8,7 @@ import com.herra.exception._SyntaxErrorException;
 import com.interfaces.sh.Observable;
 import com.interfaces.sh.Observer;
 
-public class Calculator1 implements Observer, Observable {
+public class AbstractCalculator1 implements Observer, Observable {
 
     protected List<Observer> _cObservers = new LinkedList<Observer>();
     protected String _cInput = new String();
@@ -19,15 +19,15 @@ public class Calculator1 implements Observer, Observable {
 //==========================================================================================
 
 /**
- * Construct new Calculator object
+ * Construct new AbstractCalculator object
  * 
  * @param _expression {@code the expression to evaluate}
  * 
  * @author Heriniaina - {@see https://github.com/Herra-dev}
  */
-    public Calculator1(String _input) {
+    public AbstractCalculator1(String _input) {
         _cInput = _input;
-        _initializeCalculator();
+        _initializeAbstractCalculator();
     }
 
 //==========================================================================================
@@ -87,7 +87,7 @@ public class Calculator1 implements Observer, Observable {
  */
     public void _set_cInput(String input) { 
         this._cInput = input;
-        this._initializeCalculator();
+        this._initializeAbstractCalculator();
     }
 
 //==========================================================================================
@@ -109,7 +109,7 @@ public class Calculator1 implements Observer, Observable {
 
 //==========================================================================================    
 
-    private void _initializeCalculator() {
+    private void _initializeAbstractCalculator() {
         try {
             this._arrangeOperatorInput();
         } catch (_DivisionByZeroException | _SyntaxErrorException e) {
