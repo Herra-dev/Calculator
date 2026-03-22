@@ -19,11 +19,11 @@ public abstract class AbstractCalculator implements Observer, Observable {
 
     protected abstract void testUserInput() throws _SyntaxErrorException, _DivisionByZeroException;
     protected abstract void arrangeUserInput();
-    protected abstract String calcul();
-    protected abstract String operatorPlus();
-    protected abstract String operatorMinus();
-    protected abstract String operatorMultiply();
-    protected abstract String operatorDivide();
+    protected abstract String calcul(List<String> list);
+    protected abstract List<String> operatorPlus(List<String> list);
+    protected abstract List<String> operatorMinus(List<String> list);
+    protected abstract List<String> operatorMultiply(List<String> list);
+    protected abstract List<String> operatorDivide(List<String> list);
 
 //===================================================================
 //  GETTERS

@@ -16,10 +16,12 @@ public class DecimalCalculator extends AbstractDecimalCalculator{
             testParenthesis();
             testUserInput();
             arrangeUserInput();
-            separeInput();
+            this.setListInput(separeInput());
         } catch (_SyntaxErrorException | _DivisionByZeroException e) {
             e.printStackTrace();
         }
+
+        this.operatorPlus(this.getInputList());
     }
 
 //===================================================================

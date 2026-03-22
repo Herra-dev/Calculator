@@ -1,5 +1,7 @@
 package com.herra.back;
 
+import java.util.List;
+
 import com.herra.exception._DivisionByZeroException;
 import com.herra.exception._SyntaxErrorException;
 
@@ -154,32 +156,47 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * 
  * @return the result of the actual calcul
  */
-    @Override protected String calcul() {
+    @Override protected String calcul(List<String> list) {
+
+        while(list.contains("/") || list.contains("*") || list.contains("+") || list.contains("-")) {
+            list = operatorDivide(list);
+            list = operatorMultiply(list);
+            list = operatorPlus(list);
+            list = operatorMinus(list);
+        }
+
         return "";
     }
 
 //===================================================================
 
-    @Override protected String operatorPlus() {
-        return "";
+    @Override protected List<String> operatorPlus(List<String> list) {
+        int plus_sign_index = list.indexOf("+");
+        int first_number_index = plus_sign_index-1;
+        int second_number_index = (list.get(plus_sign_index+1).equals("-")) ? plus_sign_index+2 : plus_sign_index+1;
+
+        System.out.println("first index = " + first_number_index + ", second index = " + second_number_index);
+
+
+        return list;
     }
 
 //===================================================================
 
-    @Override protected String operatorMinus() {
-        return "";
+    @Override protected List<String> operatorMinus(List<String> list) {
+        return list;
     }
 
 //===================================================================
 
-    @Override protected String operatorMultiply() {
-        return "";
+    @Override protected List<String> operatorMultiply(List<String> list) {
+        return list;
     }
     
 //===================================================================
     
-    @Override protected String operatorDivide() {
-        return "";
+    @Override protected List<String> operatorDivide(List<String> list) {
+        return list;
     }
 
 }
