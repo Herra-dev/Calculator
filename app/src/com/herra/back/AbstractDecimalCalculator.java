@@ -56,47 +56,63 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
     //-----------------------------------------------------------------------------------
 
         //if the user input contains a division by zero, raise a _DivisionByZeroException
-        int from_index = 0;
-        int index_of_zero = 0;
-        String str = new String();
+        this.setListInput(separeInput());
+        MyLinkedList<String> my_list = new MyLinkedList<String>();
+        my_list.addAll(this.getInputList());
+        System.out.println("-------------------------------------------");
+        for(String str: my_list)
+            System.out.println(str);
+        System.out.println("index of / = " + my_list.indexOf("-", 1));
+        System.out.println("-------------------------------------------");
         
-        while((index_of_zero = this.getInput().indexOf('0', from_index)) != -1) {
-            if(this.getInput().charAt(index_of_zero-1) == '/' || this.getInput().charAt(index_of_zero-1) == '%') {
-                System.out.println("search starts from = " + from_index);
-                if(index_of_zero+1 > this.getInput().length()-1) {
-                    this.setOutPut("SYNTAX ERROR");
-                    this._canProcess = false;
-                    throw new _DivisionByZeroException("Division by zero");
-                } 
-                str = new String();
-                str += (this.getInput().charAt(index_of_zero-1) == '/') ? "/0" : "%0";
+        // int index_found = 0;
+        // int from_index = 0;
+        // while((index_found = my_list.indexOf("/", from_index)) != -1) {
+        //     from_index = index_found+1;
+        //     System.out.println("index found = " + index_found);
+        // }
+
+
+        // int index_of_zero = 0;
+        // String str = new String();
+        
+        // while((index_of_zero = this.getInput().indexOf('0', from_index)) != -1) {
+        //     if(this.getInput().charAt(index_of_zero-1) == '/' || this.getInput().charAt(index_of_zero-1) == '%') {
+        //         System.out.println("search starts from = " + from_index);
+        //         if(index_of_zero+1 > this.getInput().length()-1) {
+        //             this.setOutPut("SYNTAX ERROR");
+        //             this._canProcess = false;
+        //             throw new _DivisionByZeroException("Division by zero");
+        //         } 
+        //         str = new String();
+        //         str += (this.getInput().charAt(index_of_zero-1) == '/') ? "/0" : "%0";
  
-                char character = this.getInput().charAt(++index_of_zero);
+        //         char character = this.getInput().charAt(++index_of_zero);
                 
 
-                boolean must_break = false;
-                while(character != '(' && character != ')' && character != '+' && character != '-' &&
-                        character != '*' && character != '/' && index_of_zero < this.getInput().length() && !must_break) {
+        //         boolean must_break = false;
+        //         while(character != '(' && character != ')' && character != '+' && character != '-' &&
+        //                 character != '*' && character != '/' && index_of_zero < this.getInput().length() && !must_break) {
 
-                    character = this.getInput().charAt(index_of_zero++);
-                    str += character;
-                    for(char i = '1'; i <= '9'; i++) {
-                        if(character == i) {
-                            must_break = true;
-                            break;
-                        }
-                    }
-                }
+        //             character = this.getInput().charAt(index_of_zero++);
+        //             str += character;
+        //             for(char i = '1'; i <= '9'; i++) {
+        //                 if(character == i) {
+        //                     must_break = true;
+        //                     break;
+        //                 }
+        //             }
+        //         }
 
-                if(!str.matches("[[/]|[%]0]{1}0*[1-9]+")) {
-                    this.setOutPut("SYNTAX ERROR");
-                    this._canProcess = false;
-                    throw new _DivisionByZeroException("Division by zero");
-                }
-            }
+        //         if(!str.matches("[[/]|[%]0]{1}0*[1-9]+")) {
+        //             this.setOutPut("SYNTAX ERROR");
+        //             this._canProcess = false;
+        //             throw new _DivisionByZeroException("Division by zero");
+        //         }
+        //     }
             
-            from_index = index_of_zero+1; // new search starts at index_of_zero + 1, where a zero was found
-        }
+        //     from_index = index_of_zero+1; // new search starts at index_of_zero + 1, where a zero was found
+        // }
 
         this._canProcess = true;
     }
@@ -175,10 +191,10 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         int first_number_index = plus_sign_index-1;
         int second_number_index = plus_sign_index+1;
 
-        boolean first_number_negative = list.get(second_number_index).matches("[-]{1}");
+        // boolean first_number_negative = list.get(second_number_index).matches("[-]{1}");
 
         System.out.println("first index = " + first_number_index + ", second index = " + second_number_index);
-        System.out.println("first number negative? --> " + first_number_negative);
+        // System.out.println("first number negative? --> " + first_number_negative);
 
 
         return list;
