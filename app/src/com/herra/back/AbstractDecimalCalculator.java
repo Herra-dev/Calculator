@@ -51,14 +51,22 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
     //-----------------------------------------------------------------------------------
 
         //if the user input contains a division by zero, raise a _DivisionByZeroException
-        int from_index = 0;
-        int index_of_zero = 0;
-        while((index_of_zero = this.getInput().indexOf('0', from_index)) != -1) {
-            if(this.getInput().charAt(index_of_zero+1) == '/' || this.getInput().charAt(index_of_zero+1) == '%') {
-                
-                
-            }
-            from_index = index_of_zero+1; // new search starts at index + 1, where a zero was found
+        // int from_index = 0;
+        // int index_of_zero = 0;
+        // while((index_of_zero = this.getInput().indexOf('0', from_index)) != -1) {
+        //     if(this.getInput().charAt(index_of_zero-1) == '/' || this.getInput().charAt(index_of_zero-1) == '%') {
+        //         if(this.getInput().matches("[/0]{1}[1-9]");
+        //     }
+        //     from_index = index_of_zero+1; // new search starts at index + 1, where a zero was found
+        // }
+
+        // Pattern
+
+        if(this.getInput().contains("/0[^1-9[^.]{1}]")) {
+            System.out.println("hello world");
+        }
+        else {
+            System.out.println("hello hery only");
         }
 
 
@@ -89,12 +97,17 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  */
     protected void arrangeUserInput() {  
         do {
+            // OPERATOR
             _input = _input.replaceAll("[+]{2}", "+");                      // ++           --> +
             _input = _input.replaceAll("[-]{2}", "+");                      // --           --> +
             _input = _input.replaceAll("[+]{1}[-]{1}|[-]{1}[+]{1}", "-");   // +- or -+     --> -
             _input = _input.replaceAll("[*]{1}[+]{1}", "*");                // *+           --> *
             _input = _input.replaceAll("[/]{1}[+]{1}", "/");                // /+           --> /
             _input = _input.replaceAll("[%]{1}[+]{1}", "%");                // %+           --> %
+
+            // NUMBER
+            _input = _input.replaceAll("0+", "0");
+
         }while (_input.contains("--") || _input.contains("++") ||
                     _input.contains("-+") || _input.contains("+-"));
 
