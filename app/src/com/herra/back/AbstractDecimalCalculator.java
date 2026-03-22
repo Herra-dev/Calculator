@@ -173,9 +173,12 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
     @Override protected List<String> operatorPlus(List<String> list) {
         int plus_sign_index = list.indexOf("+");
         int first_number_index = plus_sign_index-1;
-        int second_number_index = (list.get(plus_sign_index+1).equals("-")) ? plus_sign_index+2 : plus_sign_index+1;
+        int second_number_index = plus_sign_index+1;
+
+        boolean first_number_negative = list.get(second_number_index).matches("[-]{1}");
 
         System.out.println("first index = " + first_number_index + ", second index = " + second_number_index);
+        System.out.println("first number negative? --> " + first_number_negative);
 
 
         return list;
