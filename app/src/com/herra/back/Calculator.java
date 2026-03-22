@@ -1,5 +1,5 @@
 package com.herra.back;
 
-public class Calculator extends AbstractCalculator{
+public class Calculator extends AbstractDecimalCalculator{
 
 }
