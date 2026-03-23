@@ -40,6 +40,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
     //-----------------------------------------------------------------------------------
 
+        // if the user input contains a succession of arithmetic operator invalid, raise a _SyntaxErrorException
         if (_input.contains("-*") || _input.contains("-/") || _input.contains("-%") ||          
             _input.contains("+*") || _input.contains("+/") || _input.contains("+%") ||
                 _input.contains("**") || _input.contains("*/") || _input.contains("*%") ||
@@ -55,8 +56,14 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
     //-----------------------------------------------------------------------------------
 
-        //if the user input contains a division by zero, raise a _DivisionByZeroException
+        // if no error was encountered during previous operations, then arrange user input after that
+        // put each element from user input into a list
+        this.arrangeUserInput();
         this.setListInput(separeInput());
+    
+    //-----------------------------------------------------------------------------------
+
+        //if the user input contains a division by zero, raise a _DivisionByZeroException
         MyLinkedList<String> my_list = new MyLinkedList<String>();
         my_list.addAll(this.getInputList());
         System.out.println("-------------------------------------------");
@@ -65,12 +72,12 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         System.out.println("index of / = " + my_list.indexOf("-", 1));
         System.out.println("-------------------------------------------");
         
-        // int index_found = 0;
-        // int from_index = 0;
-        // while((index_found = my_list.indexOf("/", from_index)) != -1) {
-        //     from_index = index_found+1;
-        //     System.out.println("index found = " + index_found);
-        // }
+        int index_found = 0;
+        int from_index = 0;
+        while((index_found = my_list.indexOf("/", from_index)) != -1) {
+            from_index = index_found+1;
+            System.out.println("index found = " + index_found);
+        }
 
 
         // int index_of_zero = 0;

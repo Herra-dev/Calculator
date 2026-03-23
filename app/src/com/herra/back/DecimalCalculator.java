@@ -15,8 +15,6 @@ public class DecimalCalculator extends AbstractDecimalCalculator{
         try {
             testUserInput();
             testParenthesis();
-            
-            arrangeUserInput();
         } catch (_SyntaxErrorException | _DivisionByZeroException e) {
             e.printStackTrace();
         }
