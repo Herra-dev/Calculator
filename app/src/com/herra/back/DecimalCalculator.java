@@ -13,8 +13,10 @@ public class DecimalCalculator extends AbstractDecimalCalculator{
         System.out.println("Construction of a DecimalCalculator");
         this._input = user_input;
         try {
-            testUserInput();
-            testParenthesis();
+            if(this.getAuthorization())
+                testUserInput();
+            if(this.getAuthorization())
+                testParenthesis();
         } catch (_SyntaxErrorException | _DivisionByZeroException e) {
             e.printStackTrace();
         }

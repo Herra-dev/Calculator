@@ -29,6 +29,7 @@ public abstract class AbstractCalculator implements Observer, Observable {
 //  GETTERS
 
     public String getInput()            { return this._input; }
+    public boolean getAuthorization()   { return this._canProcess; }
     public String getOutput()           { return this._outPut; }
     public List<String> getInputList()  { return this._input_list; }
 
@@ -36,6 +37,7 @@ public abstract class AbstractCalculator implements Observer, Observable {
 //  SETTERS
 
     public void setInput(String new_input)                  { this._input = new_input; }
+    public void setAuthorization(boolean new_authorization) { this._canProcess = new_authorization; }
     public void setOutPut(String new_output)                { this._outPut = new_output; }
     public void setListInput(List<String> new_input_list)   { this._input_list = new_input_list; }
 

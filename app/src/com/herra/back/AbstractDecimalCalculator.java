@@ -33,7 +33,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         if (this.getInput().startsWith("*") || this.getInput().startsWith("/") || this.getInput().startsWith("%") ||
                 this.getInput().endsWith("-") || this.getInput().endsWith("+") || this.getInput().endsWith("%") ||
                     this.getInput().endsWith("*") || this.getInput().endsWith("/")) {
-            _outPut = "SYNTAX ERROR";
+            this.setOutPut("SYNTAX ERROR");
             _canProcess = false;
             throw new _SyntaxErrorException("Input can't starts or ends with an arithmetic operator");
         }
@@ -49,7 +49,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
                     _input.contains("+)") || _input.contains("-)") || _input.contains("-%") ||
                     _input.contains("*)") || _input.contains("/)") || _input.contains("/%") ||
                         _input.contains("(/") || _input.contains("(*") || _input.contains("(%")) { 
-            _outPut = "SYNTAX ERROR";
+            this.setOutPut("SYNTAX ERROR");
             this._canProcess = false;
             throw new _SyntaxErrorException("Verify your syntax");
         }
@@ -58,8 +58,10 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
         // if no error was encountered during previous operations, then arrange user input after that
         // put each element from user input into a list
-        this.arrangeUserInput();
-        this.setListInput(separeInput());
+        if(getAuthorization())
+            this.arrangeUserInput();
+        if(getAuthorization())
+            this.setListInput(separeInput());
     
     //-----------------------------------------------------------------------------------
 
@@ -72,8 +74,10 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         while((index_found = my_list.indexOf("/", from_index)) != -1) {
             from_index = index_found+1;
             
-            if(my_list.get(index_found+1).matches("[0+]") ) {
-                System.out.println("division by zero");
+            if(my_list.get(index_found+1).matches("0+") ) {
+                this.setOutPut("SYNTAX ERROR");
+                this._canProcess = false;
+                throw new _DivisionByZeroException("Division by zero");
             }
         }
 
