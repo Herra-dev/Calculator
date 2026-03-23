@@ -142,7 +142,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * @return the result of the actual calcul
  */
     @Override protected String calcul(List<String> list) {
-        // Quit function if, during test of user input an error of syntax was occured
+        // Quit function if during test of user input an error of syntax was occured
         if(!this.getAuthorization()) return "0";
 
         while(list.contains("/") || list.contains("*") || list.contains("+") || list.contains("-")) {
@@ -158,7 +158,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 //===================================================================
 
     @Override protected List<String> operatorPlus(List<String> list) {
-        // if the list doesn't contains an operator (plus)  quit function
+        // if the list doesn't contains an operator '+' quit function
         if(!list.contains("+")) return list;
 
         System.out.println("before");
