@@ -158,24 +158,46 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 //===================================================================
 
     @Override protected List<String> operatorPlus(List<String> list) {
+        // if the list doesn't contains an operator (plus)  quit function
+        if(!list.contains("+")) return list;
+
+        System.out.println("before");
+        for(String str : list)
+            System.out.print(str);
+        System.out.println();
+
         int plus_sign_index = list.indexOf("+");
         double first_Number = java.lang.Double.parseDouble(list.get(plus_sign_index-1));
         double second_number = java.lang.Double.parseDouble(list.get(plus_sign_index+1));
 
+        int first  = plus_sign_index-1;
+        int last = plus_sign_index+1;
+
 
         // Case where plus sign index is equals to two(2), first number is probably a negative number wherefore
-        //      it's necessary to check which element is stocked at index zero(0)
+        //      necessity to check which element is stocked at index zero(0), if this last is equals to '-',
+        //      changes first number to negative
         //----------------- EXAMPLE ------------------
         // input_value      =  - 5 + 12
         //                     ^   ^
         // index_input      =  0 1 2 3
-        if(plus_sign_index == 2 && list.get(0) == "-") {
 
+        if(plus_sign_index == 2 && list.get(0).equals("-")) {
+            first_Number = -first_Number;
+            first = 0;
         }
-        System.out.println("first number = " + first_Number + ", second number = " + second_number);
+        for(int i = last; i >= first; i--)
+            list.remove(i);
 
+        list.add(first, java.lang.Double.toString(first_Number + second_number));
+
+        System.out.println("after");
+        for(String str : list)
+            System.out.print(str);
+        System.out.println();
 
         return list;
+        
     }
 
 //===================================================================
