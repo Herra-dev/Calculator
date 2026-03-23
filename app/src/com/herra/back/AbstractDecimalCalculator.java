@@ -162,6 +162,16 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         double first_Number = java.lang.Double.parseDouble(list.get(plus_sign_index-1));
         double second_number = java.lang.Double.parseDouble(list.get(plus_sign_index+1));
 
+
+        // Case where plus sign index is equals to two(2), first number is probably a negative number wherefore
+        //      it's necessary to check which element is stocked at index zero(0)
+        //----------------- EXAMPLE ------------------
+        // input_value      =  - 5 + 12
+        //                     ^   ^
+        // index_input      =  0 1 2 3
+        if(plus_sign_index == 2 && list.get(0) == "-") {
+
+        }
         System.out.println("first number = " + first_Number + ", second number = " + second_number);
 
 
