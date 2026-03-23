@@ -222,7 +222,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
     //--------------------------------------------------------------------------------
 
         int minus_sign_index = list.indexOf("-");
-        // if the index of minus sign is equals to 0
+        // if the index of minus sign is equals to 0, remove it and set next element into negative
         if(minus_sign_index == 0) {
             list.remove(0);
             list.set(0, "-" + list.get(0));
