@@ -2,15 +2,6 @@ package com.herra.back;
 
 import java.util.LinkedList;
 
-
-/**
- * <h3>MyLinkedList</h3>
- * {@link com.herra.back.MyLinkedList}
- * <p>
- * {@link java.util.LinkedList}, not having method to search an element in a List{@code LinkedList} from a specific index, this class is here for that.
- * 
- * @author Heriniaina
- */
 public class MyLinkedList<E> extends LinkedList<E>{
 
 /**

@@ -5,7 +5,7 @@ import com.herra.back.DecimalCalculator;
 public class App {
     public static void main(String[] args) {
         @SuppressWarnings("unused")
-        DecimalCalculator dc = new DecimalCalculator("-000000001+-1/000015/80000");
+        DecimalCalculator dc = new DecimalCalculator("-000000001+-1/0000/80000");
           
         // MyLinkedList<String> list = new MyLinkedList<String>();
         // list.indexOf("i", 0);
