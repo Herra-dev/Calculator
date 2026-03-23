@@ -222,15 +222,14 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         int minus_sign_index = list.indexOf("-");
         if(minus_sign_index == 0) {
             list.remove(0);
-            String s = "-";
-            s +=  list.get(1);
-            list.set(1, s);
+            
+            list.set(0, "-" + list.get(0));
         }
 
         // System.out.println("index of minus sign = " + minus_sign_index);
 
         for(String str: list)
-            System.out.print(str);
+            System.out.println(str);
         System.out.println();
 
 
