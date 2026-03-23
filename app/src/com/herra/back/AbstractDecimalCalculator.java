@@ -222,6 +222,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
     //--------------------------------------------------------------------------------
 
         int minus_sign_index = list.indexOf("-");
+        // if the index of minus sign is equals to 0
         if(minus_sign_index == 0) {
             list.remove(0);
             list.set(0, "-" + list.get(0));
@@ -229,8 +230,6 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         }
 
     //--------------------------------------------------------------------------------
-
-        System.out.println("index of minus sign = " + minus_sign_index);
 
         double first_Number = java.lang.Double.parseDouble(list.get(minus_sign_index-1));
         double second_Number = java.lang.Double.parseDouble(list.get(minus_sign_index+1));
