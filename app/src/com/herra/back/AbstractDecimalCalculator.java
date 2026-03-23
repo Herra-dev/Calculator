@@ -157,14 +157,29 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
 //===================================================================
 
+/**
+ * <h3>operatorPlus</h3>
+ * {@link com.herra.back.AbstractDecimalCalculator#operatorPlus(List)}<p>
+ * 
+ * This method add two numbers ({@code double}), these number is taken from parameter{@code list}, example:<p>
+ * <ol>
+ * <li>the parameter {@code list} contains: "5", "+", "96", "-", "680" </li>
+ * <li>the function search for index of the plus {@code +} sign</li>, stock this index in a variable {@code int}
+ * <li>put the element at index -> index of {@code plus} signe {@code -} 1, into variable {@code Double}, The value stocked in this last is considered as {@code first number}</li>
+ * <li>put the element at index -> index of {@code plus} signe {@code +} 1, into variable {@code Double}, The value stocked in this last is considered as {@code second number}<p>
+ * {@code Notes}: elements are taken from the list as a {@code String} values, so they are parsed into {@code Double}</li>
+ * <li>add {@code first number} to {@code second number}</li>
+ * <li>removes all elements between index of{@code +}sign - 1 (<i>-2</i> if first number is a negative value) and{@code +}sign +1</li>
+ * </uo><p>
+ * 
+ * 
+ * @param list {@code List<String>}
+ * 
+ * @return {@code List<String>}
+ */
     @Override protected List<String> operatorPlus(List<String> list) {
         // if the list doesn't contains an operator '+' quit function
         if(!list.contains("+")) return list;
-
-        System.out.println("before");
-        for(String str : list)
-            System.out.print(str);
-        System.out.println();
 
         int plus_sign_index = list.indexOf("+");
         double first_Number = java.lang.Double.parseDouble(list.get(plus_sign_index-1));
@@ -174,27 +189,25 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         int last = plus_sign_index+1;
 
 
-        // Case where plus sign index is equals to two(2), first number is probably a negative number wherefore
+        {
+            // Case where plus sign index is equals to two(2), first number is probably a negative number wherefore
         //      necessity to check which element is stocked at index zero(0), if this last is equals to '-',
         //      changes first number to negative
         //----------------- EXAMPLE ------------------
         // input_value      =  - 5 + 12
         //                     ^   ^
         // index_input      =  0 1 2 3
+        }
 
         if(plus_sign_index == 2 && list.get(0).equals("-")) {
             first_Number = -first_Number;
             first = 0;
         }
-        for(int i = last; i >= first; i--)
+        // removes all elements between index first and last (both included)
+        for(int i = last; i >= first; i--) 
             list.remove(i);
 
         list.add(first, java.lang.Double.toString(first_Number + second_number));
-
-        System.out.println("after");
-        for(String str : list)
-            System.out.print(str);
-        System.out.println();
 
         return list;
         
@@ -203,6 +216,24 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 //===================================================================
 
     @Override protected List<String> operatorMinus(List<String> list) {
+        // if the list doesn't contains an operator '-' quit function
+        if(!list.contains("-")) return list;
+
+        int minus_sign_index = list.indexOf("-");
+        if(minus_sign_index == 0) {
+            list.remove(0);
+            String s = "-";
+            s +=  list.get(1);
+            list.set(1, s);
+        }
+
+        // System.out.println("index of minus sign = " + minus_sign_index);
+
+        for(String str: list)
+            System.out.print(str);
+        System.out.println();
+
+
         return list;
     }
 
