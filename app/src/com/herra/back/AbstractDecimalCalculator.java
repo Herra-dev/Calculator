@@ -75,6 +75,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         while((index_found = my_list.indexOf("/", from_index)) != -1) {
             from_index = index_found+1;
             
+            // use a regular expression to check element after division sign
             if(my_list.get(index_found+1).matches("0+")) {
                 this.setOutPut("SYNTAX ERROR");
                 this._canProcess = false;

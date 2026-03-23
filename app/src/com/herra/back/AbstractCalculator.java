@@ -45,7 +45,8 @@ public abstract class AbstractCalculator implements Observer, Observable {
 
 /**
  * <h3>testParenthesis</h3>
- * {@link com.herra.back.AbstractCalculator#testParenthesis()}
+ * {@link com.herra.back.AbstractCalculator#testParenthesis()}<p>
+ * <Strong>Test if all {@code parenthesis} is well placed in user input</strong>
  * 
  * @throws _SyntaxErrorException when closed parenthesis {@code >} open parenthesis
  */
@@ -88,14 +89,14 @@ public abstract class AbstractCalculator implements Observer, Observable {
                 }
             }         
         }
-
-    //-----------------------------------------------------------------------------------
     }
 
 //===================================================================
 
 /**
  * <h3>countCharacter</h3>
+ * {@link com.herra.back.AbstractCalculator#countCharacter(String, char)}<p>
+ * <i>Count occurence of parameter {@code charToFind} in {@code charSequence}</i>
  * 
  * @param charSequence  {@code String}
  * @param charToFind    {@code char}
