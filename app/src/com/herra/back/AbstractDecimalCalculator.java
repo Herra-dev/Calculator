@@ -222,8 +222,8 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         int minus_sign_index = list.indexOf("-");
         if(minus_sign_index == 0) {
             list.remove(0);
-            
             list.set(0, "-" + list.get(0));
+            return list;
         }
 
         // System.out.println("index of minus sign = " + minus_sign_index);
