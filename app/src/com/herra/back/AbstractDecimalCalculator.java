@@ -219,6 +219,8 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         // if the list doesn't contains an operator '-' quit function
         if(!list.contains("-")) return list;
 
+    //--------------------------------------------------------------------------------
+
         int minus_sign_index = list.indexOf("-");
         if(minus_sign_index == 0) {
             list.remove(0);
@@ -226,11 +228,21 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             return list;
         }
 
-        // System.out.println("index of minus sign = " + minus_sign_index);
+    //--------------------------------------------------------------------------------
 
-        for(String str: list)
-            System.out.println(str);
-        System.out.println();
+        System.out.println("index of minus sign = " + minus_sign_index);
+
+        double first_Number = java.lang.Double.parseDouble(list.get(minus_sign_index-1));
+        double second_Number = java.lang.Double.parseDouble(list.get(minus_sign_index+1));
+
+        for(int i = minus_sign_index+1; i > minus_sign_index-1; i--)
+            list.remove(i);
+
+        System.out.println("out = " + (first_Number - second_Number));
+
+        // for(String str: list)
+        //     System.out.println(str);
+        // System.out.println();
 
 
         return list;
