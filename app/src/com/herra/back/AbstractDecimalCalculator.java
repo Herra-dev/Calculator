@@ -235,15 +235,11 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         double first_Number = java.lang.Double.parseDouble(list.get(minus_sign_index-1));
         double second_Number = java.lang.Double.parseDouble(list.get(minus_sign_index+1));
 
-        for(int i = minus_sign_index+1; i > minus_sign_index-1; i--)
+        // removes elements between minus_sign_index-1 and minus_sign_index+1
+        for(int i = minus_sign_index+1; i >= minus_sign_index-1; i--)
             list.remove(i);
 
-        System.out.println("out = " + (first_Number - second_Number));
-
-        // for(String str: list)
-        //     System.out.println(str);
-        // System.out.println();
-
+        list.add(minus_sign_index-1, java.lang.Double.toString(first_Number - second_Number));
 
         return list;
     }
