@@ -20,6 +20,8 @@ public class DecimalCalculator extends AbstractDecimalCalculator{
         } catch (_SyntaxErrorException | _DivisionByZeroException e) {
             e.printStackTrace();
         }
+
+        this.operatorPlus(this.getInputList());
     }
 
 //===================================================================

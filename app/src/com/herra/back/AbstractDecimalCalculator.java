@@ -142,6 +142,8 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * @return the result of the actual calcul
  */
     @Override protected String calcul(List<String> list) {
+        // Quit function if, during test of user input an error of syntax was occured
+        if(!this.getAuthorization()) return "0";
 
         while(list.contains("/") || list.contains("*") || list.contains("+") || list.contains("-")) {
             list = operatorDivide(list);
@@ -157,13 +159,10 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
     @Override protected List<String> operatorPlus(List<String> list) {
         int plus_sign_index = list.indexOf("+");
-        int first_number_index = plus_sign_index-1;
-        int second_number_index = plus_sign_index+1;
+        double first_Number = java.lang.Double.parseDouble(list.get(plus_sign_index-1));
+        double second_number = java.lang.Double.parseDouble(list.get(plus_sign_index+1));
 
-        // boolean first_number_negative = list.get(second_number_index).matches("[-]{1}");
-
-        System.out.println("first index = " + first_number_index + ", second index = " + second_number_index);
-        // System.out.println("first number negative? --> " + first_number_negative);
+        System.out.println("first number = " + first_Number + ", second number = " + second_number);
 
 
         return list;
