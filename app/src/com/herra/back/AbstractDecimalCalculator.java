@@ -175,7 +175,13 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * 
  * @param list {@code List<String>}
  * 
+ * @see com.herra.back.AbstractDecimalCalculator#operatorMinus(List)
+ * @see com.herra.back.AbstractDecimalCalculator#operatorMultiply(List)
+ * @see com.herra.back.AbstractDecimalCalculator#operatorDivide(List)
+ * 
  * @return {@code List<String>}
+ * 
+ * @author Heriniaina {@link https://github.com/Herra-dev}
  */
     @Override protected List<String> operatorPlus(List<String> list) {
         // if the list doesn't contains an operator '+' quit function
@@ -215,6 +221,20 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
 //===================================================================
 
+/**
+ * <h3>operatorMinus</h3>
+ * {@link com.herra.back.AbstractDecimalCalculator#operatorMinus(List)}
+ * 
+ * @param list {@code List<String>}
+ * 
+ * @see com.herra.back.AbstractDecimalCalculator#operatorPlus(List)
+ * @see com.herra.back.AbstractDecimalCalculator#operatorMultiply(List)
+ * @see com.herra.back.AbstractDecimalCalculator#operatorDivide(List)
+ * 
+ * @return {@code List<String>}
+ * 
+ * @author Heriniaina {@link https://github.com/Herra-dev}
+ */
     @Override protected List<String> operatorMinus(List<String> list) {
         // if the list doesn't contains an operator '-' quit function
         if(!list.contains("-")) return list;
