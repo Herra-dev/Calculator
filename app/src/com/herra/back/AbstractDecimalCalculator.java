@@ -85,6 +85,8 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
 //===================================================================
 
+    // protected void 
+
 /**
  * Do calcul
  * 
