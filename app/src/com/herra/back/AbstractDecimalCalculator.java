@@ -251,14 +251,14 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
     //--------------------------------------------------------------------------------
 
-        double first_Number = java.lang.Double.parseDouble(list.get(minus_sign_index-1));
-        double second_Number = java.lang.Double.parseDouble(list.get(minus_sign_index+1));
+        double first_number = java.lang.Double.parseDouble(list.get(minus_sign_index-1));
+        double second_number = java.lang.Double.parseDouble(list.get(minus_sign_index+1));
 
         // removes elements between minus_sign_index-1 and minus_sign_index+1
         for(int i = minus_sign_index+1; i >= minus_sign_index-1; i--)
             list.remove(i);
 
-        list.add(minus_sign_index-1, java.lang.Double.toString(first_Number - second_Number));
+        list.add(minus_sign_index-1, java.lang.Double.toString(first_number - second_number));
 
         return list;
     }
@@ -273,6 +273,16 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
         int multiplication_sign_index = list.indexOf("*");
         System.out.println("multiplication sign index = " + multiplication_sign_index);
+
+        double first_number = java.lang.Double.parseDouble(list.get(multiplication_sign_index-1));
+        double second_number = (list.get(multiplication_sign_index+1).equals("-")) 
+            ? java.lang.Double.parseDouble(list.get(multiplication_sign_index+2)) 
+            : java.lang.Double.parseDouble(list.get(multiplication_sign_index+1));
+        System.out.println("first number = " + first_number);
+        System.out.println("second number = " + second_number);
+
+
+        
 
         return list;
     }
