@@ -223,7 +223,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
 /**
  * <h3>operatorMinus</h3>
- * {@link com.herra.back.AbstractDecimalCalculator#operatorMinus(List)}
+ * {@link com.herra.back.AbstractDecimalCalculator#operatorMinus(List)}<p>
  * 
  * @param list {@code List<String>}
  * 
