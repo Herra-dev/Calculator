@@ -36,6 +36,12 @@ public abstract class AbstractCalculator implements Observer, Observable {
 
 //===================================================================
 
+/**
+ * <h3>testParenthesis</h3>
+ * {@link com.herra.back.AbstractCalculator#testParenthesis()}
+ * 
+ * @throws _SyntaxErrorException when closed parenthesis {@code >} open parenthesis
+ */
     public void testParenthesis() throws _SyntaxErrorException {
         // if user input doesn't contains '(' or ')', it's not necessary to continue
         if(!this.getInput().contains("(") && !this.getInput().contains(")")) return;
@@ -43,16 +49,54 @@ public abstract class AbstractCalculator implements Observer, Observable {
         // testing open and closed parenthesis
         int open = this.countCharacter(this.getInput(), '(');
         int closed = this.countCharacter(this.getInput(), ')');
+        
+    //-----------------------------------------------------------------------------------
 
-        // if closed parenthesis is superior than open parenthesis throw new _SyntaxErrorException
         if(open < closed) { 
             _canProcess = false; 
+            // if closed parenthesis is superior than open parenthesis throw new _SyntaxErrorException
+            this.setOutPut("SYNTAX ERROR");
             throw new _SyntaxErrorException("Verify your syntax: closed parenthesis must be equals or inferior of open parenthesis"); 
         }
+
+    //-----------------------------------------------------------------------------------
+
+        // testing that: closed parenthesis must be allways placed after an open parenthesis
+        int[] array_open = new int[open];       // create an array of int containing index of all open parenthesis
+        int[] array_closed = new int[closed];   // create an array of int containing index of all closed parenthesis
+        int o = 0;
+        int c = 0;
+
+        for(int i = 0; i < this.getInput().length(); i++) {
+            if(this.getInput().charAt(i) == '(') array_open[o++] = i;
+            if(this.getInput().charAt(i) == ')') array_closed[c++] = i;
+        }
+
+        for(int _c = 0; _c < array_closed.length; _c++) {
+            for(int _o = _c; _o >= 0; _o--) {
+                if (array_closed[_c] < array_open[_o]) {
+                    _canProcess = false;
+                    this.setOutPut( "SYNTAX ERROR");
+                    throw new _SyntaxErrorException("verify your syntax: never close an anopened parenthesis");
+                }
+            }         
+        }
+
+    //-----------------------------------------------------------------------------------
     }
 
 //===================================================================
 
+/**
+ * <h3>countCharacter</h3>
+ * 
+ * @param charSequence  {@code String}
+ * @param charToFind    {@code char}
+ * 
+ * @return returns the number of {@code charToFind} found in {@code charSequence}
+ * 
+ * @author Heriniaina {@see https://github.com/Herra-dev}
+ */
     public int countCharacter(String charSequence, char charToFind) {
         int _nbr = 0;
 

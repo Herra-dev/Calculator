@@ -7,7 +7,7 @@ public class DecimalCalculator extends AbstractDecimalCalculator{
  * @param user_input
  */
     public DecimalCalculator(String user_input) {
-        System.out.println("Construction of one DecimalCalculator");
+        System.out.println("Construction of a DecimalCalculator");
         this._input = user_input;
     }
 }
