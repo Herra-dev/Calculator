@@ -36,7 +36,7 @@ public abstract class AbstractCalculator implements Observer, Observable {
 
 //===================================================================
 
-    public void testParenthesis() {
+    public void testParenthesis() throws _SyntaxErrorException {
         // if user input doesn't contains '(' or ')', it's not necessary to continue
         if(!this.getInput().contains("(") && !this.getInput().contains(")")) return;
 
@@ -44,9 +44,14 @@ public abstract class AbstractCalculator implements Observer, Observable {
         int open = this.countCharacter(this.getInput(), '(');
         int closed = this.countCharacter(this.getInput(), ')');
 
-        System.out.println("open = " + open);
-        System.out.println("close = " + closed);
+        // if closed parenthesis is superior than open parenthesis throw new _SyntaxErrorException
+        if(open < closed) { 
+            _canProcess = false; 
+            throw new _SyntaxErrorException("Verify your syntax: closed parenthesis must be equals or inferior of open parenthesis"); 
+        }
     }
+
+//===================================================================
 
     public int countCharacter(String charSequence, char charToFind) {
         int _nbr = 0;
