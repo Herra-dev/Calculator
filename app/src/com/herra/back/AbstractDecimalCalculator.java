@@ -8,9 +8,9 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * <h2>testUserInput()</h2>{@link com.herra.back.AbstractCalculator#testUserInput() } <p>
  * 
  * if user input:<p>
- * - starts with {@code *} or {@code /}, <p>
- * - ends with {@code +} or {@code -} or {@code *} or {@code /}<p>
- * - contains a succession of arithmetic operator invalid for example: {@code +*}, {@code -*}, {@code **}, {@code /*}, {@code -)} ...
+ * - starts with {@code *} or {@code /} or {@code %}, <p>
+ * - ends with {@code +} or {@code -} or {@code *} or {@code /} or {@code %}<p>
+ * - contains a succession of arithmetic operator invalid for example: {@code +*}, {@code -*}, {@code %%}, {@code **}, {@code %*}, {@code /*}, {@code -)} ...
  * 
  * {@code raise}an {@link com.herra.exception._SyntaxErrorException}
  * 
@@ -19,27 +19,45 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * @author Heriniaina {@link https://github.com/Herra-dev}
  */
     protected void testUserInput() throws _SyntaxErrorException{
-        //if the user input contains nothing or white space only, remove those last and quit function
+        // if the user input contains nothing or white space only, remove those last and quit function
         if (this._input.isBlank()) { this._input.strip(); _outPut = "0"; return; }
         
-        if (this._input.startsWith("*") || this._input.startsWith("/") ||
-                this._input.endsWith("-") || this._input.endsWith("+") ||
-                    this._input.endsWith("*") || this._input.endsWith("/")) {
+    //-----------------------------------------------------------------------------------
+
+        // if the user input starts with '*', '/', '%' or ends with '+', '-', '*', '/', '%', raise a _SyntaxErrorException
+        if (this.getInput().startsWith("*") || this.getInput().startsWith("/") || this.getInput().startsWith("%") ||
+                this.getInput().endsWith("-") || this.getInput().endsWith("+") || this.getInput().endsWith("%") ||
+                    this.getInput().endsWith("*") || this.getInput().endsWith("/")) {
             _outPut = "SYNTAX ERROR";
             _canProcess = false;
             throw new _SyntaxErrorException("Input can't starts or ends with an arithmetic operator");
         }
 
-        if (_input.contains("-*") || _input.contains("-/") ||            
-            _input.contains("+*") || _input.contains("+/") ||
-                _input.contains("**") || _input.contains("*/") ||
-                _input.contains("//") || _input.contains("/*") ||
-                    _input.contains("+)") || _input.contains("-)") ||
-                    _input.contains("*)") || _input.contains("/)") ||
-                        _input.contains("(/") || _input.contains("(*")) { 
+    //-----------------------------------------------------------------------------------
+
+        if (_input.contains("-*") || _input.contains("-/") || _input.contains("-%") ||          
+            _input.contains("+*") || _input.contains("+/") || _input.contains("+%") ||
+                _input.contains("**") || _input.contains("*/") || _input.contains("*%") ||
+                _input.contains("//") || _input.contains("/*") || _input.contains("/%") ||
+                _input.contains("%/") || _input.contains("%*") || _input.contains("%%") ||
+                    _input.contains("+)") || _input.contains("-)") || _input.contains("-%") ||
+                    _input.contains("*)") || _input.contains("/)") || _input.contains("/%") ||
+                        _input.contains("(/") || _input.contains("(*") || _input.contains("(%")) { 
             _outPut = "SYNTAX ERROR";
             this._canProcess = false;
             throw new _SyntaxErrorException("Verify your syntax");
+        }
+
+    //-----------------------------------------------------------------------------------
+
+        //if the user input contains a division by zero, raise a _DivisionByZeroException
+        int from_index = 0;
+        int index_of_zero = 0;
+        while((index_of_zero = this.getInput().indexOf('0', from_index)) != -1) {
+            if(this.getInput().charAt(index_of_zero-1) == '/' || this.getInput().charAt(index_of_zero-1) == '%') {
+
+            }
+            from_index = index_of_zero;
         }
 
         this._canProcess = true;
