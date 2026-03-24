@@ -8,5 +8,6 @@ public class DecimalCalculator extends AbstractDecimalCalculator{
  */
     public DecimalCalculator(String user_input) {
         System.out.println("Construction of one DecimalCalculator");
+        this._input = user_input;
     }
 }

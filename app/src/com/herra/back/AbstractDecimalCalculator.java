@@ -3,7 +3,6 @@ package com.herra.back;
 import com.herra.exception._SyntaxErrorException;
 
 public class AbstractDecimalCalculator extends AbstractCalculator {
-//===================================================================
 
 /**
  * <h2>testUserInput()</h2>{@link com.herra.back.AbstractCalculator#testUserInput() } <p>
@@ -21,7 +20,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  */
     protected void testUserInput() throws _SyntaxErrorException{
         //if the user input contains nothing or white space only, remove those last and quit function
-        if (this._input.isBlank()) { this._input.strip(); return; }
+        if (this._input.isBlank()) { this._input.strip(); _outPut = "0"; return; }
         
         if (this._input.startsWith("*") || this._input.startsWith("/") ||
                 this._input.endsWith("-") || this._input.endsWith("+") ||

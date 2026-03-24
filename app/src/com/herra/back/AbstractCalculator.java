@@ -36,6 +36,29 @@ public abstract class AbstractCalculator implements Observer, Observable {
 
 //===================================================================
 
+    public void testParenthesis() {
+        // if user input doesn't contains '(' or ')', it's not necessary to continue
+        if(!this.getInput().contains("(") && !this.getInput().contains(")")) return;
+
+        // testing open and closed parenthesis
+        int open = this.countCharacter(this.getInput(), '(');
+        int closed = this.countCharacter(this.getInput(), ')');
+
+        System.out.println("open = " + open);
+        System.out.println("close = " + closed);
+    }
+
+    public int countCharacter(String charSequence, char charToFind) {
+        int _nbr = 0;
+
+        for(int i = 0; i < charSequence.length(); i++)
+            if(charSequence.charAt(i) == charToFind) _nbr++;
+
+        return _nbr;
+    }
+
+//===================================================================
+
     @Override public boolean update(Object _obj) {
         return true;
     }
