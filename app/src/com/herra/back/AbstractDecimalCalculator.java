@@ -54,11 +54,13 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         int from_index = 0;
         int index_of_zero = 0;
         while((index_of_zero = this.getInput().indexOf('0', from_index)) != -1) {
-            if(this.getInput().charAt(index_of_zero-1) == '/' || this.getInput().charAt(index_of_zero-1) == '%') {
-
+            if(this.getInput().charAt(index_of_zero+1) == '/' || this.getInput().charAt(index_of_zero+1) == '%') {
+                
+                
             }
-            from_index = index_of_zero;
+            from_index = index_of_zero+1; // new search starts at index + 1, where a zero was found
         }
+
 
         this._canProcess = true;
     }
@@ -92,6 +94,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             _input = _input.replaceAll("[+]{1}[-]{1}|[-]{1}[+]{1}", "-");   // +- or -+     --> -
             _input = _input.replaceAll("[*]{1}[+]{1}", "*");                // *+           --> *
             _input = _input.replaceAll("[/]{1}[+]{1}", "/");                // /+           --> /
+            _input = _input.replaceAll("[%]{1}[+]{1}", "%");                // %+           --> %
         }while (_input.contains("--") || _input.contains("++") ||
                     _input.contains("-+") || _input.contains("+-"));
 
