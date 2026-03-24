@@ -266,6 +266,14 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 //===================================================================
 
     @Override protected List<String> operatorMultiply(List<String> list) {
+        // if the list doesn't contains an operator '*' quit function
+        if(!list.contains("*")) return list;
+
+    //--------------------------------------------------------------------------------
+
+        int multiplication_sign_index = list.indexOf("*");
+        System.out.println("multiplication sign index = " + multiplication_sign_index);
+
         return list;
     }
     
