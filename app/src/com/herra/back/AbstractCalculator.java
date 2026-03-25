@@ -109,7 +109,34 @@ public abstract class AbstractCalculator implements Observer, Observable {
 
 //===================================================================
 
-    public void separeInput() {
+/**
+ * <h3>separeInput</h3>
+ * {@link com.herra.back.AbstractCalculator#separeInput()}<p>
+ * 
+ * This methor separe user input and push each element into a list.<p>
+ * <strong>Example:</strong>
+ * 
+ * <strong><i>Remember that user input is taken from a label or another displayer and {@code stocked} as {@link java.lang.String}</i></strong>
+ * <ol>
+ *  <li>if user input is equals to = "7*9+00002-668+6", then the list will stock 9 elements wich is:
+ *     <ul>
+ *      <li>"7"</li>
+ *      <li>"*"</li>
+ *      <li>"9"</li>
+ *      <li>"6"</li>
+ *      <li>"00002"</li>
+ *      <li>"-"</li>
+ *      <li>"668"</li>
+ *      <li>"+"</li>
+ *      <li>"6"</li>
+ *  </li>
+ * </ol>
+ * 
+ * @return returns {@code List<String>} <i>list of String</i> 
+ * 
+ * @author Heriniaina {@link https://github.com/Herra-dev}
+ */
+    public List<String> separeInput() {
         List<String> list = new LinkedList<String>();
         String input = this.getInput();
 
@@ -130,26 +157,19 @@ public abstract class AbstractCalculator implements Observer, Observable {
                 char c = input.charAt(i+1);
                 if(c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')') list.add("");
             }
-            
         }
 
         if(list.get(list.size()-1) == (String)"") list.remove(list.size()-1);
-        this.setListInput(list);
 
-        for(String str: list)
-            System.out.println(str);
-
-        System.out.println();
+        return list;
 
     }
 
 //==========================================================================================    
 
-    private boolean addNonNumberToListNumber(List<String> _cListNumber, int index) {
-        _cListNumber.set(_cListNumber.size()-1, _cListNumber.get(_cListNumber.size()-1)+""+this.getInput().charAt(index));
-        _cListNumber.add("");
-
-        return true;
+    private void addNonNumberToListNumber(List<String> list, int index) {
+        list.set(list.size()-1, list.get(list.size()-1)+""+this.getInput().charAt(index));
+        list.add("");
     }
 
 //===================================================================
