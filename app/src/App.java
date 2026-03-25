@@ -6,7 +6,7 @@ import com.herra.exception._SyntaxErrorException;
 
 public class App {
     public static void main(String[] args) {
-        DecimalCalculator dc = new DecimalCalculator("16/000010000");
+        DecimalCalculator dc = new DecimalCalculator("16/000000009+2");
         try {
             dc.testParenthesis();
         } catch (_SyntaxErrorException e) {
@@ -19,5 +19,13 @@ public class App {
 
         // if(b) System.out.println("true");
         // else System.out.println("false");
+
+        // char character = '5';
+
+        // for(char i = '1'; i < '9'; i++) {
+        //     if(character == i) 
+        //         break;
+        //     System.out.println("i = " + (char)i + ", character = " + character);
+        // }
     }
 }

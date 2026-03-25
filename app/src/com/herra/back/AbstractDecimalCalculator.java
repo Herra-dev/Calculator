@@ -65,23 +65,25 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
                 char character = this.getInput().charAt(++index_of_zero);
 
+                boolean must_break = false;
                 while(character != '(' && character != ')' && character != '+' && character != '-' &&
-                        character != '*' && character != '/' && index_of_zero < this.getInput().length()) {
+                        character != '*' && character != '/' && index_of_zero < this.getInput().length() && !must_break) {
+
                     character = this.getInput().charAt(index_of_zero++);
                     str += character;
-                    for(int i = 1; i < 9; i++) {
-                        if(character == (char)i) 
+                    for(char i = '1'; i < '9'; i++) {
+                        if(character == i) {
+                            must_break = true;
                             break;
-                        System.out.println("i = " + i + ", character = " + character);
+                        }
                     }
-                        
                 }
 
-                // if(!str.matches("[/0]{1}0*[1-9]+")) {
-                //     throw new _DivisionByZeroException("Division by zero");
-                // } else {
-                //     System.out.println("Hello Hery only");
-                // }
+                if(!str.matches("[/0]{1}0*[1-9]+")) {
+                    throw new _DivisionByZeroException("Division by zero");
+                } else {
+                    System.out.println("Hello Hery only");
+                }
 
             }
             from_index = index_of_zero+1; // new search starts at index + 1, where a zero was found
