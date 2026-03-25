@@ -272,17 +272,27 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
     //--------------------------------------------------------------------------------
 
         int multiplication_sign_index = list.indexOf("*");
-        System.out.println("multiplication sign index = " + multiplication_sign_index);
 
         double first_number = java.lang.Double.parseDouble(list.get(multiplication_sign_index-1));
         double second_number = (list.get(multiplication_sign_index+1).equals("-")) 
             ? java.lang.Double.parseDouble(list.get(multiplication_sign_index+2)) 
             : java.lang.Double.parseDouble(list.get(multiplication_sign_index+1));
+        
+
+        int first = 0;
+        int last = 0;
+
+        if(multiplication_sign_index > 1 && list.get(multiplication_sign_index-2).equals("-")) {
+            first_number = -first_number;
+            first = multiplication_sign_index-2;
+        }
+        if(list.get(multiplication_sign_index+1).equals("-")) {
+            first_number = -first_number;
+            last = multiplication_sign_index+2;
+        }
+
         System.out.println("first number = " + first_number);
         System.out.println("second number = " + second_number);
-
-
-        
 
         return list;
     }
