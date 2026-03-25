@@ -18,7 +18,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * 
  * @author Heriniaina {@link https://github.com/Herra-dev}
  */
-    protected void testUserInput() throws _SyntaxErrorException{
+    @Override protected void testUserInput() throws _SyntaxErrorException{
         // if the user input contains nothing or white space only, remove those last and quit function
         if (this._input.isBlank()) { this._input.strip(); _outPut = "0"; return; }
         
@@ -51,24 +51,30 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
     //-----------------------------------------------------------------------------------
 
         //if the user input contains a division by zero, raise a _DivisionByZeroException
-        // int from_index = 0;
-        // int index_of_zero = 0;
-        // while((index_of_zero = this.getInput().indexOf('0', from_index)) != -1) {
-        //     if(this.getInput().charAt(index_of_zero-1) == '/' || this.getInput().charAt(index_of_zero-1) == '%') {
-        //         if(this.getInput().matches("[/0]{1}[1-9]");
-        //     }
-        //     from_index = index_of_zero+1; // new search starts at index + 1, where a zero was found
-        // }
+        int from_index = 0;
+        int index_of_zero = 0;
+        String str = new String();
+        
+        while((index_of_zero = this.getInput().indexOf('0', from_index)) != -1) {
+            if(this.getInput().charAt(index_of_zero-1) == '/' || this.getInput().charAt(index_of_zero-1) == '%') {
+                
+                str += (this.getInput().charAt(index_of_zero-1) == '/') ? "/0" : "%0";
 
-        // Pattern
+                char character = this.getInput().charAt(index_of_zero++);
 
-        if(this.getInput().contains("/0[^1-9[^.]{1}]")) {
-            System.out.println("hello world");
+                while(character != '(' && character != ')' && character != '+' && character != '-' &&
+                        character != '*' && character != '/') {
+                    character = this.getInput().charAt(index_of_zero++);
+                    str += character;
+                }
+
+                // if(this.getInput().matches("[/0]{1}[1-9]")) {
+
+                // }
+            }
+            from_index = index_of_zero+1; // new search starts at index + 1, where a zero was found
         }
-        else {
-            System.out.println("hello hery only");
-        }
-
+        System.out.println("str = " + str);
 
         this._canProcess = true;
     }
@@ -76,7 +82,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 //===================================================================
 
 /**
- * <h2>arrangeUserInput()</h2> {@link com.herra.back.AbstractCalculator#arrangeUserInput()}<p>
+ * <h2>arrangeUserInput()</h2> {@link com.herra.back.AbstractDecimalCalculator#arrangeUserInput()}<p>
  * 
  * Arrange user input: (Simplify arithmetic sign)<p>
  * examples:<p>
@@ -92,10 +98,20 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * - {@code +} * {@code -} = {@code -}
  * - {@code -} * {@code +} = {@code -}
  * 
+ * <table >
+ * <tr>
+ * <td>heri</td>
+ * <td>niaina</td>
+ * </tr>
+ * <tr>
+ * <td>niaina</td>
+ * <td>heri</td>
+ * <tr>
+ * </table>
  * 
  * @author Heriniaina {@link https://github.com/Herra-dev}
  */
-    protected void arrangeUserInput() {  
+    @Override protected void arrangeUserInput() {  
         do {
             _input = _input.replaceAll("[+]{2}", "+");                      // ++           --> +
             _input = _input.replaceAll("[-]{2}", "+");                      // --           --> +
@@ -120,7 +136,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * 
  * @return the result of the actual calcul
  */
-    protected String calcul() {
+    @Override protected String calcul() {
         return "";
     }
 
