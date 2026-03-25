@@ -60,8 +60,12 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         
         while((index_of_zero = this.getInput().indexOf('0', from_index)) != -1) {
             if(this.getInput().charAt(index_of_zero-1) == '/' || this.getInput().charAt(index_of_zero-1) == '%') {
-                System.out.println("index of zero = " + index_of_zero + ", length = " + this.getInput().length());
-                if(index_of_zero+1 > this.getInput().length()-1) throw new _DivisionByZeroException("Division by zero");
+                System.out.println("search starts from = " + from_index);
+                if(index_of_zero+1 > this.getInput().length()-1) {
+                    this.setOutPut("SYNTAX ERROR");
+                    this._canProcess = false;
+                    throw new _DivisionByZeroException("Division by zero");
+                } 
                 str = new String();
                 str += (this.getInput().charAt(index_of_zero-1) == '/') ? "/0" : "%0";
  
@@ -82,18 +86,15 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
                     }
                 }
 
-                System.out.println("str = " + str);
-
                 if(!str.matches("[[/]|[%]0]{1}0*[1-9]+")) {
+                    this.setOutPut("SYNTAX ERROR");
+                    this._canProcess = false;
                     throw new _DivisionByZeroException("Division by zero");
-                } else {
-                    System.out.println("Hello Hery only");
                 }
-
             }
-            from_index = index_of_zero+1; // new search starts at index + 1, where a zero was found
+            
+            from_index = index_of_zero+1; // new search starts at index_of_zero + 1, where a zero was found
         }
-        System.out.println("str = " + str);
 
         this._canProcess = true;
     }

@@ -14,13 +14,10 @@ public class DecimalCalculator extends AbstractDecimalCalculator{
         this._input = user_input;
         try {
             testParenthesis();
-            try {
-                testUserInput();
-            } catch (_DivisionByZeroException e) {
-                e.printStackTrace();
-            }
+            testUserInput();
             arrangeUserInput();
-        } catch (_SyntaxErrorException e) {
+            separeInput();
+        } catch (_SyntaxErrorException | _DivisionByZeroException e) {
             e.printStackTrace();
         }
     }

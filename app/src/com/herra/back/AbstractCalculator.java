@@ -43,7 +43,7 @@ public abstract class AbstractCalculator implements Observer, Observable {
  * 
  * @throws _SyntaxErrorException when closed parenthesis {@code >} open parenthesis
  */
-    public void testParenthesis() throws _SyntaxErrorException {
+    protected void testParenthesis() throws _SyntaxErrorException {
         // if user input doesn't contains '(' or ')', it's not necessary to continue
         if(!this.getInput().contains("(") && !this.getInput().contains(")")) return;
 
@@ -105,6 +105,51 @@ public abstract class AbstractCalculator implements Observer, Observable {
             if(charSequence.charAt(i) == charToFind) _nbr++;
 
         return _nbr;
+    }
+
+//===================================================================
+
+    public void separeInput() {
+        List<String> list = new LinkedList<String>();
+        String input = this.getInput();
+
+        list.clear();
+        list.add("");
+
+        for(int i = 0; i < input.length(); i++) {
+            if(input.charAt(i) == '+') { addNonNumberToListNumber(list, i); continue; }
+            if(input.charAt(i) == '-') { addNonNumberToListNumber(list, i); continue; }
+            if(input.charAt(i) == '*') { addNonNumberToListNumber(list, i); continue; }
+            if(input.charAt(i) == '/') { addNonNumberToListNumber(list, i); continue; }
+            if(input.charAt(i) == '(') { addNonNumberToListNumber(list, i); continue; }
+            if(input.charAt(i) == ')') { addNonNumberToListNumber(list, i); continue; }
+
+            list.set(list.size()-1, list.get(list.size()-1)+""+input.charAt(i));
+            
+            if(i+1 < input.length()) {
+                char c = input.charAt(i+1);
+                if(c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')') list.add("");
+            }
+            
+        }
+
+        if(list.get(list.size()-1) == (String)"") list.remove(list.size()-1);
+        this.setListInput(list);
+
+        for(String str: list)
+            System.out.println(str);
+
+        System.out.println();
+
+    }
+
+//==========================================================================================    
+
+    private boolean addNonNumberToListNumber(List<String> _cListNumber, int index) {
+        _cListNumber.set(_cListNumber.size()-1, _cListNumber.get(_cListNumber.size()-1)+""+this.getInput().charAt(index));
+        _cListNumber.add("");
+
+        return true;
     }
 
 //===================================================================
