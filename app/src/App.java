@@ -5,6 +5,6 @@ import com.herra.back.DecimalCalculator;
 public class App {
     public static void main(String[] args) {
         @SuppressWarnings("unused")
-        DecimalCalculator dc = new DecimalCalculator("()-8.596315---6.0000026");
+        DecimalCalculator dc = new DecimalCalculator("-8.596315(---6.0000026)");
     }
 }
