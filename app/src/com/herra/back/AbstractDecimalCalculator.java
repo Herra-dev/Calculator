@@ -63,7 +63,11 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
                 
                 str += (this.getInput().charAt(index_of_zero-1) == '/') ? "/0" : "%0";
 
+                
+                // if(index_of_zero+1 > this.getInput().length()) throw new _DivisionByZeroException("Division by zero");
+                    
                 char character = this.getInput().charAt(++index_of_zero);
+                
 
                 boolean must_break = false;
                 while(character != '(' && character != ')' && character != '+' && character != '-' &&
@@ -71,7 +75,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
                     character = this.getInput().charAt(index_of_zero++);
                     str += character;
-                    for(char i = '1'; i < '9'; i++) {
+                    for(char i = '1'; i <= '9'; i++) {
                         if(character == i) {
                             must_break = true;
                             break;
@@ -79,7 +83,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
                     }
                 }
 
-                if(!str.matches("[/0]{1}0*[1-9]+")) {
+                if(!str.matches("[[/][%]0]{1}0*[1-9]+")) {
                     throw new _DivisionByZeroException("Division by zero");
                 } else {
                     System.out.println("Hello Hery only");
