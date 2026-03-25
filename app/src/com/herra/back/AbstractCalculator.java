@@ -3,6 +3,7 @@ package com.herra.back;
 import java.util.List;
 import java.util.LinkedList;
 
+import com.herra.exception._DivisionByZeroException;
 import com.herra.exception._SyntaxErrorException;
 import com.interfaces.sh.Observable;
 import com.interfaces.sh.Observer;
@@ -16,7 +17,7 @@ public abstract class AbstractCalculator implements Observer, Observable {
 //===================================================================
 //  ABSTRACT METHODS
 
-    protected abstract void testUserInput() throws _SyntaxErrorException;
+    protected abstract void testUserInput() throws _SyntaxErrorException, _DivisionByZeroException;
     protected abstract void arrangeUserInput();
     protected abstract String calcul();
 

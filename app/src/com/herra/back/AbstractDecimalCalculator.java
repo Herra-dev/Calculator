@@ -1,5 +1,6 @@
 package com.herra.back;
 
+import com.herra.exception._DivisionByZeroException;
 import com.herra.exception._SyntaxErrorException;
 
 public class AbstractDecimalCalculator extends AbstractCalculator {
@@ -15,10 +16,12 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * {@code raise}an {@link com.herra.exception._SyntaxErrorException}
  * 
  * @throws _SyntaxErrorException when user input is incorrect
+ * @throws _DivisionByZeroException when user input contains division by zero
  * 
  * @author Heriniaina {@link https://github.com/Herra-dev}
+ * 
  */
-    @Override protected void testUserInput() throws _SyntaxErrorException{
+    @Override protected void testUserInput() throws _SyntaxErrorException, _DivisionByZeroException {
         // if the user input contains nothing or white space only, remove those last and quit function
         if (this._input.isBlank()) { this._input.strip(); _outPut = "0"; return; }
         
@@ -60,17 +63,26 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
                 
                 str += (this.getInput().charAt(index_of_zero-1) == '/') ? "/0" : "%0";
 
-                char character = this.getInput().charAt(index_of_zero++);
+                char character = this.getInput().charAt(++index_of_zero);
 
                 while(character != '(' && character != ')' && character != '+' && character != '-' &&
-                        character != '*' && character != '/') {
+                        character != '*' && character != '/' && index_of_zero < this.getInput().length()) {
                     character = this.getInput().charAt(index_of_zero++);
                     str += character;
+                    for(int i = 1; i < 9; i++) {
+                        if(character == (char)i) 
+                            break;
+                        System.out.println("i = " + i + ", character = " + character);
+                    }
+                        
                 }
 
-                // if(this.getInput().matches("[/0]{1}[1-9]")) {
-
+                // if(!str.matches("[/0]{1}0*[1-9]+")) {
+                //     throw new _DivisionByZeroException("Division by zero");
+                // } else {
+                //     System.out.println("Hello Hery only");
                 // }
+
             }
             from_index = index_of_zero+1; // new search starts at index + 1, where a zero was found
         }

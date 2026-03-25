@@ -1,5 +1,6 @@
 package com.herra.back;
 
+import com.herra.exception._DivisionByZeroException;
 import com.herra.exception._SyntaxErrorException;
 
 public class DecimalCalculator extends AbstractDecimalCalculator{
@@ -13,7 +14,11 @@ public class DecimalCalculator extends AbstractDecimalCalculator{
         this._input = user_input;
         try {
             testParenthesis();
-            testUserInput();
+            try {
+                testUserInput();
+            } catch (_DivisionByZeroException e) {
+                e.printStackTrace();
+            }
             arrangeUserInput();
         } catch (_SyntaxErrorException e) {
             e.printStackTrace();
