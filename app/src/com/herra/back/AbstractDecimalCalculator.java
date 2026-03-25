@@ -129,7 +129,6 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         }while (_input.contains("--") || _input.contains("++") ||
                     _input.contains("-+") || _input.contains("+-"));
 
-        System.out.println(_input);
         this._canProcess = true;
         
     }    
@@ -159,6 +158,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
 /**
  * <h3>operatorPlus</h3>
+ * 
  * {@link com.herra.back.AbstractDecimalCalculator#operatorPlus(List)}<p>
  * 
  * This method add two numbers ({@code double}), these number is taken from parameter{@code list}, example:<p>
@@ -170,7 +170,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * {@code Notes}: elements are taken from the list as a {@code String} values, so they are parsed into {@code Double}</li>
  * <li>add {@code first number} to {@code second number}</li>
  * <li>removes all elements between index of{@code +}sign - 1 (<i>-2</i> if first number is a negative value) and{@code +}sign +1</li>
- * </uo><p>
+ * </ol><p>
  * 
  * 
  * @param list {@code List<String>}
@@ -223,7 +223,11 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
 /**
  * <h3>operatorMinus</h3>
+ * 
  * {@link com.herra.back.AbstractDecimalCalculator#operatorMinus(List)}<p>
+ * 
+ * This method subtract two number.<p>
+ * first and second numbers are taken from the parameter {@code list} in the same way function {@link com.herra.back.AbstractDecimalCalculator#operatorPlus(List)} take them.
  * 
  * @param list {@code List<String>}
  * 
@@ -265,6 +269,20 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
 //===================================================================
 
+/**
+ * <h3>operatorMultiply</h3>
+ * 
+ * {@link com.herra.back.AbstractDecimalCalculator#operatorMultiply(List)}<p>
+ * 
+ * This method multiply two number.<p>
+ * first and second numbers are taken from the parameter {@code list} in the same way function {@link com.herra.back.AbstractDecimalCalculator#operatorPlus(List)} take them.
+ *
+ * @author Heriniaina {@link https://github.com/Herra-dev}
+ * 
+ * @see com.herra.back.AbstractDecimalCalculator#operatorPlus(List)
+ * @see com.herra.back.AbstractDecimalCalculator#operatorMinus(List)
+ * @see com.herra.back.AbstractDecimalCalculator#operatorDivide(List)
+ */
     @Override protected List<String> operatorMultiply(List<String> list) {
         // if the list doesn't contains an operator '*' quit function
         if(!list.contains("*")) return list;
@@ -277,22 +295,25 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         double second_number = (list.get(multiplication_sign_index+1).equals("-")) 
             ? java.lang.Double.parseDouble(list.get(multiplication_sign_index+2)) 
             : java.lang.Double.parseDouble(list.get(multiplication_sign_index+1));
-        
 
-        int first = 0;
-        int last = 0;
+        int first = multiplication_sign_index-1;
+        int last = multiplication_sign_index+1;
 
+        // check if first number is a negative number
         if(multiplication_sign_index > 1 && list.get(multiplication_sign_index-2).equals("-")) {
             first_number = -first_number;
             first = multiplication_sign_index-2;
         }
         if(list.get(multiplication_sign_index+1).equals("-")) {
-            first_number = -first_number;
+            second_number = -second_number;
             last = multiplication_sign_index+2;
         }
 
-        System.out.println("first number = " + first_number);
-        System.out.println("second number = " + second_number);
+        // removes elements between first and last
+        for(int i = last; i >= first; i--)
+            list.remove(i);
+
+        list.add(first, java.lang.Double.toString(first_number * second_number));
 
         return list;
     }
