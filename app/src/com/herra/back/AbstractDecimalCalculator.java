@@ -13,7 +13,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * - ends with {@code +} or {@code -} or {@code *} or {@code /} or {@code %}<p>
  * - contains a succession of arithmetic operator invalid for example: {@code +*}, {@code -*}, {@code %%}, {@code **}, {@code %*}, {@code /*}, {@code -)} ...
  * 
- * {@code raise}an {@link com.herra.exception._SyntaxErrorException}
+ * {@code raise}a {@link com.herra.exception._SyntaxErrorException}
  * 
  * @throws _SyntaxErrorException when user input is incorrect
  * @throws _DivisionByZeroException when user input contains division by zero
@@ -149,8 +149,6 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
 //===================================================================
 
-    // protected void 
-
 /**
  * Do calcul
  * 
@@ -161,5 +159,27 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
     }
 
 //===================================================================
+
+    @Override protected String operatorPlus() {
+        return "";
+    }
+
+//===================================================================
+
+    @Override protected String operatorMinus() {
+        return "";
+    }
+
+//===================================================================
+
+    @Override protected String operatorMultiply() {
+        return "";
+    }
+    
+//===================================================================
+    
+    @Override protected String operatorDivide() {
+        return "";
+    }
 
 }
