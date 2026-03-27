@@ -21,7 +21,7 @@ public class DecimalCalculator extends AbstractDecimalCalculator{
             e.printStackTrace();
         }
 
-        this.operatorMultiply(this.getInputList());
+        this.operatorMinus(this.getInputList());
     }
 
 //===================================================================

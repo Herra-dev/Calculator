@@ -141,8 +141,19 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * @return the result of the actual calcul
  */
     @Override protected String calcul(List<String> list) {
-        // Quit function if during test of user input an error of syntax was occured
+        // Quit function if during the test of user input an error of syntax was occured
         if(!this.getAuthorization()) return "0";
+
+    //-------------------------------------------------------------------------------
+
+        int open_parenthesis = 0;
+        int closed_parenthesis = list.size();
+        
+        while(list.contains("(")) {
+            open_parenthesis = list.indexOf("(");
+        }
+
+    //-------------------------------------------------------------------------------
 
         while(list.contains("/") || list.contains("*") || list.contains("+") || list.contains("-")) {
             list = operatorDivide(list);
@@ -321,6 +332,41 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 //===================================================================
     
     @Override protected List<String> operatorDivide(List<String> list) {
+        // if the list doesn't contains an operator '/' quit function
+        if(!list.contains("/")) return list;
+
+        //--------------------------------------------------------------------------------
+
+        int division_sign_index = list.indexOf("/");
+
+        double first_number = java.lang.Double.parseDouble(list.get(division_sign_index-1));
+        double second_number = (list.get(division_sign_index+1).equals("-")) 
+            ? java.lang.Double.parseDouble(list.get(division_sign_index+2)) 
+            : java.lang.Double.parseDouble(list.get(division_sign_index+1));
+
+        int first = division_sign_index-1;
+        int last = division_sign_index+1;
+
+        // check if first number is a negative number
+        if(division_sign_index > 1 && list.get(division_sign_index-2).equals("-")) {
+            first_number = -first_number;
+            first = division_sign_index-2;
+        }
+        if(list.get(division_sign_index+1).equals("-")) {
+            second_number = -second_number;
+            last = division_sign_index+2;
+        }
+
+        // removes elements between first and last
+        for(int i = last; i >= first; i--)
+            list.remove(i);
+
+        list.add(first, java.lang.Double.toString(first_number / second_number));
+
+        for(String str: list)
+            System.out.print(str);
+        System.out.println();
+
         return list;
     }
 
