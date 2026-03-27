@@ -146,21 +146,29 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
     //-------------------------------------------------------------------------------
 
-        int open_parenthesis = 0;
-        int closed_parenthesis = list.size();
+        int open_parenthesis_index = 0;
+        int closed_parenthesis_index = list.size()-1;
+        int another_one_open = 0;
         
-        while(list.contains("(")) {
-            open_parenthesis = list.indexOf("(");
+        // while(list.contains("(")) {
+        open_parenthesis_index = list.indexOf("(");
+        for(int i = open_parenthesis_index+1; i < list.size(); i++) {
+            if(list.get(i).equals("(")) ++another_one_open;
+            else if(list.get(i).equals(")") && another_one_open == 0) closed_parenthesis_index = i;
         }
+
+        System.out.println("open = " + open_parenthesis_index);
+        System.out.println("closed = " + closed_parenthesis_index);
+        // }
 
     //-------------------------------------------------------------------------------
 
-        while(list.contains("/") || list.contains("*") || list.contains("+") || list.contains("-")) {
-            list = operatorDivide(list);
-            list = operatorMultiply(list);
-            list = operatorPlus(list);
-            list = operatorMinus(list);
-        }
+        // while(list.contains("/") || list.contains("*") || list.contains("+") || list.contains("-")) {
+        //     list = operatorDivide(list);
+        //     list = operatorMultiply(list);
+        //     list = operatorPlus(list);
+        //     list = operatorMinus(list);
+        // }
 
         return "";
     }
