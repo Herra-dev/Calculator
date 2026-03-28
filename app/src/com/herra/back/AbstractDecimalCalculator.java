@@ -1,5 +1,6 @@
 package com.herra.back;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import com.herra.exception._DivisionByZeroException;
@@ -145,32 +146,50 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         if(!this.getAuthorization()) return "0";
 
     //-------------------------------------------------------------------------------
+        List<String> list_copy = new LinkedList<String>();
+        String output = new String();
 
-        int open_parenthesis_index = 0;
-        int closed_parenthesis_index = list.size()-1;
-        int another_one_open = 0;
-        
-        // while(list.contains("(")) {
-        open_parenthesis_index = list.indexOf("(");
-        for(int i = open_parenthesis_index+1; i < list.size(); i++) {
-            if(list.get(i).equals("(")) ++another_one_open;
-            else if(list.get(i).equals(")") && another_one_open == 0) closed_parenthesis_index = i;
+        if(list.contains("(")) {
+            int open_parenthesis_index = 0;
+            int closed_parenthesis_index = list.size()-1;
+            int another_one_open = 0;
+            
+            open_parenthesis_index = list.indexOf("(");
+
+            if(open_parenthesis_index > 0)
+                if(list.get(open_parenthesis_index-1).matches("[0-9]"))
+
+            for(int i = open_parenthesis_index+1; i < list.size(); i++) {
+                if(list.get(i).equals("(")) ++another_one_open;
+                else if(list.get(i).equals(")") && another_one_open == 0) closed_parenthesis_index = i;
+            }
+
+            int a = 0;
+            //copy all elements between open and closed parenthesis (both excluded) into another list
+            for(int i = open_parenthesis_index+1; i < closed_parenthesis_index; i++) list_copy.add(a++, list.get(i));
+            //remove all elements between open and closed parenthesis (both included) from list
+            for(int i = closed_parenthesis_index; i >= open_parenthesis_index; i--) list.remove(i);
+
+            System.out.println("open parenthesis = " + open_parenthesis_index);
+            System.out.println("closed parenthesis = " + closed_parenthesis_index);
+
+
+
         }
 
-        System.out.println("open = " + open_parenthesis_index);
-        System.out.println("closed = " + closed_parenthesis_index);
-        // }
+        
+        
 
     //-------------------------------------------------------------------------------
 
-        // while(list.contains("/") || list.contains("*") || list.contains("+") || list.contains("-")) {
-        //     list = operatorDivide(list);
-        //     list = operatorMultiply(list);
-        //     list = operatorPlus(list);
-        //     list = operatorMinus(list);
+        // while(list_copy.contains("/") || list_copy.contains("*") || list_copy.contains("+") || list_copy.contains("-")) {
+        //     list_copy = operatorDivide(list_copy);
+        //     list_copy = operatorMultiply(list_copy);
+        //     list_copy = operatorPlus(list_copy);
+        //     list_copy = operatorMinus(list_copy);
         // }
 
-        return "";
+        return output;
     }
 
 //===================================================================
