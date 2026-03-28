@@ -1,5 +1,6 @@
 package com.herra.back;
 
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -146,48 +147,57 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         if(!this.getAuthorization()) return "0";
 
     //-------------------------------------------------------------------------------
-        List<String> list_copy = new LinkedList<String>();
+        // List<String> list_copy = new LinkedList<String>();
         String output = new String();
 
-        if(list.contains("(")) {
-            int open_parenthesis_index = 0;
-            int closed_parenthesis_index = list.size()-1;
-            int another_one_open = 0;
+        // if(list.contains("(")) {
+        //     int open_parenthesis_index = 0;
+        //     int closed_parenthesis_index = list.size()-1;
+        //     int another_one_open = 0;
             
-            open_parenthesis_index = list.indexOf("(");
+        //     open_parenthesis_index = list.indexOf("(");
 
-            if(open_parenthesis_index > 0)
-                if(list.get(open_parenthesis_index-1).matches("[0-9]"))
+        //     if(open_parenthesis_index > 0)
+        //         if(list.get(open_parenthesis_index-1).matches("[0-9]"))
 
-            for(int i = open_parenthesis_index+1; i < list.size(); i++) {
-                if(list.get(i).equals("(")) ++another_one_open;
-                else if(list.get(i).equals(")") && another_one_open == 0) closed_parenthesis_index = i;
-            }
+        //     for(int i = open_parenthesis_index+1; i < list.size(); i++) {
+        //         if(list.get(i).equals("(")) ++another_one_open;
+        //         else if(list.get(i).equals(")") && another_one_open == 0) closed_parenthesis_index = i;
+        //     }
 
-            int a = 0;
-            //copy all elements between open and closed parenthesis (both excluded) into another list
-            for(int i = open_parenthesis_index+1; i < closed_parenthesis_index; i++) list_copy.add(a++, list.get(i));
-            //remove all elements between open and closed parenthesis (both included) from list
-            for(int i = closed_parenthesis_index; i >= open_parenthesis_index; i--) list.remove(i);
+        //     int a = 0;
+        //     //copy all elements between open and closed parenthesis (both excluded) into another list
+        //     for(int i = open_parenthesis_index+1; i < closed_parenthesis_index; i++) list_copy.add(a++, list.get(i));
+        //     //remove all elements between open and closed parenthesis (both included) from list
+        //     for(int i = closed_parenthesis_index; i >= open_parenthesis_index; i--) list.remove(i);
 
-            System.out.println("open parenthesis = " + open_parenthesis_index);
-            System.out.println("closed parenthesis = " + closed_parenthesis_index);
+        //     System.out.println("open parenthesis = " + open_parenthesis_index);
+        //     System.out.println("closed parenthesis = " + closed_parenthesis_index);
 
 
+        //     // 9+9(6-3)(1-99)
+        //     // 6-3 -> 3
+        //     // 9+9*3(1-99)
+        //     // 1-99 -> -98
+        //     // 9+9*3*-98
 
-        }
+        // }
 
         
         
 
     //-------------------------------------------------------------------------------
 
-        // while(list_copy.contains("/") || list_copy.contains("*") || list_copy.contains("+") || list_copy.contains("-")) {
-        //     list_copy = operatorDivide(list_copy);
-        //     list_copy = operatorMultiply(list_copy);
-        //     list_copy = operatorPlus(list_copy);
-        //     list_copy = operatorMinus(list_copy);
-        // }
+        while(list.contains("/") || list.contains("*") || list.contains("+") || list.contains("-")) {
+            list = operatorDivide(list);
+            list = operatorMultiply(list);
+            list = operatorPlus(list);
+            list = operatorMinus(list);
+        }
+
+        for(String str: list)
+            System.out.print(str);
+        System.out.println();
 
         return output;
     }
@@ -226,8 +236,9 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         if(!list.contains("+")) return list;
 
         int plus_sign_index = list.indexOf("+");
-        double first_Number = java.lang.Double.parseDouble(list.get(plus_sign_index-1));
-        double second_number = java.lang.Double.parseDouble(list.get(plus_sign_index+1));
+        
+        BigDecimal first_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(plus_sign_index-1)));
+        BigDecimal second_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(plus_sign_index+1)));
 
         int first  = plus_sign_index-1;
         int last = plus_sign_index+1;
@@ -244,14 +255,14 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         }
 
         if(plus_sign_index == 2 && list.get(0).equals("-")) {
-            first_Number = -first_Number;
+            first_number = first_number.negate();
             first = 0;
         }
         // removes all elements between index first and last (both included)
         for(int i = last; i >= first; i--) 
             list.remove(i);
 
-        list.add(first, java.lang.Double.toString(first_Number + second_number));
+        list.add(first, (first_number.add(second_number)).toString());
 
         return list;
         
@@ -293,14 +304,14 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
     //--------------------------------------------------------------------------------
 
-        double first_number = java.lang.Double.parseDouble(list.get(minus_sign_index-1));
-        double second_number = java.lang.Double.parseDouble(list.get(minus_sign_index+1));
+        BigDecimal first_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(minus_sign_index-1)));
+        BigDecimal second_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(minus_sign_index+1)));
 
         // removes elements between minus_sign_index-1 and minus_sign_index+1
         for(int i = minus_sign_index+1; i >= minus_sign_index-1; i--)
             list.remove(i);
 
-        list.add(minus_sign_index-1, java.lang.Double.toString(first_number - second_number));
+        list.add(minus_sign_index-1, first_number.subtract(second_number).toString());
 
         return list;
     }
@@ -329,21 +340,21 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
         int multiplication_sign_index = list.indexOf("*");
 
-        double first_number = java.lang.Double.parseDouble(list.get(multiplication_sign_index-1));
-        double second_number = (list.get(multiplication_sign_index+1).equals("-")) 
+        BigDecimal first_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(multiplication_sign_index-1)));
+        BigDecimal second_number = BigDecimal.valueOf((list.get(multiplication_sign_index+1).equals("-")) 
             ? java.lang.Double.parseDouble(list.get(multiplication_sign_index+2)) 
-            : java.lang.Double.parseDouble(list.get(multiplication_sign_index+1));
+            : java.lang.Double.parseDouble(list.get(multiplication_sign_index+1)));
 
         int first = multiplication_sign_index-1;
         int last = multiplication_sign_index+1;
 
         // check if first number is a negative number
         if(multiplication_sign_index > 1 && list.get(multiplication_sign_index-2).equals("-")) {
-            first_number = -first_number;
+            first_number = first_number.negate();
             first = multiplication_sign_index-2;
         }
         if(list.get(multiplication_sign_index+1).equals("-")) {
-            second_number = -second_number;
+            second_number = second_number.negate();
             last = multiplication_sign_index+2;
         }
 
@@ -351,7 +362,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         for(int i = last; i >= first; i--)
             list.remove(i);
 
-        list.add(first, java.lang.Double.toString(first_number * second_number));
+        list.add(first, first_number.multiply(second_number).toString());
 
         return list;
     }
@@ -366,21 +377,21 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
         int division_sign_index = list.indexOf("/");
 
-        double first_number = java.lang.Double.parseDouble(list.get(division_sign_index-1));
-        double second_number = (list.get(division_sign_index+1).equals("-")) 
+        BigDecimal first_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(division_sign_index-1)));
+        BigDecimal second_number = BigDecimal.valueOf((list.get(division_sign_index+1).equals("-")) 
             ? java.lang.Double.parseDouble(list.get(division_sign_index+2)) 
-            : java.lang.Double.parseDouble(list.get(division_sign_index+1));
+            : java.lang.Double.parseDouble(list.get(division_sign_index+1)));
 
         int first = division_sign_index-1;
         int last = division_sign_index+1;
 
         // check if first number is a negative number
         if(division_sign_index > 1 && list.get(division_sign_index-2).equals("-")) {
-            first_number = -first_number;
+            first_number = first_number.negate();
             first = division_sign_index-2;
         }
         if(list.get(division_sign_index+1).equals("-")) {
-            second_number = -second_number;
+            second_number = second_number.negate();
             last = division_sign_index+2;
         }
 
@@ -388,11 +399,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         for(int i = last; i >= first; i--)
             list.remove(i);
 
-        list.add(first, java.lang.Double.toString(first_number / second_number));
-
-        for(String str: list)
-            System.out.print(str);
-        System.out.println();
+        list.add(first, first_number.divide(second_number).toString());
 
         return list;
     }
