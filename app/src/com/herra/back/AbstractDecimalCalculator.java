@@ -108,17 +108,6 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * - {@code +} * {@code -} = {@code -}
  * - {@code -} * {@code +} = {@code -}
  * 
- * <table >
- * <tr>
- * <td>heri</td>
- * <td>niaina</td>
- * </tr>
- * <tr>
- * <td>niaina</td>
- * <td>heri</td>
- * <tr>
- * </table>
- * 
  * @author Heriniaina {@link https://github.com/Herra-dev}
  */
     @Override protected void arrangeUserInput() {  
@@ -174,17 +163,6 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             for(int i = open_parenthesis_index+1; i < closed_parenthesis_index; i++) list_copy.add(a++, list.get(i));
             //remove all elements between open and closed parenthesis (both included) from list
             for(int i = closed_parenthesis_index; i >= open_parenthesis_index; i--) list.remove(i);
-
-            System.out.println("open parenthesis = " + open_parenthesis_index);
-            System.out.println("closed parenthesis = " + closed_parenthesis_index);
-
-
-        //     // 9+9(6-3)(1-99)
-        //     // 6-3 -> 3
-        //     // 9+9*3(1-99)
-        //     // 1-99 -> -98
-        //     // 9+9*3*-98
-
         }
 
     //-------------------------------------------------------------------------------
@@ -345,7 +323,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             --first_to_remove;
         }
 
-        // removes all used elements: first number(and his sign if it is an addition sign), minus sign and second number
+        // removes all used elements: first number(and his sign if it is an minus sign), minus sign and second number
         for(int i = last_to_remove; i >= first_to_remove; i--) list.remove(i);
 
         BigDecimal result = first_number.subtract(second_number);
@@ -425,7 +403,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             ++last_to_remove;
         }
 
-        // removes all used elements: first number(and his sign if it is an addition sign), minus sign and second number
+        // removes all used elements: first number(and his sign if it is an multiplication sign), minus sign and second number
         for(int i = last_to_remove; i >= first_to_remove; i--) list.remove(i);
 
         BigDecimal result = first_number.multiply(second_number);
@@ -444,17 +422,25 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             list.add(first_to_remove, result.toString());
         }
 
-        System.out.println("multiply");
-
-        for(String str: list)
-            System.out.println(str);
-        System.out.println();
-
         return list;
     }
     
 //===================================================================
     
+/**
+ * <h3>operatorDivide</h3>
+ * 
+ * {@link com.herra.back.AbstractDecimalCalculator#operatorDivide(List)}<p>
+ * 
+ * This method divide two number.<p>
+ * first and second numbers are taken from the parameter {@code list} in the same way function {@link com.herra.back.AbstractDecimalCalculator#operatorPlus(List)} take them.
+ *
+ * @author Heriniaina {@link https://github.com/Herra-dev}
+ * 
+ * @see com.herra.back.AbstractDecimalCalculator#operatorPlus(List)
+ * @see com.herra.back.AbstractDecimalCalculator#operatorMinus(List)
+ * @see com.herra.back.AbstractDecimalCalculator#operatorMultiply(List)
+ */
     @Override protected List<String> operatorDivide(List<String> list) {
 
         // if no authorization was not accorded(caused by user input syntax) returns a new empty LinkedList
@@ -490,7 +476,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             ++last_to_remove;
         }
 
-        // removes all used elements: first number(and his sign if it is an addition sign), minus sign and second number
+        // removes all used elements: first number(and his sign if it is an division sign), minus sign and second number
         for(int i = last_to_remove; i >= first_to_remove; i--) list.remove(i);
 
         BigDecimal result = first_number.divide(second_number, 2, RoundingMode.HALF_UP);
@@ -508,12 +494,6 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         } else {
             list.add(first_to_remove, result.toString());
         }
-
-        System.out.println("multiply");
-
-        for(String str: list)
-            System.out.println(str);
-        System.out.println();
 
         return list;
     }
