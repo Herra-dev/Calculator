@@ -195,8 +195,8 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         while(list_copy.contains("/") || list_copy.contains("*") || list_copy.contains("+") || list_copy.contains("-")) {
             list_copy = operatorDivide(list_copy);
             list_copy = operatorMultiply(list_copy);
-            list_copy = operatorPlus(list_copy);
             list_copy = operatorMinus(list_copy);
+            list_copy = operatorPlus(list_copy);
         }
 
         output = list_copy.get(0);
@@ -212,17 +212,9 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * 
  * {@link com.herra.back.AbstractDecimalCalculator#operatorPlus(List)}<p>
  * 
- * This method add two numbers ({@code double}), these number is taken from parameter{@code list}, example:<p>
- * <ol>
- * <li>the parameter {@code list} contains: "5", "+", "96", "-", "680" </li>
- * <li>the function search for index of the plus {@code +} sign</li>, stock this index in a variable {@code int}
- * <li>put the element at index -> index of {@code plus} signe {@code -} 1, into variable {@code Double}, The value stocked in this last is considered as {@code first number}</li>
- * <li>put the element at index -> index of {@code plus} signe {@code +} 1, into variable {@code Double}, The value stocked in this last is considered as {@code second number}<p>
- * {@code Notes}: elements are taken from the list as a {@code String} values, so they are parsed into {@code Double}</li>
- * <li>add {@code first number} to {@code second number}</li>
- * <li>removes all elements between index of{@code +}sign - 1 (<i>-2</i> if first number is a negative value) and{@code +}sign +1</li>
- * </ol><p>
- * 
+ * This method add two numbers ({@code double}), these number is taken from parameter{@code list}, example:<p> 
+ * * If no plus{@code +}sign was found, returns the parameter {@code list}<p>
+ * * If no number was found before plus{@code +}sign, 
  * 
  * @param list {@code List<String>}
  * 
@@ -235,34 +227,44 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * @author Heriniaina {@link https://github.com/Herra-dev}
  */
     @Override protected List<String> operatorPlus(List<String> list) {
+
+        // if no authorization was not accorded
+        if(!this.getAuthorization()) return new LinkedList<String>();
+
         // if the list doesn't contains an operator '+' quit function
         if(!list.contains("+")) return list;
 
+        //-----------------------------------------------------------------------------------------------------------
+        // if plus sign is the first element of the list, remove it and returns the list
         int plus_sign_index = list.indexOf("+");
+        if(plus_sign_index == 0) {
+            list.remove(plus_sign_index);
+            return list;
+        }
 
+        //-----------------------------------------------------------------------------------------------------------
+        //
         int first_number_index = plus_sign_index-1;
         int second_number_index = plus_sign_index+1;
+        int first_to_remove  = first_number_index;
+        int last_to_remove = second_number_index;
+
+        System.out.println("second number index = " + second_number_index);
 
         BigDecimal first_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(first_number_index)));
         BigDecimal second_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(second_number_index)));
 
-        int first_to_remove  = first_number_index;
-        int last_to_remove = second_number_index;
-
+        
         // first number is a negative number if element before it is a subraction sign
         if(first_number_index > 0 && list.get(first_number_index-1).equals("-")){
             --first_to_remove;
             first_number = first_number.negate();
         }
 
-        System.out.println("first to remove = " + first_to_remove);
-        System.out.println("second to remove = " + last_to_remove);
-
-        for(int i = last_to_remove; i >= first_to_remove; i--)
-            list.remove(i);
+        // removes all used elements: first number(and his sign if it is a minus sign), plus sign and second number
+        for(int i = last_to_remove; i >= first_to_remove; i--) list.remove(i);
 
         BigDecimal result = first_number.add(second_number);
-
 
         // if first to remove is superior to zero(0), probably there is a number before it,
         // so separe result's operator and number
@@ -275,18 +277,12 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
                 list.add(first_to_remove, "-");
                 list.add(first_to_remove+1, result.abs().toString());
             }
+
         } else {
             list.add(first_to_remove, result.toString());
         }
 
-        System.out.println("addition");
-
-        for(String str: list)
-            System.out.println(str);
-        System.out.println();
-
         return list;
-        
     }
 
 //===================================================================
@@ -318,21 +314,44 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         int minus_sign_index = list.indexOf("-");
         // if the index of minus sign is equals to 0, remove it and set next element into negative
         if(minus_sign_index == 0) {
-            list.remove(0);
-            list.set(0, "-" + list.get(0));
+            list.remove(minus_sign_index);
+            list.set(minus_sign_index, "-" + list.get(0));
             return list;
         }
 
     //--------------------------------------------------------------------------------
 
+        int first_number_index = minus_sign_index-1;
+        int second_number_index = minus_sign_index+1;
+        int first_to_remove = first_number_index;
+        int last_to_remove = second_number_index;
+
         BigDecimal first_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(minus_sign_index-1)));
         BigDecimal second_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(minus_sign_index+1)));
 
-        // removes elements between minus_sign_index-1 and minus_sign_index+1
-        for(int i = minus_sign_index+1; i >= minus_sign_index-1; i--)
-            list.remove(i);
+        // first number is a negative number if element before it is a subraction sign
+        if(first_number_index > 0 && list.get(first_number_index-1).equals("+")){
+            --first_to_remove;
+        }
 
-        list.add(minus_sign_index-1, first_number.subtract(second_number).toString());
+        // removes all used elements: first number(and his sign if it is an addition sign), minus sign and second number
+        for(int i = last_to_remove; i >= first_to_remove; i--) list.remove(i);
+
+        BigDecimal result = first_number.subtract(second_number);
+
+        if(first_to_remove > 0) {
+            if(result.equals(result.abs())) {   // result is a positive number
+                list.add(first_to_remove, "+");
+                list.add(first_to_remove+1, result.abs().toString());
+            }
+            else {                              // result is a negative number
+                list.add(first_to_remove, "-");
+                list.add(first_to_remove+1, result.abs().toString());
+            }
+
+        } else {
+            list.add(first_to_remove, result.toString());
+        }
 
         System.out.println("substract");
 
