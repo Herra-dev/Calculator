@@ -1,6 +1,7 @@
 package com.herra.back;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import com.herra.exception._DivisionByZeroException;
@@ -398,7 +399,8 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         for(int i = last; i >= first; i--)
             list.remove(i);
 
-        list.add(first, first_number.divide(second_number).toString());
+        // To prevent case of an infinite result as 10/3=0.33333333333... 
+        list.add(first, first_number.divide(second_number, 10, RoundingMode.UP).toString());
 
         return list;
     }
