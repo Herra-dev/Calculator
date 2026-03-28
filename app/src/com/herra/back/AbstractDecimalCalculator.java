@@ -192,11 +192,12 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         if(list_copy.isEmpty())
             list_copy.addAll(list);
 
+
         while(list_copy.contains("/") || list_copy.contains("*") || list_copy.contains("+") || list_copy.contains("-")) {
-            list_copy = operatorDivide(list_copy);
-            list_copy = operatorMultiply(list_copy);
-            list_copy = operatorMinus(list_copy);
-            list_copy = operatorPlus(list_copy);
+            while(list_copy.contains("/")) list_copy = operatorDivide(list_copy);
+            while(list_copy.contains("*")) list_copy = operatorMultiply(list_copy);
+            while(list_copy.contains("-")) list_copy = operatorMinus(list_copy);
+            while(list_copy.contains("+")) list_copy = operatorPlus(list_copy);
         }
 
         output = list_copy.get(0);
@@ -228,7 +229,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  */
     @Override protected List<String> operatorPlus(List<String> list) {
 
-        // if no authorization was not accorded
+        // if no authorization was not accorded(caused by user input syntax) returns a new empty LinkedList
         if(!this.getAuthorization()) return new LinkedList<String>();
 
         // if the list doesn't contains an operator '+' quit function
@@ -282,6 +283,12 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             list.add(first_to_remove, result.toString());
         }
 
+        System.out.println("add");
+
+        for(String str: list)
+            System.out.println(str);
+        System.out.println();
+
         return list;
     }
 
@@ -306,6 +313,10 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * @author Heriniaina {@link https://github.com/Herra-dev}
  */
     @Override protected List<String> operatorMinus(List<String> list) {
+
+        // if no authorization was not accorded(caused by user input syntax) returns a new empty LinkedList
+        if(!this.getAuthorization()) return new LinkedList<String>();
+
         // if the list doesn't contains an operator '-' quit function
         if(!list.contains("-")) return list;
 
@@ -379,36 +390,65 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * @see com.herra.back.AbstractDecimalCalculator#operatorDivide(List)
  */
     @Override protected List<String> operatorMultiply(List<String> list) {
+
+        // if no authorization was not accorded(caused by user input syntax) returns a new empty LinkedList
+        if(!this.getAuthorization()) return new LinkedList<String>();
+
         // if the list doesn't contains an operator '*' quit function
         if(!list.contains("*")) return list;
 
     //--------------------------------------------------------------------------------
 
         int multiplication_sign_index = list.indexOf("*");
+        int first_number_index = multiplication_sign_index-1;
+        int second_number_index = multiplication_sign_index+1;
+        int first_to_remove = first_number_index;
+        int last_to_remove = second_number_index;
 
-        BigDecimal first_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(multiplication_sign_index-1)));
+
+        BigDecimal first_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(first_number_index)));
         BigDecimal second_number = BigDecimal.valueOf((list.get(multiplication_sign_index+1).equals("-")) 
-            ? java.lang.Double.parseDouble(list.get(multiplication_sign_index+2)) 
-            : java.lang.Double.parseDouble(list.get(multiplication_sign_index+1)));
+            ? java.lang.Double.parseDouble(list.get(second_number_index+1)) 
+            : java.lang.Double.parseDouble(list.get(second_number_index)));
 
-        int first = multiplication_sign_index-1;
-        int last = multiplication_sign_index+1;
-
-        // check if first number is a negative number
-        if(multiplication_sign_index > 1 && list.get(multiplication_sign_index-2).equals("-")) {
-            first_number = first_number.negate();
-            first = multiplication_sign_index-2;
+        // if first number's index is superior to 0, 
+        if(first_number_index > 0){
+            if(list.get(first_number_index-1).equals("-")) {
+                first_number = first_number.negate();
+                --first_to_remove;
+            }
+            else if(list.get(first_number_index-1).equals("+")) --first_to_remove;
         }
+        // if element coming after multiplication sign is a subraction sign, negate second number 
         if(list.get(multiplication_sign_index+1).equals("-")) {
             second_number = second_number.negate();
-            last = multiplication_sign_index+2;
+            ++last_to_remove;
         }
 
-        // removes elements between first and last
-        for(int i = last; i >= first; i--)
-            list.remove(i);
+        // removes all used elements: first number(and his sign if it is an addition sign), minus sign and second number
+        for(int i = last_to_remove; i >= first_to_remove; i--) list.remove(i);
 
-        list.add(first, first_number.multiply(second_number).toString());
+        BigDecimal result = first_number.multiply(second_number);
+
+        if(first_to_remove > 0) {
+            if(result.equals(result.abs())) {   // result is a positive number
+                list.add(first_to_remove, "+");
+                list.add(first_to_remove+1, result.abs().toString());
+            }
+            else {                              // result is a negative number
+                list.add(first_to_remove, "-");
+                list.add(first_to_remove+1, result.abs().toString());
+            }
+
+        } else {
+            list.add(first_to_remove, result.toString());
+        }
+
+        System.out.println("multiply");
+
+        for(String str: list)
+            System.out.println(str);
+        System.out.println();
 
         return list;
     }
@@ -416,37 +456,64 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 //===================================================================
     
     @Override protected List<String> operatorDivide(List<String> list) {
+
+        // if no authorization was not accorded(caused by user input syntax) returns a new empty LinkedList
+        if(!this.getAuthorization()) return new LinkedList<String>();
+
         // if the list doesn't contains an operator '/' quit function
         if(!list.contains("/")) return list;
 
         //--------------------------------------------------------------------------------
 
         int division_sign_index = list.indexOf("/");
+        int first_number_index = division_sign_index-1;
+        int second_number_index = division_sign_index+1;
+        int first_to_remove = first_number_index;
+        int last_to_remove = second_number_index;
 
         BigDecimal first_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(division_sign_index-1)));
         BigDecimal second_number = BigDecimal.valueOf((list.get(division_sign_index+1).equals("-")) 
             ? java.lang.Double.parseDouble(list.get(division_sign_index+2)) 
             : java.lang.Double.parseDouble(list.get(division_sign_index+1)));
 
-        int first = division_sign_index-1;
-        int last = division_sign_index+1;
-
-        // check if first number is a negative number
-        if(division_sign_index > 1 && list.get(division_sign_index-2).equals("-")) {
-            first_number = first_number.negate();
-            first = division_sign_index-2;
+        // if first number's index is superior to 0, 
+        if(first_number_index > 0){
+            if(list.get(first_number_index-1).equals("-")) {
+                first_number = first_number.negate();
+                --first_to_remove;
+            }
+            else if(list.get(first_number_index-1).equals("+")) --first_to_remove;
         }
+        // if element coming after multiplication sign is a subraction sign, negate second number 
         if(list.get(division_sign_index+1).equals("-")) {
             second_number = second_number.negate();
-            last = division_sign_index+2;
+            ++last_to_remove;
         }
 
-        // removes elements between first and last
-        for(int i = last; i >= first; i--)
-            list.remove(i);
+        // removes all used elements: first number(and his sign if it is an addition sign), minus sign and second number
+        for(int i = last_to_remove; i >= first_to_remove; i--) list.remove(i);
 
-        // To prevent case of an infinite result as 10/3=0.33333333333... 
-        list.add(first, first_number.divide(second_number, 10, RoundingMode.UP).toString());
+        BigDecimal result = first_number.divide(second_number, 2, RoundingMode.HALF_UP);
+
+        if(first_to_remove > 0) {
+            if(result.equals(result.abs())) {   // result is a positive number
+                list.add(first_to_remove, "+");
+                list.add(first_to_remove+1, result.abs().toString());
+            }
+            else {                              // result is a negative number
+                list.add(first_to_remove, "-");
+                list.add(first_to_remove+1, result.abs().toString());
+            }
+
+        } else {
+            list.add(first_to_remove, result.toString());
+        }
+
+        System.out.println("multiply");
+
+        for(String str: list)
+            System.out.println(str);
+        System.out.println();
 
         return list;
     }
