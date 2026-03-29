@@ -189,16 +189,18 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
     //-------------------------------------------------------------------------------
 
-        while(list.contains("/") || list.contains("*") || list.contains("+") || list.contains("-")) {
-            list = operatorDivide(list);
-            list = operatorMultiply(list);
-            list = operatorPlus(list);
-            list = operatorMinus(list);
+        if(list_copy.isEmpty())
+            list_copy.addAll(list);
+
+        while(list_copy.contains("/") || list_copy.contains("*") || list_copy.contains("+") || list_copy.contains("-")) {
+            list_copy = operatorDivide(list_copy);
+            list_copy = operatorMultiply(list_copy);
+            list_copy = operatorPlus(list_copy);
+            list_copy = operatorMinus(list_copy);
         }
 
-        for(String str: list)
-            System.out.print(str);
-        System.out.println();
+        output = list_copy.get(0);
+        System.out.println("output : " + output);
 
         return output;
     }
@@ -265,6 +267,8 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
         list.add(first, (first_number.add(second_number)).toString());
 
+        System.out.println("add");
+
         return list;
         
     }
@@ -313,6 +317,8 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             list.remove(i);
 
         list.add(minus_sign_index-1, first_number.subtract(second_number).toString());
+
+        System.out.println("substract");
 
         return list;
     }
