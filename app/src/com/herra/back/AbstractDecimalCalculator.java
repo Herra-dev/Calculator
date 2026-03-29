@@ -252,14 +252,34 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         // first number is a negative number if element before it is a subraction sign
         if(first_number_index > 0 && list.get(first_number_index-1).equals("-")){
             --first_to_remove;
-            first_number.negate();
+            first_number = first_number.negate();
         }
 
         System.out.println("first to remove = " + first_to_remove);
         System.out.println("second to remove = " + last_to_remove);
 
         for(int i = last_to_remove; i >= first_to_remove; i--)
-            lis
+            list.remove(i);
+
+        BigDecimal result = first_number.add(second_number);
+
+
+        if(first_to_remove > 0) {
+            if(result.equals(result.abs())) { // result is positive
+                list.add(first_to_remove, "+");
+                list.add(first_to_remove+1, result.abs().toString());
+            }
+            else {
+                list.add(first_to_remove, "-");
+                list.add(first_to_remove+1, result.abs().toString());
+            }
+        } else {
+
+        }
+
+        for(String str: list)
+            System.out.println(str);
+        System.out.println();
 
         return list;
         
