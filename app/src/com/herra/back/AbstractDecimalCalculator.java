@@ -264,18 +264,22 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         BigDecimal result = first_number.add(second_number);
 
 
+        // if first to remove is superior to zero(0), probably there is a number before it,
+        // so separe result's operator and number
         if(first_to_remove > 0) {
-            if(result.equals(result.abs())) { // result is positive
+            if(result.equals(result.abs())) {   // result is a positive number
                 list.add(first_to_remove, "+");
                 list.add(first_to_remove+1, result.abs().toString());
             }
-            else {
+            else {                              // result is a negative number
                 list.add(first_to_remove, "-");
                 list.add(first_to_remove+1, result.abs().toString());
             }
         } else {
-
+            list.add(first_to_remove, result.toString());
         }
+
+        System.out.println("addition");
 
         for(String str: list)
             System.out.println(str);
@@ -331,6 +335,10 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         list.add(minus_sign_index-1, first_number.subtract(second_number).toString());
 
         System.out.println("substract");
+
+        for(String str: list)
+            System.out.println(str);
+        System.out.println();
 
         return list;
     }
