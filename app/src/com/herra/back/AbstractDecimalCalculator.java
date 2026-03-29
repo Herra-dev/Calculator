@@ -265,17 +265,22 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         // removes all elements between index first and last (both included)
         for(int i = last; i >= first; i--) 
             list.remove(i);
+
+        // add result to list
         BigDecimal result = first_number.add(second_number);
 
-        if(result.equals(result.abs()) && first > 0) {// positive number
+        if(result.equals(result.abs()) && first > 0) {  // positive number
             list.add(first, "+");
-            list.add(first+1, result.toString());
-        }else
-            list.add(first, result.toString());
+            list.add(first+1, result.abs().toString());
+        }else {                                         // negative number
+            list.add(first, "-");
+            list.add(first+1, result.abs().toString());
+        }
+            
 
         System.out.println("add");
         for(String str: list)
-            System.out.print(str);
+            System.out.println(str);
         System.out.println();
 
         return list;
