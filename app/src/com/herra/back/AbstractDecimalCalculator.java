@@ -242,12 +242,12 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
         int first_number_index = plus_sign_index-1;
         int second_number_index = plus_sign_index+1;
-        
+
         BigDecimal first_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(first_number_index)));
         BigDecimal second_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(second_number_index)));
 
-        int first  = first_number_index;
-        int last = second_number_index;
+        int first_to_remove  = first_number_index;
+        int last_to_remove = second_number_index;
 
 
         {
