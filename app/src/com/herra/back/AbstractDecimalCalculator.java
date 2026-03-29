@@ -239,12 +239,15 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         if(!list.contains("+")) return list;
 
         int plus_sign_index = list.indexOf("+");
-        
-        BigDecimal first_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(plus_sign_index-1)));
-        BigDecimal second_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(plus_sign_index+1)));
 
-        int first  = plus_sign_index-1;
-        int last = plus_sign_index+1;
+        int first_number_index = plus_sign_index-1;
+        int second_number_index = plus_sign_index+1;
+        
+        BigDecimal first_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(first_number_index)));
+        BigDecimal second_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(second_number_index)));
+
+        int first  = first_number_index;
+        int last = second_number_index;
 
 
         {
@@ -262,19 +265,29 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             first = plus_sign_index-2;
         }
 
-        // removes all elements between index first and last (both included)
+        // Removes all elements between index first and last (both included)
         for(int i = last; i >= first; i--) 
             list.remove(i);
 
-        // add result to list
+        // Stock result (first_number+second_number) in a variable of type BigDecimal
         BigDecimal result = first_number.add(second_number);
 
+        System.out.println("result : " + result);
+
+        if(result.equals(result.abs()))
+            System.out.println("positive");
+        System.out.println("first = " + first);
+
+        // if result is a positive number and first number's index is superior to zero
         if(result.equals(result.abs()) && first > 0) {  // positive number
             list.add(first, "+");
             list.add(first+1, result.abs().toString());
+            System.out.println("positive");
+
         }else {                                         // negative number
             list.add(first, "-");
             list.add(first+1, result.abs().toString());
+            System.out.println("negative");
         }
             
 
