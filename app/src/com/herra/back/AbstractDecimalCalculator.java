@@ -2,6 +2,7 @@ package com.herra.back;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.herra.exception._DivisionByZeroException;
@@ -146,33 +147,36 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         // Quit function if during the test of user input an error of syntax was occured
         if(!this.getAuthorization()) return "0";
 
+        // If the first element of the list is a plus '+' sign, removes it
+        if(list.get(0).equals("+")) list.remove(0);
+
     //-------------------------------------------------------------------------------
-        // List<String> list_copy = new LinkedList<String>();
+        List<String> list_copy = new LinkedList<String>();
         String output = new String();
 
-        // if(list.contains("(")) {
-        //     int open_parenthesis_index = 0;
-        //     int closed_parenthesis_index = list.size()-1;
-        //     int another_one_open = 0;
+        if(list.contains("(")) {
+            int open_parenthesis_index = 0;
+            int closed_parenthesis_index = list.size()-1;
+            int another_one_open = 0;
             
-        //     open_parenthesis_index = list.indexOf("(");
+            open_parenthesis_index = list.indexOf("(");
 
-        //     if(open_parenthesis_index > 0)
-        //         if(list.get(open_parenthesis_index-1).matches("[0-9]"))
+            if(open_parenthesis_index > 0)
+                if(list.get(open_parenthesis_index-1).matches("[0-9]"))
 
-        //     for(int i = open_parenthesis_index+1; i < list.size(); i++) {
-        //         if(list.get(i).equals("(")) ++another_one_open;
-        //         else if(list.get(i).equals(")") && another_one_open == 0) closed_parenthesis_index = i;
-        //     }
+            for(int i = open_parenthesis_index+1; i < list.size(); i++) {
+                if(list.get(i).equals("(")) ++another_one_open;
+                else if(list.get(i).equals(")") && another_one_open == 0) closed_parenthesis_index = i;
+            }
 
-        //     int a = 0;
-        //     //copy all elements between open and closed parenthesis (both excluded) into another list
-        //     for(int i = open_parenthesis_index+1; i < closed_parenthesis_index; i++) list_copy.add(a++, list.get(i));
-        //     //remove all elements between open and closed parenthesis (both included) from list
-        //     for(int i = closed_parenthesis_index; i >= open_parenthesis_index; i--) list.remove(i);
+            int a = 0;
+            //copy all elements between open and closed parenthesis (both excluded) into another list
+            for(int i = open_parenthesis_index+1; i < closed_parenthesis_index; i++) list_copy.add(a++, list.get(i));
+            //remove all elements between open and closed parenthesis (both included) from list
+            for(int i = closed_parenthesis_index; i >= open_parenthesis_index; i--) list.remove(i);
 
-        //     System.out.println("open parenthesis = " + open_parenthesis_index);
-        //     System.out.println("closed parenthesis = " + closed_parenthesis_index);
+            System.out.println("open parenthesis = " + open_parenthesis_index);
+            System.out.println("closed parenthesis = " + closed_parenthesis_index);
 
 
         //     // 9+9(6-3)(1-99)
@@ -181,10 +185,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         //     // 1-99 -> -98
         //     // 9+9*3*-98
 
-        // }
-
-        
-        
+        }
 
     //-------------------------------------------------------------------------------
 
