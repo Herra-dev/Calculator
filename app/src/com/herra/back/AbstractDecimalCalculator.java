@@ -249,10 +249,17 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         int first_to_remove  = first_number_index;
         int last_to_remove = second_number_index;
 
+        // first number is a negative number if element before it is a subraction sign
         if(first_number_index > 0 && list.get(first_number_index-1).equals("-")){
             --first_to_remove;
             first_number.negate();
         }
+
+        System.out.println("first to remove = " + first_to_remove);
+        System.out.println("second to remove = " + last_to_remove);
+
+        for(int i = last_to_remove; i >= first_to_remove; i--)
+            lis
 
         return list;
         
