@@ -249,52 +249,10 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         int first_to_remove  = first_number_index;
         int last_to_remove = second_number_index;
 
-
-        {
-            // Case where plus sign index is equals to two(2), first number is probably a negative number wherefore
-        //      necessity to check which element is stocked at index zero(0), if this last is equals to '-',
-        //      changes first number to negative
-        //----------------- EXAMPLE ------------------
-        // input_value      =  - 5 + 12
-        //                     ^   ^
-        // index_input      =  0 1 2 3
+        if(first_number_index > 0 && list.get(first_number_index-1).equals("-")){
+            --first_to_remove;
+            first_number.negate();
         }
-
-        if(plus_sign_index >= 2 && list.get(plus_sign_index-2).equals("-")) {
-            first_number = first_number.negate();
-            first = plus_sign_index-2;
-        }
-
-        // Removes all elements between index first and last (both included)
-        for(int i = last; i >= first; i--) 
-            list.remove(i);
-
-        // Stock result (first_number+second_number) in a variable of type BigDecimal
-        BigDecimal result = first_number.add(second_number);
-
-        System.out.println("result : " + result);
-
-        if(result.equals(result.abs()))
-            System.out.println("positive");
-        System.out.println("first = " + first);
-
-        // if result is a positive number and first number's index is superior to zero
-        if(result.equals(result.abs()) && first > 0) {  // positive number
-            list.add(first, "+");
-            list.add(first+1, result.abs().toString());
-            System.out.println("positive");
-
-        }else {                                         // negative number
-            list.add(first, "-");
-            list.add(first+1, result.abs().toString());
-            System.out.println("negative");
-        }
-            
-
-        System.out.println("add");
-        for(String str: list)
-            System.out.println(str);
-        System.out.println();
 
         return list;
         
