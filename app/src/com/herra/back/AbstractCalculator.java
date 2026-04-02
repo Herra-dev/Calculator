@@ -24,6 +24,7 @@ public abstract class AbstractCalculator implements Observer, Observable {
     protected abstract List<String> operatorMinus(List<String> list);
     protected abstract List<String> operatorMultiply(List<String> list);
     protected abstract List<String> operatorDivide(List<String> list);
+    protected abstract List<String> operatorModulo(List<String> list);
 
 //===================================================================
 //  GETTERS
@@ -155,14 +156,16 @@ public abstract class AbstractCalculator implements Observer, Observable {
             if(input.charAt(i) == '-') { addNonNumberToListNumber(list, i); continue; }
             if(input.charAt(i) == '*') { addNonNumberToListNumber(list, i); continue; }
             if(input.charAt(i) == '/') { addNonNumberToListNumber(list, i); continue; }
+            if(input.charAt(i) == '%') { addNonNumberToListNumber(list, i); continue; }
             if(input.charAt(i) == '(') { addNonNumberToListNumber(list, i); continue; }
             if(input.charAt(i) == ')') { addNonNumberToListNumber(list, i); continue; }
+            
 
             list.set(list.size()-1, list.get(list.size()-1)+""+input.charAt(i));
             
             if(i+1 < input.length()) {
                 char c = input.charAt(i+1);
-                if(c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')') list.add("");
+                if(c == '+' || c == '-' || c == '*' || c == '/' || c == '%' || c == '(' || c == ')') list.add("");
             }
         }
 

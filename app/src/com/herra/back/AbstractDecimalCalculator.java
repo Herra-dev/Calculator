@@ -498,4 +498,50 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         return list;
     }
 
+//===================================================================
+
+    @Override protected List<String> operatorModulo(List<String> list) {
+
+        // if no authorization was not accorded(caused by user input syntax) returns a new empty LinkedList
+        if(!this.getAuthorization()) return new LinkedList<String>();
+
+        // if the list doesn't contains an operator '/' quit function
+        if(!list.contains("%")) return list;
+
+        //--------------------------------------------------------------------------------
+
+        int modulo_sign_index = list.indexOf("/");
+        int first_number_index = modulo_sign_index-1;
+        int second_number_index = modulo_sign_index+1;
+        int first_to_remove = first_number_index;
+        int last_to_remove = second_number_index;
+
+        BigDecimal first_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(modulo_sign_index-1)));
+        BigDecimal second_number = BigDecimal.valueOf((list.get(modulo_sign_index+1).equals("-")) 
+            ? java.lang.Double.parseDouble(list.get(modulo_sign_index+2)) 
+            : java.lang.Double.parseDouble(list.get(modulo_sign_index+1)));
+
+        // if first number's index is superior to 0, 
+        if(first_number_index > 0){
+            if(list.get(first_number_index-1).equals("-")) {
+                first_number = first_number.negate();
+                --first_to_remove;
+            }
+            else if(list.get(first_number_index-1).equals("+")) --first_to_remove;
+        }
+        // if element coming after multiplication sign is a subraction sign, negate second number 
+        if(list.get(modulo_sign_index+1).equals("-")) {
+            second_number = second_number.negate();
+            ++last_to_remove;
+        }
+
+        // removes all used elements: first number(and his sign if it is an division sign), minus sign and second number
+        for(int i = last_to_remove; i >= first_to_remove; i--) list.remove(i);
+
+        BigDecimal exactDivision = new BigDecimal((first_number.toBigInteger().divide(second_number.toBigInteger()).toString()));
+        BigDecimal result = first_number.subtract(second_number.multiply(exactDivision));
+
+        return list;
+    }
+
 }
