@@ -152,7 +152,8 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             open_parenthesis_index = list.indexOf("(");
 
             if(open_parenthesis_index > 0)
-                if(list.get(open_parenthesis_index-1).matches("[0-9]++")) // if element before the open parenthesis is a number
+                // if element before the open parenthesis is a natural number or decimal number
+                if(list.get(open_parenthesis_index-1).matches("[0-9]++|[0-9]++\\p{Punct}[0-9]++")) 
                     add_multiplication_sign = true;
 
             for(int i = open_parenthesis_index+1; i < list.size(); i++) {
