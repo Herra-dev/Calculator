@@ -171,8 +171,9 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             list_copy.addAll(list);
 
 
-        while(list_copy.contains("/") || list_copy.contains("*") || list_copy.contains("+") || list_copy.contains("-")) {
+        while(list_copy.contains("/") || list_copy.contains("*") || list_copy.contains("+") || list_copy.contains("-") || list_copy.contains("%")) {
             while(list_copy.contains("/")) list_copy = operatorDivide(list_copy);
+            while(list_copy.contains("%")) list_copy = operatorDivide(list_copy);
             while(list_copy.contains("*")) list_copy = operatorMultiply(list_copy);
             while(list_copy.contains("-")) list_copy = operatorMinus(list_copy);
             while(list_copy.contains("+")) list_copy = operatorPlus(list_copy);
@@ -200,6 +201,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * @see com.herra.back.AbstractDecimalCalculator#operatorMinus(List)
  * @see com.herra.back.AbstractDecimalCalculator#operatorMultiply(List)
  * @see com.herra.back.AbstractDecimalCalculator#operatorDivide(List)
+ * @see com.herra.back.AbstractDecimalCalculator#operatorModulo(List)
  * 
  * @return {@code List<String>}
  * 
@@ -285,6 +287,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * @see com.herra.back.AbstractDecimalCalculator#operatorPlus(List)
  * @see com.herra.back.AbstractDecimalCalculator#operatorMultiply(List)
  * @see com.herra.back.AbstractDecimalCalculator#operatorDivide(List)
+ * @see com.herra.back.AbstractDecimalCalculator#operatorModulo(List)
  * 
  * @return {@code List<String>}
  * 
@@ -366,6 +369,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * @see com.herra.back.AbstractDecimalCalculator#operatorPlus(List)
  * @see com.herra.back.AbstractDecimalCalculator#operatorMinus(List)
  * @see com.herra.back.AbstractDecimalCalculator#operatorDivide(List)
+ * @see com.herra.back.AbstractDecimalCalculator#operatorModulo(List)
  */
     @Override protected List<String> operatorMultiply(List<String> list) {
 
@@ -440,6 +444,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * @see com.herra.back.AbstractDecimalCalculator#operatorPlus(List)
  * @see com.herra.back.AbstractDecimalCalculator#operatorMinus(List)
  * @see com.herra.back.AbstractDecimalCalculator#operatorMultiply(List)
+ * @see com.herra.back.AbstractDecimalCalculator#operatorModulo(List)
  */
     @Override protected List<String> operatorDivide(List<String> list) {
 
@@ -500,6 +505,21 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
 //===================================================================
 
+/**
+ * <h3>operatorModulo</h3>
+ * 
+ * {@link com.herra.back.AbstractDecimalCalculator#operatorModulo(List)}<p>
+ * 
+ * This method find the modulo between two numbers.<p>
+ * first and second numbers are taken from the parameter {@code list} in the same way function {@link com.herra.back.AbstractDecimalCalculator#operatorPlus(List)} take them.
+ *
+ * @author Heriniaina {@link https://github.com/Herra-dev}
+ * 
+ * @see com.herra.back.AbstractDecimalCalculator#operatorPlus(List)
+ * @see com.herra.back.AbstractDecimalCalculator#operatorMinus(List)
+ * @see com.herra.back.AbstractDecimalCalculator#operatorMultiply(List)
+ * @see com.herra.back.AbstractDecimalCalculator#operatorDivide(List)
+ */
     @Override protected List<String> operatorModulo(List<String> list) {
 
         // if no authorization was not accorded(caused by user input syntax) returns a new empty LinkedList
@@ -540,6 +560,20 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
         BigDecimal exactDivision = new BigDecimal((first_number.toBigInteger().divide(second_number.toBigInteger()).toString()));
         BigDecimal result = first_number.subtract(second_number.multiply(exactDivision));
+
+        if(first_to_remove > 0) {
+            if(result.equals(result.abs())) {   // result is a positive number
+                list.add(first_to_remove, "+");
+                list.add(first_to_remove+1, result.abs().toString());
+            }
+            else {                              // result is a negative number
+                list.add(first_to_remove, "-");
+                list.add(first_to_remove+1, result.abs().toString());
+            }
+
+        } else {
+            list.add(first_to_remove, result.toString());
+        }
 
         return list;
     }
