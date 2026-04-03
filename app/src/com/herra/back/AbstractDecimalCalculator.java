@@ -142,6 +142,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
     //-------------------------------------------------------------------------------
         List<String> list_copy = new LinkedList<String>();
         String output = new String();
+        boolean add_multiplication_sign = false;
 
         if(list.contains("(")) {
             int open_parenthesis_index = 0;
@@ -151,7 +152,8 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             open_parenthesis_index = list.indexOf("(");
 
             if(open_parenthesis_index > 0)
-                if(list.get(open_parenthesis_index-1).matches("[0-9]"))
+                if(list.get(open_parenthesis_index-1).matches("[0-9]++")) // if element before the open parenthesis is a number
+                    add_multiplication_sign = true;
 
             for(int i = open_parenthesis_index+1; i < list.size(); i++) {
                 if(list.get(i).equals("(")) ++another_one_open;
@@ -165,13 +167,20 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             for(int i = closed_parenthesis_index; i >= open_parenthesis_index; i--) list.remove(i);
         }
 
+
+
+
+
+
+
+
+
     //-------------------------------------------------------------------------------
 
         if(list_copy.isEmpty())
             list_copy.addAll(list);
 
-
-        while(list_copy.contains("/") || list_copy.contains("*") || list_copy.contains("+") || list_copy.contains("-") || list_copy.contains("%")) {
+        while(list_copy.contains("/") || list_copy.contains("%") || list_copy.contains("*") || list_copy.contains("+") || list_copy.contains("-")) {
             while(list_copy.contains("/")) list_copy = operatorDivide(list_copy);
             while(list_copy.contains("%")) list_copy = operatorDivide(list_copy);
             while(list_copy.contains("*")) list_copy = operatorMultiply(list_copy);

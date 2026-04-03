@@ -6,6 +6,10 @@ public class App {
         // @SuppressWarnings("unused")
         // DecimalCalculator dc = new DecimalCalculator("-10/-5*2");
 
-        System.out.println("10%-3 = " + (100*10%3));
+        String str = new String(".");
+        if(str.matches("\\p{Punct}"))
+            System.out.println("same");
+        else
+            System.out.println("Different");
     }
 }
