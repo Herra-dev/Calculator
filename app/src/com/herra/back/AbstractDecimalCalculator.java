@@ -299,11 +299,11 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             list.add(first_to_remove, result.toString());
         }
 
-        // System.out.println("add");
+        System.out.println("add");
 
-        // for(String str: list)
-        //     System.out.println(str);
-        // System.out.println();
+        for(String str: list)
+            System.out.print(str);
+        System.out.println();
 
         return list;
     }
@@ -381,11 +381,11 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             list.add(first_to_remove, result.toString());
         }
 
-        // System.out.println("substract");
+        System.out.println("substract");
 
-        // for(String str: list)
-        //     System.out.println(str);
-        // System.out.println();
+        for(String str: list)
+            System.out.print(str);
+        System.out.println();
 
         return list;
     }
@@ -462,11 +462,11 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             list.add(first_to_remove, result.toString());
         }
 
-        // System.out.println("Multiply");
+        System.out.println("Multiply");
 
-        // for(String str: list)
-        //     System.out.println(str);
-        // System.out.println();
+        for(String str: list)
+            System.out.print(str);
+        System.out.println();
 
         return list;
     }
@@ -530,8 +530,14 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
         if(first_to_remove > 0) {
             if(result.equals(result.abs())) {   // result is a positive number
-                list.add(first_to_remove, "+");
-                list.add(first_to_remove+1, result.abs().toString());
+                if(list.get(first_to_remove-1).equals("*") || list.get(first_to_remove-1).equals("/")) {
+                    list.add(first_to_remove, result.abs().toString());
+                    System.out.println("not a number");
+                } else {
+                    list.add(first_to_remove, result.abs().toString());
+                    list.add(first_to_remove, "+");
+                    System.out.println("a number");
+                }
             }
             else {                              // result is a negative number
                 list.add(first_to_remove, "-");
@@ -542,11 +548,11 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             list.add(first_to_remove, result.toString());
         }
 
-        // System.out.println("Divide");
+        System.out.println("Divide");
 
-        // for(String str: list)
-        //     System.out.println(str);
-        // System.out.println();
+        for(String str: list)
+            System.out.print(str);
+        System.out.println();
 
         return list;
     }
