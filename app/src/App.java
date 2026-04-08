@@ -1,9 +1,9 @@
-import com.herra.back.DecimalCalculator;
+import com.herra.ui.Calculator;
 
 
 public class App {
     public static void main(String[] args) {
-        @SuppressWarnings("unused")
-        DecimalCalculator dc = new DecimalCalculator("6*5/4");
+        Calculator calc = new Calculator();
+        calc.setVisible(true);
     }
 }
