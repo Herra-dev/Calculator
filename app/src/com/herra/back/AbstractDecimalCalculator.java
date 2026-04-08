@@ -462,6 +462,8 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             list.add(first_to_remove, result.toString());
         }
 
+        System.out.println("first to remove = " + first_to_remove);
+
         System.out.println("Multiply");
 
         for(String str: list)
