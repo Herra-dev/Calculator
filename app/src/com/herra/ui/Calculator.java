@@ -1,6 +1,5 @@
 package com.herra.ui;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -27,28 +26,29 @@ public class Calculator extends JFrame implements KeyListener {
         this.setTitle("Calculator");
         this.setSize(500, 500);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setLayout(new BorderLayout());
+        this.setLayout(new GridLayout());
 
-        this.getContentPane().add(new InputDisplayer(), BorderLayout.NORTH);
-        this.getContentPane().add(new InputDisplayer(), BorderLayout.WEST);
-        this.getContentPane().add(new OutputDisplayer(), BorderLayout.SOUTH);
+        this.addToPanel(NumberPanel, key_list_number);
+        this.addToPanel(OperatorPanel, key_list_operator);
 
-        JButton button0 = new JButton("B");
-        JButton button1 = new JButton("V");
-        
-        button0 = this.addActionListener(button0);
-        button0.setFocusable(false);
-        button1 = this.addActionListener(button1); 
-        button1.setFocusable(false);
+        this.getContentPane().add(NumberPanel, BorderLayout.NORTH);
+        this.getContentPane().add(OperatorPanel, BorderLayout.WEST);
 
         this.addKeyListener(this);
               
-        this.getContentPane().add(button0, BorderLayout.CENTER);
-        this.getContentPane().add(button1, BorderLayout.EAST);
-
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.setVisible(true);
+    }
+
+//==================================================================================
+
+    public void addToPanel(JPanel panel, LinkedList<String> to_add) {
+        for(String str: to_add) {
+            JButton bt = new JButton(str);
+            bt.setFocusable(false);
+            panel.add(bt);
+        }
     }
 
 //==================================================================================
