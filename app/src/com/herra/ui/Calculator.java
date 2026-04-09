@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Calculator extends JFrame {
+public class Calculator extends JFrame implements KeyListener{
     public Calculator() {
         this.setLocationRelativeTo(null);
         this.setTitle("Calculator");
@@ -27,27 +27,26 @@ public class Calculator extends JFrame {
         button0 = this.addActionListener(button0);
         button1 = this.addActionListener(button1); 
 
-        button1.addKeyListener(new KeyListener() {
-            @Override public void keyPressed(KeyEvent event) {
-                System.out.println("key pressed");
-            }
-
-            //--------------------------------------------------------------------------
-
-            @Override public void keyTyped(KeyEvent event) {
-                System.out.println("key typed");
-            }
-
-            //--------------------------------------------------------------------------
-
-            @Override public void keyReleased(KeyEvent event) {
-                
-            }
-        });
-        
-        
+        this.addKeyListener(this);
+              
         this.getContentPane().add(button0, BorderLayout.CENTER);
         this.getContentPane().add(button1, BorderLayout.EAST);
+    }
+
+    @Override public void keyPressed(KeyEvent event) {
+        System.out.println("key pressed");
+    }
+
+    //--------------------------------------------------------------------------
+
+    @Override public void keyTyped(KeyEvent event) {
+        System.out.println("key typed");
+    }
+
+    //--------------------------------------------------------------------------
+
+    @Override public void keyReleased(KeyEvent event) {
+        
     }
 
 //==================================================================================
