@@ -33,17 +33,19 @@ public class Calculator extends JFrame implements KeyListener{
         this.getContentPane().add(button1, BorderLayout.EAST);
     }
 
+//==================================================================================
+
     @Override public void keyPressed(KeyEvent event) {
         System.out.println("key pressed");
     }
 
-    //--------------------------------------------------------------------------
+//==================================================================================
 
     @Override public void keyTyped(KeyEvent event) {
         System.out.println("key typed");
     }
 
-    //--------------------------------------------------------------------------
+//==================================================================================
 
     @Override public void keyReleased(KeyEvent event) {
         
