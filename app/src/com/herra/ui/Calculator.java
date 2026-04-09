@@ -9,8 +9,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import java.util.LinkedList;
-
 public class Calculator extends JFrame {
     public Calculator() {
         this.setLocationRelativeTo(null);
@@ -25,8 +23,8 @@ public class Calculator extends JFrame {
 
         JButton button0 = new JButton("B");
         JButton button1 = new JButton("V");
-        LinkedList<String> ls = new LinkedList<String>();
-        this.addKeyListener(ls);
+        
+        this.addKeyListener(new MyKeyListener());
         
         button0 = this.addActionListener(button0);
         button1 = this.addActionListener(button1); 
@@ -49,24 +47,22 @@ public class Calculator extends JFrame {
 
 //==================================================================================
 
-    public void addKeyListener(LinkedList<String> button_name_list) {
-        this.addKeyListener(new KeyListener() {
-            @Override public void keyPressed(KeyEvent event) {
-                System.out.println("key pressed");
-            }
+    class MyKeyListener implements KeyListener {
+        @Override public void keyPressed(KeyEvent event) {
+            System.out.println("key pressed");
+        }
 
-        //--------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
-            @Override public void keyTyped(KeyEvent event) {
-                System.out.println("key typed");
-            }
+        @Override public void keyTyped(KeyEvent event) {
+            System.out.println("key typed");
+        }
 
-        //--------------------------------------------------------------------------
+    //--------------------------------------------------------------------------
 
-            @Override public void keyReleased(KeyEvent event) {
-                
-            }
-        });
+        @Override public void keyReleased(KeyEvent event) {
+            
+        }
     }
 
 //==================================================================================    
