@@ -17,7 +17,7 @@ public class Calculator extends JFrame implements KeyListener {
     protected LinkedList<String> key_list_number = this.setKeyNumber();
     protected LinkedList<String> key_list_operator = this.setKeyOperator();
     protected JPanel DisplayerPanel = new JPanel(new GridLayout(2, 1)); // two lines and one column
-    protected JPanel NumberPanel = new JPanel(new GridLayout(4, 3)); // four lines and three columns
+    protected JPanel NumberPanel = new JPanel(new GridLayout(key_list_number.size()/3, 3)); // four lines and three columns
     protected JPanel OperatorPanel = new JPanel(new GridLayout(key_list_operator.size(), 1));
 
 //==================================================================================
