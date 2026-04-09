@@ -8,6 +8,7 @@ public class OutputDisplayer extends JLabel implements Observer{
 
     public OutputDisplayer() {
         this.setHorizontalAlignment(RIGHT);
+        this.setText("OUTPUT");
     }
 
 //==========================================================================================

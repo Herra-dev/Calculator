@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.JLabel;
+import javax.swing.border.LineBorder;
 
 import com.interfaces.sh.Observable;
 import com.interfaces.sh.Observer;
@@ -14,6 +15,10 @@ public class InputDisplayer extends JLabel implements Observable{
 
     public InputDisplayer() {
         this.setHorizontalAlignment(RIGHT);
+        this.setHorizontalAlignment(CENTER);
+        this.setVerticalAlignment(CENTER);
+        this.setText("INPUT");
+        this.setBorder(LineBorder.createBlackLineBorder());
     }
 
 //==========================================================================================
