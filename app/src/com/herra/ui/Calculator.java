@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-public class Calculator extends JFrame{
+public class Calculator extends JFrame implements KeyListener{
     public Calculator() {
         this.setLocationRelativeTo(null);
         this.setTitle("Calculator");
@@ -21,27 +21,11 @@ public class Calculator extends JFrame{
         this.getContentPane().add(new InputDisplayer(), BorderLayout.WEST);
         this.getContentPane().add(new OutputDisplayer(), BorderLayout.SOUTH);
 
-        JButton button0 = new JButton("JButton 0");
-        JButton button1 = new JButton("JButton 1");
-        button0 = this.addActionListener(button0);
-        button1 = this.addActionListener(button1);
+        JButton button0 = new JButton("B");
+        JButton button1 = new JButton("V");
         
-        button0.addKeyListener(new KeyListener() {
-            public void keyPressed(KeyEvent event) {
-                if(KeyEvent.getKeyText(event.getKeyCode()) == "F3"){
-                    System.out.println("You pressed F3");
-                    System.out.println("You pressed " + KeyEvent.getKeyText(event.getKeyCode()));
-                }else {
-                    System.out.println("You pressed another key than F3");
-                }
-            }
-            public void keyTyped(KeyEvent event) {
-
-            }
-            public void keyReleased(KeyEvent event) {
-                
-            }
-        });
+        button0 = this.addActionListener(button0);
+        button1 = this.addActionListener(button1); 
 
         this.getContentPane().add(button0, BorderLayout.CENTER);
         this.getContentPane().add(button1, BorderLayout.EAST);
@@ -49,11 +33,32 @@ public class Calculator extends JFrame{
 
     public JButton addActionListener(JButton button) {
         button.addActionListener(new ActionListener() {
-    public void actionPerformed(ActionEvent event) {
-        System.out.println("you pressed the button : " + button.getText() + ", via addActionListener button");
-    }
+            public void actionPerformed(ActionEvent event) {
+                System.out.println("you pressed the button : " + button.getText() + ", via addActionListener button");
+            }
         });
 
         return button;
     }
+
+//==================================================================================
+
+    @Override public void keyPressed(KeyEvent event) {
+
+    }
+
+//==================================================================================
+
+    @Override public void keyTyped(KeyEvent event) {
+        
+    }
+
+//==================================================================================
+
+    @Override public void keyReleased(KeyEvent event) {
+        
+    }
+
+//==================================================================================    
+
 }
