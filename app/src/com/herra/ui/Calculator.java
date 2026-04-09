@@ -24,11 +24,28 @@ public class Calculator extends JFrame {
         JButton button0 = new JButton("B");
         JButton button1 = new JButton("V");
         
-        this.addKeyListener(new MyKeyListener());
-        
         button0 = this.addActionListener(button0);
         button1 = this.addActionListener(button1); 
 
+        button1.addKeyListener(new KeyListener() {
+            @Override public void keyPressed(KeyEvent event) {
+                System.out.println("key pressed");
+            }
+
+            //--------------------------------------------------------------------------
+
+            @Override public void keyTyped(KeyEvent event) {
+                System.out.println("key typed");
+            }
+
+            //--------------------------------------------------------------------------
+
+            @Override public void keyReleased(KeyEvent event) {
+                
+            }
+        });
+        
+        
         this.getContentPane().add(button0, BorderLayout.CENTER);
         this.getContentPane().add(button1, BorderLayout.EAST);
     }
@@ -43,26 +60,6 @@ public class Calculator extends JFrame {
         });
 
         return button;
-    }
-
-//==================================================================================
-
-    class MyKeyListener implements KeyListener {
-        @Override public void keyPressed(KeyEvent event) {
-            System.out.println("key pressed");
-        }
-
-    //--------------------------------------------------------------------------
-
-        @Override public void keyTyped(KeyEvent event) {
-            System.out.println("key typed");
-        }
-
-    //--------------------------------------------------------------------------
-
-        @Override public void keyReleased(KeyEvent event) {
-            
-        }
     }
 
 //==================================================================================    
