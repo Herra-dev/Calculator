@@ -31,6 +31,7 @@ public class Calculator extends JFrame implements KeyListener{
               
         this.getContentPane().add(button0, BorderLayout.CENTER);
         this.getContentPane().add(button1, BorderLayout.EAST);
+        this.setVisible(true);
     }
 
 //==================================================================================
