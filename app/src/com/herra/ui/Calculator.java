@@ -1,9 +1,12 @@
 package com.herra.ui;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -11,8 +14,11 @@ import java.awt.event.KeyListener;
 import java.util.LinkedList;
 
 public class Calculator extends JFrame implements KeyListener {
-    protected LinkedList<String> key_list_number = new LinkedList<String>();
-    protected LinkedList<String> key_list_operator = new LinkedList<String>();
+    protected LinkedList<String> key_list_number = this.setKeyNumber();
+    protected LinkedList<String> key_list_operator = this.setKeyOperator();
+    protected JPanel DisplayerPanel = new JPanel(new GridLayout(2, 1)); // two lines and one column
+    protected JPanel NumberPanel = new JPanel(new GridLayout(4, 3)); // four lines and three columns
+    protected JPanel OperatorPanel = new JPanel(new GridLayout(5, 1));
 
 //==================================================================================
 
@@ -40,9 +46,6 @@ public class Calculator extends JFrame implements KeyListener {
         this.getContentPane().add(button0, BorderLayout.CENTER);
         this.getContentPane().add(button1, BorderLayout.EAST);
 
-        this.setKeyNumber();
-        this.setKeyOperator();
-
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.setVisible(true);
@@ -50,30 +53,37 @@ public class Calculator extends JFrame implements KeyListener {
 
 //==================================================================================
 
-    public void setKeyNumber() {
-        this.key_list_number.add("7");
-        this.key_list_number.add("8");
-        this.key_list_number.add("9");
-        this.key_list_number.add("4");
-        this.key_list_number.add("5");
-        this.key_list_number.add("6");
-        this.key_list_number.add("1");
-        this.key_list_number.add("2");
-        this.key_list_number.add("3");
-        this.key_list_number.add("0");
-        this.key_list_number.add(".");
-        this.key_list_number.add("%");
+    public LinkedList<String> setKeyNumber() {
+        LinkedList<String> key = new LinkedList<String>();
+
+        key.add("7");
+        key.add("8");
+        key.add("9");
+        key.add("4");
+        key.add("5");
+        key.add("6");
+        key.add("1");
+        key.add("2");
+        key.add("3");
+        key.add("0");
+        key.add(".");
+        key.add("%");
+
+        return key;
     }
 
 //==================================================================================
 
-    public void setKeyOperator() {
-        this.key_list_operator.add("+");
-        this.key_list_operator.add("-");
-        this.key_list_operator.add("*");
-        this.key_list_operator.add("/");
-        this.key_list_operator.add("(");
-        this.key_list_operator.add(")");
+    public LinkedList<String> setKeyOperator() {
+        LinkedList<String> key = new LinkedList<String>();
+        key.add("+");
+        key.add("-");
+        key.add("*");
+        key.add("/");
+        key.add("(");
+        key.add(")");
+
+        return key;
     }
 
 //==================================================================================
