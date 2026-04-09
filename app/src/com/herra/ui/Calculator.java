@@ -31,6 +31,8 @@ public class Calculator extends JFrame implements KeyListener{
         this.getContentPane().add(button1, BorderLayout.EAST);
     }
 
+//==================================================================================
+
     public JButton addActionListener(JButton button) {
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent event) {
@@ -44,13 +46,13 @@ public class Calculator extends JFrame implements KeyListener{
 //==================================================================================
 
     @Override public void keyPressed(KeyEvent event) {
-
+        System.out.println("key tuped");
     }
 
 //==================================================================================
 
     @Override public void keyTyped(KeyEvent event) {
-        
+        System.out.println("key typed");
     }
 
 //==================================================================================
