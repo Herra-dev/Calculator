@@ -82,6 +82,8 @@ public class Calculator extends JFrame implements KeyListener {
         return this.key_list_number;
     }
 
+//==================================================================================
+
     public LinkedList<String> getKeyOperator() {
         return this.key_list_operator;
     }
