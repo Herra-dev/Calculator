@@ -48,6 +48,9 @@ public class Calculator extends JFrame {
 //==================================================================================
 
     class MyKeyListener implements KeyListener {
+        public MyKeyListener() {
+            System.out.println("my key listener");
+        }
         @Override public void keyPressed(KeyEvent event) {
             System.out.println("key pressed");
         }
