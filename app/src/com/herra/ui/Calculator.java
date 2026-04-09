@@ -8,8 +8,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.LinkedList;
 
-public class Calculator extends JFrame implements KeyListener{
+public class Calculator extends JFrame implements KeyListener {
+    protected LinkedList<String> key_list_number = new LinkedList<String>();
+    protected LinkedList<String> key_list_operator = new LinkedList<String>();
+
+//==================================================================================
+
     public Calculator() {
         this.setLocationRelativeTo(null);
         this.setTitle("Calculator");
@@ -34,9 +40,50 @@ public class Calculator extends JFrame implements KeyListener{
         this.getContentPane().add(button0, BorderLayout.CENTER);
         this.getContentPane().add(button1, BorderLayout.EAST);
 
+        this.setKeyNumber();
+        this.setKeyOperator();
+
         this.setFocusable(true);
         this.requestFocusInWindow();
         this.setVisible(true);
+    }
+
+//==================================================================================
+
+    public void setKeyNumber() {
+        this.key_list_number.add("7");
+        this.key_list_number.add("8");
+        this.key_list_number.add("9");
+        this.key_list_number.add("4");
+        this.key_list_number.add("5");
+        this.key_list_number.add("6");
+        this.key_list_number.add("1");
+        this.key_list_number.add("2");
+        this.key_list_number.add("3");
+        this.key_list_number.add("0");
+        this.key_list_number.add(".");
+        this.key_list_number.add("%");
+    }
+
+//==================================================================================
+
+    public void setKeyOperator() {
+        this.key_list_operator.add("+");
+        this.key_list_operator.add("-");
+        this.key_list_operator.add("*");
+        this.key_list_operator.add("/");
+        this.key_list_operator.add("(");
+        this.key_list_operator.add(")");
+    }
+
+//==================================================================================
+
+    public LinkedList<String> getKeyNumber() {
+        return this.key_list_number;
+    }
+
+    public LinkedList<String> getKeyOperator() {
+        return this.key_list_operator;
     }
 
 //==================================================================================
