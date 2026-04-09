@@ -25,32 +25,33 @@ public class Calculator extends JFrame implements KeyListener{
         JButton button1 = new JButton("V");
         
         button0 = this.addActionListener(button0);
+        button0.setFocusable(false);
         button1 = this.addActionListener(button1); 
+        button1.setFocusable(false);
 
         this.addKeyListener(this);
               
         this.getContentPane().add(button0, BorderLayout.CENTER);
         this.getContentPane().add(button1, BorderLayout.EAST);
+
+        this.setFocusable(true);
+        this.requestFocusInWindow();
         this.setVisible(true);
     }
 
 //==================================================================================
 
     @Override public void keyPressed(KeyEvent event) {
-        System.out.println("key pressed");
+        System.out.println("key pressed : " + KeyEvent.getKeyText(event.getKeyCode()));
     }
 
 //==================================================================================
 
-    @Override public void keyTyped(KeyEvent event) {
-        System.out.println("key typed");
-    }
+    @Override public void keyTyped(KeyEvent event) { }
 
 //==================================================================================
 
-    @Override public void keyReleased(KeyEvent event) {
-        
-    }
+    @Override public void keyReleased(KeyEvent event) { }
 
 //==================================================================================
 
