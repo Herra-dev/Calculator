@@ -39,7 +39,7 @@ public class Calculator extends JFrame implements KeyListener {
     public void setCalculatorProperty() {
         this.setLocationRelativeTo(null);
         this.setTitle("Calculator");
-        this.setSize(500, 500);
+        this.setSize(400, 400);
         this.setMinimumSize(new Dimension(400, 400));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
@@ -62,7 +62,7 @@ public class Calculator extends JFrame implements KeyListener {
             if(str.matches("[0-9]") || str.equals("."))
                 button.setBackground(Color.CYAN);
             
-            button.setFont(new Font("Arial", 1, 50));
+            button.setFont(new Font("Z003", 1, 50));
 
             panel.add(button);
         }
