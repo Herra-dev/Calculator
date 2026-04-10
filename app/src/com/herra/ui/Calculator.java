@@ -25,7 +25,7 @@ public class Calculator extends JFrame implements KeyListener, Observable{
     protected LinkedList<String> key_list_number = this.setKeyNumber();
     protected JPanel displayer_panel = new JPanel(new GridLayout(2, 1)); // two lines and one column
     protected JPanel number_panel = new JPanel(new GridLayout(5, 4)); // four lines and three columns
-    protected static String user_input = new String(""); // String to stock user input
+    protected static String user_input = new String("heriniaina"); // String to stock user input
 
 //==================================================================================
 
@@ -91,11 +91,18 @@ public class Calculator extends JFrame implements KeyListener, Observable{
                     if(button.getText().matches("Del")) {
                         String temp_string = new String();
                         String temp_user_input = Calculator.getUserInput();
-                        for(int i = 0; i < temp_string.length()-1; i++) {
+                        for(int i = 0; i < temp_user_input.length()-1; i++) {
                             temp_string += temp_user_input.charAt(i);
                         }
+                        System.out.println("before : " + Calculator.getUserInput());
+                        Calculator.setUserInput(temp_string);
+                        System.out.println("after : " + Calculator.getUserInput());
                     }
-                    System.out.println("Button : " + button.getText() + " clicked");
+                    else if(button.getText().matches("Clear")) {
+                        System.out.println("before : " + Calculator.getUserInput());
+                        Calculator.setUserInput(new String());
+                        System.out.println("after : " + Calculator.getUserInput());
+                    }
                 }
             });
             if(str.matches("[0-9]") || str.equals(".")) {
