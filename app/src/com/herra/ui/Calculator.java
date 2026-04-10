@@ -38,7 +38,7 @@ public class Calculator extends JFrame implements KeyListener, Observable{
         this.getContentPane().add(number_panel, BorderLayout.CENTER);
         this.getContentPane().add(displayer_panel, BorderLayout.NORTH);
 
-        this.addKeyListener(this);
+        this.addKeyListener(this);       
     }
 
 //==================================================================================
@@ -60,7 +60,7 @@ public class Calculator extends JFrame implements KeyListener, Observable{
     public void addDisplayerToPanel(JPanel panel, LinkedList<JLabel> to_add) {
         if(!(panel.getLayout().getClass().equals(new GridLayout().getClass()))) return; // only for panel having GridLayout as Layout
 
-        for(JLabel lab: to_add) lab.setSize(100, 100);
+        for(JLabel lab: to_add) panel.add(lab);
     }
 
 //==================================================================================
