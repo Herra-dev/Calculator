@@ -50,19 +50,19 @@ public class Calculator extends JFrame implements KeyListener {
 
     public void addButtonToPanel(JPanel panel, LinkedList<String> to_add) {
         for(String str: to_add) {
-            JButton bt = new JButton(str);
-            bt.setFocusable(false);
-            bt.addActionListener(new ActionListener() {
+            JButton button = new JButton(str);
+            button.setFocusable(false);
+            button.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent event) {
-                    System.out.println("Button : " + bt.getText() + " clicked");
+                    System.out.println("Button : " + button.getText() + " clicked");
                 }
             });
             if(str.matches("[0-9]") || str.equals("."))
-                bt.setBackground(Color.CYAN);
+                button.setBackground(Color.CYAN);
             
-            bt.setFont(new Font("Arial", 1, 50));
+            button.setFont(new Font("Arial", 1, 50));
 
-            panel.add(bt);
+            panel.add(button);
         }
     }
 
