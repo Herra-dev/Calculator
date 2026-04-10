@@ -24,8 +24,8 @@ public class Calculator extends JFrame implements KeyListener, Observable{
     protected LinkedList<JLabel> displayer_list = this.setDisplayer(); 
     protected LinkedList<String> key_list_number = this.setKeyNumber();
     protected JPanel displayer_panel = new JPanel(new GridLayout(2, 1)); // two lines and one column
-    protected JPanel number_panel = new JPanel(new GridLayout(4, 4)); // four lines and three columns
-    protected String user_input = new String("");
+    protected JPanel number_panel = new JPanel(new GridLayout(5, 4)); // four lines and three columns
+    protected String user_input = new String(""); // String to stock user input
 
 //==================================================================================
 
@@ -80,6 +80,8 @@ public class Calculator extends JFrame implements KeyListener, Observable{
                 button.setBackground(Color.CYAN);
             
             button.setFont(new Font("Z003", 1, 50));
+            if(button.getText().matches("Del|Clear"))
+                button.setFont(new Font("Arial", 1, 20));
 
             panel.add(button);
         }
@@ -92,6 +94,9 @@ public class Calculator extends JFrame implements KeyListener, Observable{
         LinkedList<String> key = new LinkedList<String>();
 
         for(int i = 0; i < key_number.length(); i++) key.add(key_number.charAt(i)+"");
+
+        key.add("Del");
+        key.add("Clear");
 
         return key;
     }
