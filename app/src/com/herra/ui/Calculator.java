@@ -24,14 +24,11 @@ public class Calculator extends JFrame implements KeyListener {
 
     public Calculator() {
         this.setCalculatorProperty(); // set properties for the Calculator Window
-        
 
         this.addButtonToPanel(NumberPanel, key_list_number);
         this.getContentPane().add(NumberPanel, BorderLayout.CENTER);
 
-        this.addKeyListener(this);
-              
-        
+        this.addKeyListener(this);       
     }
 
 //==================================================================================
