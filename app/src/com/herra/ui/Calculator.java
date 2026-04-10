@@ -40,7 +40,7 @@ public class Calculator extends JFrame implements KeyListener {
         this.setLocationRelativeTo(null);
         this.setTitle("Calculator");
         this.setSize(500, 500);
-        this.setMinimumSize(new Dimension(200, 200));
+        this.setMinimumSize(new Dimension(400, 400));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setLayout(new BorderLayout());
         this.setFocusable(true);
