@@ -25,7 +25,7 @@ public class Calculator extends JFrame implements KeyListener, Observable{
     protected LinkedList<String> key_list_number = this.setKeyNumber();
     protected JPanel displayer_panel = new JPanel(new GridLayout(2, 1)); // two lines and one column
     protected JPanel number_panel = new JPanel(new GridLayout(5, 4)); // four lines and three columns
-    protected String user_input = new String(""); // String to stock user input
+    protected static String user_input = new String(""); // String to stock user input
 
 //==================================================================================
 
@@ -39,6 +39,18 @@ public class Calculator extends JFrame implements KeyListener, Observable{
         this.getContentPane().add(displayer_panel, BorderLayout.NORTH);
 
         this.addKeyListener(this);       
+    }
+
+//==================================================================================
+
+    public static String getUserInput() {
+        return user_input;
+    }
+
+//==================================================================================
+
+    public static void setUserInput(String new_user_input) {
+        user_input = new_user_input;
     }
 
 //==================================================================================
@@ -78,8 +90,9 @@ public class Calculator extends JFrame implements KeyListener, Observable{
                 public void actionPerformed(ActionEvent event) {
                     if(button.getText().matches("Del")) {
                         String temp_string = new String();
-                        for(int i = 0; i < temp_string.length(); i++) {
-                            
+                        String temp_user_input = Calculator.getUserInput();
+                        for(int i = 0; i < temp_string.length()-1; i++) {
+                            temp_string += temp_user_input.charAt(i);
                         }
                     }
                     System.out.println("Button : " + button.getText() + " clicked");
