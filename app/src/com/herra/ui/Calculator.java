@@ -88,15 +88,14 @@ public class Calculator extends JFrame implements KeyListener, Observable{
             button.setFocusable(false);
             button.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent event) {
-                    if(button.getText().matches("Del")) {
+                    if(button.getText().matches("Del")) { // if user click in Del button
                         String temp_string = new String();
                         String temp_user_input = Calculator.getUserInput();
                         
                         for(int i = 0; i < temp_user_input.length()-1; i++) temp_string += temp_user_input.charAt(i);
 
                         Calculator.setUserInput(temp_string);
-                    }
-                    else if(button.getText().matches("Clear"))
+                    } else if(button.getText().matches("Clear")) // if user click in Clear button
                         Calculator.setUserInput(new String());
                     else {
                         String temp_string = Calculator.getUserInput();
