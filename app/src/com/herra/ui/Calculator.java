@@ -23,19 +23,20 @@ import java.util.LinkedList;
 public class Calculator extends JFrame implements KeyListener, Observable{
     protected LinkedList<JLabel> displayer_list = this.setDisplayer(); 
     protected LinkedList<String> key_list_number = this.setKeyNumber();
-    protected JPanel DisplayerPanel = new JPanel(new GridLayout(2, 1)); // two lines and one column
-    protected JPanel NumberPanel = new JPanel(new GridLayout(4, 4)); // four lines and three columns
+    protected JPanel displayer_panel = new JPanel(new GridLayout(2, 1)); // two lines and one column
+    protected JPanel number_panel = new JPanel(new GridLayout(4, 4)); // four lines and three columns
+    protected String user_input = new String("");
 
 //==================================================================================
 
     public Calculator() {
         this.setCalculatorProperty(); // set properties for the Calculator Window
 
-        this.addButtonToPanel(NumberPanel, key_list_number);
-        this.addDisplayerToPanel(DisplayerPanel, displayer_list);
+        this.addButtonToPanel(number_panel, key_list_number);
+        this.addDisplayerToPanel(displayer_panel, displayer_list);
 
-        this.getContentPane().add(NumberPanel, BorderLayout.CENTER);
-        this.getContentPane().add(DisplayerPanel, BorderLayout.NORTH);
+        this.getContentPane().add(number_panel, BorderLayout.CENTER);
+        this.getContentPane().add(displayer_panel, BorderLayout.NORTH);
 
         this.addKeyListener(this);       
     }
