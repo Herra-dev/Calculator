@@ -1,5 +1,6 @@
 package com.herra.ui;
 
+import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class InputDisplayer extends JLabel implements Observable, Observer{
         this.setHorizontalAlignment(CENTER);
         this.setVerticalAlignment(CENTER);
         this.setText("INPUT");
+        this.setBackground(Color.GREEN);
         
         this.setBorder(LineBorder.createBlackLineBorder());
     }
