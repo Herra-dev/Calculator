@@ -102,9 +102,7 @@ public class Calculator extends JFrame implements KeyListener, Observable{
                         String temp_string = Calculator.getUserInput();
                         temp_string += button.getText();
                         Calculator.setUserInput(temp_string);
-                        System.out.println(Calculator.getUserInput());
-                    }
-                        
+                    }                        
                 }
             });
             if(str.matches("[0-9]") || str.equals(".")) {
