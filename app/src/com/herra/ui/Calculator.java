@@ -91,18 +91,20 @@ public class Calculator extends JFrame implements KeyListener, Observable{
                     if(button.getText().matches("Del")) {
                         String temp_string = new String();
                         String temp_user_input = Calculator.getUserInput();
-                        for(int i = 0; i < temp_user_input.length()-1; i++) {
-                            temp_string += temp_user_input.charAt(i);
-                        }
-                        System.out.println("before : " + Calculator.getUserInput());
+                        
+                        for(int i = 0; i < temp_user_input.length()-1; i++) temp_string += temp_user_input.charAt(i);
+
                         Calculator.setUserInput(temp_string);
-                        System.out.println("after : " + Calculator.getUserInput());
                     }
-                    else if(button.getText().matches("Clear")) {
-                        System.out.println("before : " + Calculator.getUserInput());
+                    else if(button.getText().matches("Clear"))
                         Calculator.setUserInput(new String());
-                        System.out.println("after : " + Calculator.getUserInput());
+                    else {
+                        String temp_string = Calculator.getUserInput();
+                        temp_string += button.getText();
+                        Calculator.setUserInput(temp_string);
+                        System.out.println(Calculator.getUserInput());
                     }
+                        
                 }
             });
             if(str.matches("[0-9]") || str.equals(".")) {
