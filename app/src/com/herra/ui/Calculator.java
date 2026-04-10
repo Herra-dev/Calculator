@@ -5,6 +5,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.interfaces.sh.Observable;
+import com.interfaces.sh.Observer;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -17,7 +20,7 @@ import java.awt.event.KeyListener;
 
 import java.util.LinkedList;
 
-public class Calculator extends JFrame implements KeyListener {
+public class Calculator extends JFrame implements KeyListener, Observable{
     protected LinkedList<JLabel> displayer_list = this.setDisplayer(); 
     protected LinkedList<String> key_list_number = this.setKeyNumber();
     protected JPanel DisplayerPanel = new JPanel(new GridLayout(2, 1)); // two lines and one column
@@ -29,7 +32,10 @@ public class Calculator extends JFrame implements KeyListener {
         this.setCalculatorProperty(); // set properties for the Calculator Window
 
         this.addButtonToPanel(NumberPanel, key_list_number);
+        this.addDisplayerToPanel(DisplayerPanel, displayer_list);
+
         this.getContentPane().add(NumberPanel, BorderLayout.CENTER);
+        this.getContentPane().add(DisplayerPanel, BorderLayout.NORTH);
 
         this.addKeyListener(this);       
     }
@@ -115,5 +121,15 @@ public class Calculator extends JFrame implements KeyListener {
     @Override public void keyReleased(KeyEvent event) { }
 
 //==================================================================================
+
+    public boolean _addObserver(Observer _observer) {
+        return true;
+    }
+
+//==================================================================================
+
+    public boolean _updateObserver() {
+        return true;
+    }
 
 }
