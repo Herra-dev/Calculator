@@ -3,6 +3,7 @@ package com.herra.ui;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -35,6 +36,9 @@ public class Calculator extends JFrame implements KeyListener {
 
         this.getContentPane().add(NumberPanel, BorderLayout.WEST);
         this.getContentPane().add(OperatorPanel, BorderLayout.EAST);
+
+        JTextField field = new JTextField("text here");
+        this.getContentPane().add(field, BorderLayout.CENTER);
 
         this.addKeyListener(this);
               
