@@ -38,7 +38,7 @@ public class Calculator extends JFrame implements KeyListener, Observable{
         this.getContentPane().add(number_panel, BorderLayout.CENTER);
         this.getContentPane().add(displayer_panel, BorderLayout.NORTH);
 
-        this.addKeyListener(this);       
+        this.addKeyListener(this);
     }
 
 //==================================================================================
