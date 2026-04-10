@@ -19,7 +19,7 @@ public class InputDisplayer extends JLabel implements Observable, Observer{
         this.setHorizontalAlignment(RIGHT);
         this.setText("INPUT");
         this.setForeground(Color.GREEN);
-        this.setMinimumSize(new Dimension(100, 50));
+        this.setSize(new Dimension(100, 50));
         
         this.setBorder(LineBorder.createBlackLineBorder());
     }
