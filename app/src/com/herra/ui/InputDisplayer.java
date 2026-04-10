@@ -9,7 +9,7 @@ import javax.swing.border.LineBorder;
 import com.interfaces.sh.Observable;
 import com.interfaces.sh.Observer;
 
-public class InputDisplayer extends JLabel implements Observable{
+public class InputDisplayer extends JLabel implements Observable, Observer{
 
     protected List<Observer> _cObserver = new LinkedList<Observer>();
 
@@ -39,5 +39,7 @@ public class InputDisplayer extends JLabel implements Observable{
 
 //==========================================================================================
 
-
+    @Override public boolean update(Object _obj) {
+        return true;
+    }
 }

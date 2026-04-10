@@ -2,6 +2,7 @@ package com.herra.ui;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import java.awt.BorderLayout;
@@ -13,9 +14,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
 import java.util.LinkedList;
 
 public class Calculator extends JFrame implements KeyListener {
+    protected LinkedList<JLabel> displayer_list = this.setDisplayer(); 
     protected LinkedList<String> key_list_number = this.setKeyNumber();
     protected JPanel DisplayerPanel = new JPanel(new GridLayout(2, 1)); // two lines and one column
     protected JPanel NumberPanel = new JPanel(new GridLayout(4, 4)); // four lines and three columns
@@ -47,14 +50,16 @@ public class Calculator extends JFrame implements KeyListener {
 
 //==================================================================================
 
-    public void addDisplayerToPanel(JPanel panel, LinkedList<String> to_add) {
+    public void addDisplayerToPanel(JPanel panel, LinkedList<JLabel> to_add) {
+        if(!(panel.getLayout().getClass().equals(new GridLayout().getClass()))) return; // only for panel having GridLayout as Layout
 
+        for(JLabel lab: to_add) panel.add(lab);
     }
 
 //==================================================================================
 
     public void addButtonToPanel(JPanel panel, LinkedList<String> to_add) {
-        if(!(panel.getLayout().getClass().equals(new GridLayout().getClass()))) return;
+        if(!(panel.getLayout().getClass().equals(new GridLayout().getClass()))) return; // only for panel having GridLayout as Layout
 
         for(String str: to_add) {
             JButton button = new JButton(str);
@@ -82,6 +87,17 @@ public class Calculator extends JFrame implements KeyListener {
         for(int i = 0; i < key_number.length(); i++) key.add(key_number.charAt(i)+"");
 
         return key;
+    }
+
+//==================================================================================
+
+    public LinkedList<JLabel> setDisplayer() {
+        LinkedList<JLabel> label = new LinkedList<JLabel>();
+
+        label.add(new InputDisplayer());
+        label.add(new OutputDisplayer());
+
+        return label;
     }
 
 //==================================================================================
