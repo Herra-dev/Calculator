@@ -122,13 +122,13 @@ public class Calculator extends JFrame implements KeyListener, Observable{
 
 //==================================================================================
 
-    public boolean _addObserver(Observer _observer) {
+    @Override public boolean _addObserver(Observer _observer) {
         return true;
     }
 
 //==================================================================================
 
-    public boolean _updateObserver() {
+    @Override public boolean _updateObserver() {
         return true;
     }
 
