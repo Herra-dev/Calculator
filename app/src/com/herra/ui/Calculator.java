@@ -77,7 +77,10 @@ public class Calculator extends JFrame implements KeyListener, Observable{
             button.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent event) {
                     if(button.getText().matches("Del")) {
-                        
+                        String temp_string = new String();
+                        for(int i = 0; i < temp_string.length(); i++) {
+                            
+                        }
                     }
                     System.out.println("Button : " + button.getText() + " clicked");
                 }
