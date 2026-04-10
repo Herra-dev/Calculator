@@ -48,6 +48,8 @@ public class Calculator extends JFrame implements KeyListener {
         this.setVisible(true);
     }
 
+//==================================================================================
+
     public void addButtonToPanel(JPanel panel, LinkedList<String> to_add) {
         if(!(panel.getLayout().getClass().equals(new GridLayout().getClass()))) return;
 
