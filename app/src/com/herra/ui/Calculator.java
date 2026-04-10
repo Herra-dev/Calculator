@@ -47,6 +47,12 @@ public class Calculator extends JFrame implements KeyListener {
 
 //==================================================================================
 
+    public void addDisplayerToPanel(JPanel panel, LinkedList<String> to_add) {
+
+    }
+
+//==================================================================================
+
     public void addButtonToPanel(JPanel panel, LinkedList<String> to_add) {
         if(!(panel.getLayout().getClass().equals(new GridLayout().getClass()))) return;
 
