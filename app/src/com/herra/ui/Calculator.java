@@ -49,6 +49,8 @@ public class Calculator extends JFrame implements KeyListener {
     }
 
     public void addButtonToPanel(JPanel panel, LinkedList<String> to_add) {
+        if(!(panel.getLayout().getClass().equals(new GridLayout().getClass()))) return;
+
         for(String str: to_add) {
             JButton button = new JButton(str);
             button.setFocusable(false);
