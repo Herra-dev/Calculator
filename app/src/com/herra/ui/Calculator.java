@@ -79,12 +79,15 @@ public class Calculator extends JFrame implements KeyListener, Observable{
                     System.out.println("Button : " + button.getText() + " clicked");
                 }
             });
-            if(str.matches("[0-9]") || str.equals("."))
+            if(str.matches("[0-9]") || str.equals(".")) {
                 button.setBackground(Color.CYAN);
-            
-            button.setFont(new Font("Z003", 1, 50));
-            if(button.getText().matches("Del|Clear"))
+                button.setFont(new Font("Z003", 1, 40));
+            } else if(button.getText().matches("Del|Clear")) {
                 button.setFont(new Font("Arial", 1, 20));
+            } else {
+                button.setFont(new Font("Arial", 1, 40));
+            }
+
 
             panel.add(button);
         }
