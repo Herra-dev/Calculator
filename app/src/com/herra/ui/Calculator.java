@@ -56,19 +56,10 @@ public class Calculator extends JFrame implements KeyListener {
 //==================================================================================
 
     public LinkedList<String> setKeyNumber() {
+        String key_number = "7894561230.%";
         LinkedList<String> key = new LinkedList<String>();
 
-        key.add("7");
-        key.add("8");
-        key.add("9");
-        key.add("4");
-        key.add("5");
-        key.add("6");
-        key.add("1");
-        key.add("2");
-        key.add("3");
-        key.add("0");
-        key.add(".");
+        for(int i = 0; i < key_number.length(); i++) key.add(key_number.charAt(i)+"");
 
         return key;
     }
@@ -76,13 +67,10 @@ public class Calculator extends JFrame implements KeyListener {
 //==================================================================================
 
     public LinkedList<String> setKeyOperator() {
+        String key_operator = "+-*/()";
         LinkedList<String> key = new LinkedList<String>();
-        key.add("+");
-        key.add("-");
-        key.add("*");
-        key.add("/");
-        key.add("(");
-        key.add(")");
+
+        for(int i = 0; i < key_operator.length(); i++) key.add(key_operator.charAt(i)+"");
 
         return key;
     }
