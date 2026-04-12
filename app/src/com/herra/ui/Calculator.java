@@ -127,7 +127,28 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
 //==================================================================================
 
     @Override public void keyPressed(KeyEvent event) {
-        System.out.println("key pressed : " + KeyEvent.getKeyText(event.getKeyCode()));
+        String keyPressed = event.getKeyChar()+"";
+        if(keyPressed.matches("[0-9]|NumPad-[0-9]")) {
+            this.setUserInput(this.getUserInput()+keyPressed);
+            System.out.println("user input : " + this.getUserInput());
+        }
+        if(keyPressed.matches("Backspace")) {
+            String _user_input = this.getUserInput();
+            String _temp_user_input = new String();
+
+            for(int j = 0; j < _user_input.length()-1; j++) _temp_user_input += _user_input.charAt(j);
+            this.setUserInput(_temp_user_input);
+            System.out.println("user input : " + this.getUserInput());
+        }
+        if(keyPressed.equals("+") ||
+            keyPressed.equals("-") ||
+                keyPressed.equals("*") ||
+                    keyPressed.equals("/") ||
+                        keyPressed.equals("%") ||
+                            keyPressed.equals(".")) {
+            this.setUserInput(this.getUserInput()+keyPressed);
+            System.out.println("user input : " + this.getUserInput());
+        }
     }
 
 //==================================================================================
