@@ -1,5 +1,6 @@
 package com.herra.ui;
 
+import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,7 +21,7 @@ import java.awt.event.KeyListener;
 
 import java.util.LinkedList;
 
-public class Calculator extends JFrame implements KeyListener, Observable{
+public class Calculator extends JFrame implements KeyListener, Observable, ActionListener{
     protected LinkedList<JLabel> displayer_list = this.setDisplayer(); 
     protected LinkedList<String> key_list_number = this.setKeyNumber();
     protected JPanel displayer_panel = new JPanel(new GridLayout(2, 1)); // two lines and one column
@@ -86,26 +87,8 @@ public class Calculator extends JFrame implements KeyListener, Observable{
         for(String str: to_add) {
             JButton button = new JButton(str);
             button.setFocusable(false);
-            button.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent event) {
-                    if(button.getText().matches("Del")) { // if user click in Del button
-                        String temp_string = new String();
-                        String temp_user_input = Calculator.getUserInput();
-                        
-                        for(int i = 0; i < temp_user_input.length()-1; i++) temp_string += temp_user_input.charAt(i);
-
-                        Calculator.setUserInput(temp_string);
-                    } else if(button.getText().matches("Clear")) // if user click in Clear button
-                        Calculator.setUserInput(new String());
-                    else {
-                        String temp_string = Calculator.getUserInput();
-                        temp_string += button.getText();
-                        Calculator.setUserInput(temp_string);
-                    }   
-                    
-                    
-                }
-            });
+            button.addActionListener(this);
+                
             if(str.matches("[0-9]") || str.equals(".")) {
                 button.setBackground(Color.CYAN);
                 button.setFont(new Font("Z003", 1, 40));
@@ -169,6 +152,12 @@ public class Calculator extends JFrame implements KeyListener, Observable{
 
     @Override public boolean _updateObserver() {
         return true;
+    }
+
+//==================================================================================
+
+    @Override public void actionPerformed(ActionEvent event) {
+        System.out.println("you clicke in one button");
     }
 
 }
