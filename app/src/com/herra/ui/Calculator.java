@@ -1,6 +1,5 @@
 package com.herra.ui;
 
-import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,17 +22,17 @@ import java.util.LinkedList;
 
 public class Calculator extends JFrame implements KeyListener, Observable, ActionListener{
     protected LinkedList<JLabel> displayer_list = this.setDisplayer(); 
-    protected LinkedList<String> key_list_number = this.setKeyNumber();
+    protected LinkedList<JButton> key_button = this.setButton();
     protected JPanel displayer_panel = new JPanel(new GridLayout(2, 1)); // two lines and one column
     protected JPanel number_panel = new JPanel(new GridLayout(5, 4)); // four lines and three columns
-    protected static String user_input = new String("heriniaina"); // String to stock user input
+    protected String user_input = new String(); // String to stock user input
 
 //==================================================================================
 
     public Calculator() {
         this.setCalculatorProperty(); // set properties for the Calculator Window
 
-        this.addButtonToPanel(number_panel, key_list_number);
+        this.addButtonToPanel(number_panel, key_button);
         this.addDisplayerToPanel(displayer_panel, displayer_list);
 
         this.getContentPane().add(number_panel, BorderLayout.CENTER);
@@ -44,14 +43,14 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
 
 //==================================================================================
 
-    public static String getUserInput() {
-        return user_input;
+    public String getUserInput() {
+        return this.user_input;
     }
 
 //==================================================================================
 
-    public static void setUserInput(String new_user_input) {
-        user_input = new_user_input;
+    public void setUserInput(String new_user_input) {
+        this.user_input = new_user_input;
     }
 
 //==================================================================================
@@ -81,40 +80,25 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
 
 //==================================================================================
 
-    public void addButtonToPanel(JPanel panel, LinkedList<String> to_add) {
+    public void addButtonToPanel(JPanel panel, LinkedList<JButton> to_add) {
         if(!(panel.getLayout().getClass().equals(new GridLayout().getClass()))) return; // only for panel having GridLayout as Layout
 
-        for(String str: to_add) {
-            JButton button = new JButton(str);
-            button.setFocusable(false);
-            button.addActionListener(this);
+        for(JButton bt: to_add) {
+            bt.setFocusable(false);
+            bt.addActionListener(this);
                 
-            if(str.matches("[0-9]") || str.equals(".")) {
-                button.setBackground(Color.CYAN);
-                button.setFont(new Font("Z003", 1, 40));
-            } else if(button.getText().matches("Del|Clear")) {
-                button.setFont(new Font("Arial", 1, 20));
+            if(bt.getText().matches("[0-9]") || bt.getText().equals(".")) {
+                bt.setBackground(Color.CYAN);
+                bt.setFont(new Font("Z003", 1, 40));
+            } else if(bt.getText().matches("Del|Clear")) {
+                bt.setFont(new Font("Arial", 1, 20));
             } else {
-                button.setFont(new Font("Arial", 1, 40));
+                bt.setFont(new Font("Arial", 1, 40));
             }
 
 
-            panel.add(button);
+            panel.add(bt);
         }
-    }
-
-//==================================================================================
-
-    public LinkedList<String> setKeyNumber() {
-        String key_number = "789+456-123*0.%/";
-        LinkedList<String> key = new LinkedList<String>();
-
-        for(int i = 0; i < key_number.length(); i++) key.add(key_number.charAt(i)+"");
-
-        key.add("Del");
-        key.add("Clear");
-
-        return key;
     }
 
 //==================================================================================
@@ -126,6 +110,18 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
         label.add(new OutputDisplayer());
 
         return label;
+    }
+
+    public LinkedList<JButton> setButton() {
+        LinkedList<JButton> button = new LinkedList<JButton>();
+        String key_number = "789+456-123*0.%/";
+
+        for(int i = 0; i < key_number.length(); i++) button.add(new JButton(key_number.charAt(i)+""));
+
+        button.add(new JButton("Del"));
+        button.add(new JButton("Clear"));
+
+        return button;
     }
 
 //==================================================================================
@@ -157,7 +153,25 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
 //==================================================================================
 
     @Override public void actionPerformed(ActionEvent event) {
-        System.out.println("you clicke in one button");
+        for(int i = 0; i < key_button.size(); i++) {
+            if(event.getSource() == key_button.get(i) && key_button.get(i).getText().equals("Del")) {
+                String _user_input = this.getUserInput();
+                String _temp_user_input = new String();
+
+                for(int j = 0; j < _user_input.length()-1; j++) _temp_user_input += _user_input.charAt(j);
+                this.setUserInput(_temp_user_input);
+                System.out.println("user input : " + this.getUserInput());
+            }
+            if(event.getSource() == key_button.get(i) && key_button.get(i).getText().equals("Clear")) {
+                this.setUserInput(new String());
+                System.out.println("user input : " + this.getUserInput());
+            }
+
+            if(event.getSource() == key_button.get(i) && key_button.get(i).getText().matches("[0-9]|\\p{Punct}")) {
+                this.setUserInput(this.getUserInput()+key_button.get(i).getText());
+                System.out.println("user input : " + this.getUserInput());
+            }
+        }
     }
 
 }
