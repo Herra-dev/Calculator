@@ -147,6 +147,7 @@ public abstract class AbstractCalculator implements Observer, Observable {
     public List<String> separeInput() {
         List<String> list = new LinkedList<String>();
         String input = this.getInput();
+        if(input.isEmpty()) return new LinkedList<String>();
 
         list.clear();
         list.add("");
@@ -169,7 +170,7 @@ public abstract class AbstractCalculator implements Observer, Observable {
             }
         }
 
-        if(list.get(list.size()-1) == (String)"") list.remove(list.size()-1);
+        if(list.get(list.size()-1) == "") list.remove(list.size()-1);
 
         return list;
 
