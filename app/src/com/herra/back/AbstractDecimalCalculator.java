@@ -130,6 +130,10 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
 //===================================================================
 
+    public String calcul() {
+        return this.calcul(this.getInputList());
+    }
+
 /**
  * Do calcul
  * 
