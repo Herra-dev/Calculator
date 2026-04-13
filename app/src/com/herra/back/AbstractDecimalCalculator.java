@@ -168,9 +168,6 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
                 }
             }
 
-            System.out.println("open parenthesis index = " + open_parenthesis_index);
-            System.out.println("closed parenthesis index = " + closed_parenthesis_index);
-
             if(!(closed_parenthesis_index == open_parenthesis_index+1)) {
                 int a = 0;
                 //copy all elements between open and closed parenthesis (both excluded) into another list
