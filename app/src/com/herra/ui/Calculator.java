@@ -130,24 +130,21 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
         String keyPressed = event.getKeyChar()+"";
         if(keyPressed.matches("[0-9]|NumPad-[0-9]")) {
             this.setUserInput(this.getUserInput()+keyPressed);
-            System.out.println("user input : " + this.getUserInput());
+            this.displayer_list.get(0).setText(this.getUserInput());
         }
-        if(keyPressed.matches("Backspace")) {
+        if(KeyEvent.getKeyText(event.getKeyCode()).matches("Backspace")) {
             String _user_input = this.getUserInput();
             String _temp_user_input = new String();
 
             for(int j = 0; j < _user_input.length()-1; j++) _temp_user_input += _user_input.charAt(j);
             this.setUserInput(_temp_user_input);
-            System.out.println("user input : " + this.getUserInput());
+            this.displayer_list.get(0).setText(this.getUserInput());
         }
-        if(keyPressed.equals("+") ||
-            keyPressed.equals("-") ||
-                keyPressed.equals("*") ||
-                    keyPressed.equals("/") ||
-                        keyPressed.equals("%") ||
-                            keyPressed.equals(".")) {
+        if(keyPressed.equals("+") || keyPressed.equals("-") || keyPressed.equals("*") ||
+            keyPressed.equals("/") || keyPressed.equals("%") || keyPressed.equals(".")) {
+            
             this.setUserInput(this.getUserInput()+keyPressed);
-            System.out.println("user input : " + this.getUserInput());
+            this.displayer_list.get(0).setText(this.getUserInput());
         }
     }
 
@@ -181,16 +178,15 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
 
                 for(int j = 0; j < _user_input.length()-1; j++) _temp_user_input += _user_input.charAt(j);
                 this.setUserInput(_temp_user_input);
-                System.out.println("user input : " + this.getUserInput());
+                this.displayer_list.get(0).setText(this.getUserInput());
             }
-            if(event.getSource() == key_button.get(i) && key_button.get(i).getText().equals("Clear")) {
+            if(event.getSource() == key_button.get(i) && key_button.get(i).getText().equals("Clear")){
                 this.setUserInput(new String());
-                System.out.println("user input : " + this.getUserInput());
+                this.displayer_list.get(0).setText(this.getUserInput());
             }
-
             if(event.getSource() == key_button.get(i) && key_button.get(i).getText().matches("[0-9]|\\p{Punct}")) {
                 this.setUserInput(this.getUserInput()+key_button.get(i).getText());
-                System.out.println("user input : " + this.getUserInput());
+                this.displayer_list.get(0).setText(this.getUserInput());
             }
         }
     }
