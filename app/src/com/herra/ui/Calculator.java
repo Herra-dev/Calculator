@@ -21,11 +21,14 @@ import java.awt.event.KeyListener;
 import java.util.LinkedList;
 
 public class Calculator extends JFrame implements KeyListener, Observable, ActionListener{
+
     protected LinkedList<JLabel> displayer_list = this.setDisplayer(); 
     protected LinkedList<JButton> key_button = this.setButton();
     protected JPanel displayer_panel = new JPanel(new GridLayout(2, 1)); // two lines and one column
     protected JPanel number_panel = new JPanel(new GridLayout(5, 4)); // four lines and three columns
     protected String user_input = new String(); // String to stock user input
+    protected String output = new String(); // output
+    protected Calculator calc = new Calculator();
 
 //==================================================================================
 
