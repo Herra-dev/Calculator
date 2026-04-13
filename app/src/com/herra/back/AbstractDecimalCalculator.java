@@ -143,6 +143,8 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         // Quit function if during the test of user input an error of syntax was occured
         if(!this.getAuthorization()) return "0";
 
+        if(list.isEmpty()) return new String();
+
         // If the first element of the list is a plus '+' sign, removes it
         if(!list.isEmpty())
             if(list.get(0).equals("+")) list.remove(0);
