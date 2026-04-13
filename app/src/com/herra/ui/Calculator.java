@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.herra.back.DecimalCalculator;
 import com.interfaces.sh.Observable;
 import com.interfaces.sh.Observer;
 
@@ -27,8 +28,7 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
     protected JPanel displayer_panel = new JPanel(new GridLayout(2, 1)); // two lines and one column
     protected JPanel number_panel = new JPanel(new GridLayout(5, 4)); // four lines and three columns
     protected String user_input = new String(); // String to stock user input
-    protected String output = new String(); // output
-    protected Calculator calc = new Calculator();
+    protected DecimalCalculator calc = new DecimalCalculator(new String());
 
 //==================================================================================
 
