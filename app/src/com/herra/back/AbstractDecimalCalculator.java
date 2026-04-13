@@ -135,7 +135,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * 
  * @return the result of the actual calcul
  */
-    @Override protected String calcul(List<String> list) {
+    @Override public String calcul(List<String> list) {
         // Quit function if during the test of user input an error of syntax was occured
         if(!this.getAuthorization()) return "0";
 
