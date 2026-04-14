@@ -49,44 +49,44 @@ public abstract class AbstractCalculator implements Observer, Observable {
  * {@link com.herra.back.AbstractCalculator#testParenthesis()}<p>
  * <Strong>Test if all {@code parenthesis} is well placed in user input</strong>
  * 
- * @throws _SyntaxErrorException when closed parenthesis {@code >} open parenthesis
+ * @throws _SyntaxErrorException when closed parenthesis {@code >} opened parenthesis
  */
     protected void testParenthesis() throws _SyntaxErrorException {
         // if user input doesn't contains '(' or ')', it's not necessary to continue
         if(!this.getInput().contains("(") && !this.getInput().contains(")")) return;
 
-        // testing open and closed parenthesis
-        int open = this.countCharacter(this.getInput(), '(');
+        // testing opened and closed parenthesis
+        int opened = this.countCharacter(this.getInput(), '(');
         int closed = this.countCharacter(this.getInput(), ')');
         
     //-----------------------------------------------------------------------------------
 
-        if(open < closed) { 
+        if(opened < closed) { 
             _canProcess = false; 
-            // if closed parenthesis is superior than open parenthesis throw new _SyntaxErrorException
+            // if closed parenthesis is superior than opened parenthesis throw new _SyntaxErrorException
             this.setOutPut("SYNTAX ERROR");
-            throw new _SyntaxErrorException("Verify your syntax: closed parenthesis must be equals or inferior of open parenthesis"); 
+            throw new _SyntaxErrorException("Verify your syntax: closed parenthesis must be equals or inferior of opened parenthesis"); 
         }
 
     //-----------------------------------------------------------------------------------
 
-        // testing that: closed parenthesis must be allways placed after an open parenthesis
-        int[] array_open = new int[open];       // create an array of int containing index of all open parenthesis
+        // testing that: closed parenthesis must be allways placed after an opened parenthesis
+        int[] array_opened = new int[opened];       // create an array of int containing index of all opened parenthesis
         int[] array_closed = new int[closed];   // create an array of int containing index of all closed parenthesis
         int o = 0;
         int c = 0;
 
         for(int i = 0; i < this.getInput().length(); i++) {
-            if(this.getInput().charAt(i) == '(') array_open[o++] = i;
+            if(this.getInput().charAt(i) == '(') array_opened[o++] = i;
             if(this.getInput().charAt(i) == ')') array_closed[c++] = i;
         }
 
         for(int _c = 0; _c < array_closed.length; _c++) {
             for(int _o = _c; _o >= 0; _o--) {
-                if (array_closed[_c] < array_open[_o]) {
+                if (array_closed[_c] < array_opened[_o]) {
                     _canProcess = false;
                     this.setOutPut( "SYNTAX ERROR");
-                    throw new _SyntaxErrorException("verify your syntax: never close an anopened parenthesis");
+                    throw new _SyntaxErrorException("verify your syntax: never close an anopeneded parenthesis");
                 }
             }         
         }

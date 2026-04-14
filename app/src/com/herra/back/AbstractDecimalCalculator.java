@@ -10,6 +10,26 @@ import com.herra.exception._SyntaxErrorException;
 
 public class AbstractDecimalCalculator extends AbstractCalculator {
 
+
+/**
+ * <h2>countOccurrence</h2>{@link com.herra.back.AbstractCalculator#countCharacter(String, char)}<p> 
+ * returns the occurrence of{@code ch} found in {@code str}
+ * 
+ * @param str {@code String} where search
+ * @param ch {@code char} to search 
+ * @return {@code int}
+ * 
+ * @author Heriniaina {@link https://github.com/Herra-dev}
+ */
+    public static int countOccurrence(String str, char ch) {
+        int occ = 0;
+        for(int i = 0; i < str.length(); i++) {
+            if(str.charAt(i) == ch) ++occ;
+        }
+
+        return occ;
+    }
+
 /**
  * <h2>testUserInput()</h2>{@link com.herra.back.AbstractCalculator#testUserInput() } <p>
  * 
@@ -123,9 +143,16 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         }while (_input.contains("--") || _input.contains("++") ||
                     _input.contains("-+") || _input.contains("+-"));
 
+        int opened_parenthesis_nbr = countOccurrence(_input, '(');
+        int closed_parenthesis_nbr = countOccurrence(_input, ')');
+
+        System.out.println("opened = " + opened_parenthesis_nbr + ", closed = " + closed_parenthesis_nbr);
+
         this._canProcess = true;
         
     }    
+
+
 
 //===================================================================
 
@@ -154,21 +181,21 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         boolean add_multiplication_sign = false;
 
         if(list.contains("(")) {
-            int open_parenthesis_index = 0;
+            int opened_parenthesis_index = 0;
             int closed_parenthesis_index = list.size()-1;
-            int another_one_open = 0;
+            int another_one_opened = 0;
             
-            open_parenthesis_index = list.indexOf("(");
+            opened_parenthesis_index = list.indexOf("(");
 
-            if(open_parenthesis_index > 0)
-                // if element before the open parenthesis is a natural number or decimal number or a closed parenthesis
-                if(list.get(open_parenthesis_index-1).matches("[0-9]++|[0-9]++\\p{Punct}[0-9]++") || list.get(open_parenthesis_index-1).equals(")")) 
+            if(opened_parenthesis_index > 0)
+                // if element before the opened parenthesis is a natural number or decimal number or a closed parenthesis
+                if(list.get(opened_parenthesis_index-1).matches("[0-9]++|[0-9]++\\p{Punct}[0-9]++") || list.get(opened_parenthesis_index-1).equals(")")) 
                     add_multiplication_sign = true;
 
-            for(int i = open_parenthesis_index+1; i < list.size(); i++) {
-                if(list.get(i).equals("(")) ++another_one_open;
+            for(int i = opened_parenthesis_index+1; i < list.size(); i++) {
+                if(list.get(i).equals("(")) ++another_one_opened;
                 else if(list.get(i).equals(")")) {
-                    if(another_one_open > 0) --another_one_open;
+                    if(another_one_opened > 0) --another_one_opened;
                     else closed_parenthesis_index = i;
                 }
             }
@@ -178,24 +205,24 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             //         list.add(closed_parenthesis_index+1, "*");
             // }
 
-            if(!(closed_parenthesis_index == open_parenthesis_index+1)) {
+            if(!(closed_parenthesis_index == opened_parenthesis_index+1)) {
                 int a = 0;
-                //copy all elements between open and closed parenthesis (both excluded) into another list
-                for(int i = open_parenthesis_index+1; i < closed_parenthesis_index; i++) list_copy.add(a++, list.get(i));
-                //remove all elements between open and closed parenthesis (both included) from list
-                for(int i = closed_parenthesis_index; i >= open_parenthesis_index; i--) list.remove(i);
+                //copy all elements between opened and closed parenthesis (both excluded) into another list
+                for(int i = opened_parenthesis_index+1; i < closed_parenthesis_index; i++) list_copy.add(a++, list.get(i));
+                //remove all elements between opened and closed parenthesis (both included) from list
+                for(int i = closed_parenthesis_index; i >= opened_parenthesis_index; i--) list.remove(i);
 
                 String temp_string = this.calcul(list_copy);
 
                 if(add_multiplication_sign) {
-                    list.add(open_parenthesis_index, "*");
-                    list.add(open_parenthesis_index+1, temp_string);
+                    list.add(opened_parenthesis_index, "*");
+                    list.add(opened_parenthesis_index+1, temp_string);
                 } else
-                    list.add(open_parenthesis_index, temp_string);
+                    list.add(opened_parenthesis_index, temp_string);
                 
             } else {
-                //remove all elements between open and closed parenthesis (both included) from list
-                for(int i = closed_parenthesis_index; i >= open_parenthesis_index; i--) list.remove(i);
+                //remove all elements between opened and closed parenthesis (both included) from list
+                for(int i = closed_parenthesis_index; i >= opened_parenthesis_index; i--) list.remove(i);
             }
             
 
