@@ -172,6 +172,11 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
                 }
             }
 
+            if(closed_parenthesis_index+1 <= list.size()) {
+                if(list.get(closed_parenthesis_index+1).matches("[0-9]++|[0-9]++\\p{Punc}[0-9]"))
+                    list.add(closed_parenthesis_index+1, "*");
+            }
+
             if(!(closed_parenthesis_index == open_parenthesis_index+1)) {
                 int a = 0;
                 //copy all elements between open and closed parenthesis (both excluded) into another list

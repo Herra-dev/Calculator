@@ -6,7 +6,7 @@ public class App {
     public static void main(String[] args) {
         // Calculator calc = new Calculator();
         // calc.setVisible(true);
-        DecimalCalculator calc = new DecimalCalculator("18.00+6+6+6+6/6-1");
+        DecimalCalculator calc = new DecimalCalculator("(9)2");
         System.out.println(calc.calcul());
     }
 }
