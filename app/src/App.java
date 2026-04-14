@@ -7,6 +7,6 @@ public class App {
         Calculator calc = new Calculator();
         calc.setVisible(true);
         // DecimalCalculator calc = new DecimalCalculator("(89-6)0");
-        // System.out.println(calc.calcul());
+        // System.out.println(calc.calcul())
     }
 }
