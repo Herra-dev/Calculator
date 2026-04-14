@@ -147,6 +147,15 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         int closed_parenthesis_nbr = countOccurrence(_input, ')');
 
         System.out.println("opened = " + opened_parenthesis_nbr + ", closed = " + closed_parenthesis_nbr);
+        
+        System.out.println("input before = " + _input);
+        if(opened_parenthesis_nbr > closed_parenthesis_nbr) {
+            int nbr_of_parenthesis_to_add  = opened_parenthesis_nbr-closed_parenthesis_nbr;
+            System.out.println("to add = " + nbr_of_parenthesis_to_add);
+            for(int i = 0; i < nbr_of_parenthesis_to_add; i++)
+                _input += ")";
+        }
+        System.out.println("input after= " + _input);
 
         this._canProcess = true;
         

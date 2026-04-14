@@ -6,7 +6,7 @@ public class App {
     public static void main(String[] args) {
         // Calculator calc = new Calculator();
         // calc.setVisible(true);
-        DecimalCalculator calc = new DecimalCalculator("((((89-60)))");
+        DecimalCalculator calc = new DecimalCalculator("((((89-60");
         System.out.println(calc.calcul());
     }
 }
