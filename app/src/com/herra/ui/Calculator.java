@@ -93,9 +93,15 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
             if(bt.getText().matches("[0-9]") || bt.getText().equals(".")) {
                 bt.setBackground(Color.CYAN);
                 bt.setFont(new Font("Z003", 1, 40));
-            } else if(bt.getText().matches("Del|Clear")) {
+            } else if(bt.getText().matches("Del")) {
                 bt.setFont(new Font("Arial", 1, 20));
-            } else {
+                bt.setBackground(Color.GRAY);
+            } else if(bt.getText().matches("Clear")) {
+                bt.setFont(new Font("Arial", 1, 20));
+                bt.setBackground(Color.RED);
+            }
+
+            else {
                 bt.setFont(new Font("Arial", 1, 40));
             }
 
@@ -117,7 +123,7 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
 
     public LinkedList<JButton> setButton() {
         LinkedList<JButton> button = new LinkedList<JButton>();
-        String key_number = "789+456-123*0.%/";
+        String key_number = "789+456-123*0.%/()";
 
         for(int i = 0; i < key_number.length(); i++) button.add(new JButton(key_number.charAt(i)+""));
 
