@@ -10,7 +10,3 @@ public class App {
         // System.out.println(calc.calcul());
     }
 }
-
-
-
-// bug found: (89-6)0 returns 83 instead of 0 ----> resolved
