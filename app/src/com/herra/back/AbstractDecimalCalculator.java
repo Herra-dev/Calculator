@@ -174,7 +174,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             }
 
             if(closed_parenthesis_index+1 <= list.size()) {
-                if(list.get(closed_parenthesis_index+1).matches("[0-9]++|[0-9]++\\p{Punct}[0-9]|[.]{1}[0-9]"))
+                if(list.get(closed_parenthesis_index+1).matches("[0-9]++|[0-9]++[.]{1}[0-9]|[.]{1}[0-9]"))
                     list.add(closed_parenthesis_index+1, "*");
             }
 

@@ -6,11 +6,11 @@ public class App {
     public static void main(String[] args) {
         // Calculator calc = new Calculator();
         // calc.setVisible(true);
-        DecimalCalculator calc = new DecimalCalculator("(9).0");
+        DecimalCalculator calc = new DecimalCalculator("(89-6)0");
         System.out.println(calc.calcul());
     }
 }
 
 
 
-// bug found: (89-6)0 returns 83 instead of 0
+// bug found: (89-6)0 returns 83 instead of 0 ----> resolved
