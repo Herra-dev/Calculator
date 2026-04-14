@@ -8,7 +8,6 @@ public class App {
         // calc.setVisible(true);
         DecimalCalculator calc = new DecimalCalculator("18.00+6+6+6+6/6-1");
         System.out.println(calc.calcul());
-        System.out.println(1%6);
     }
 }
 
