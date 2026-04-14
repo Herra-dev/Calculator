@@ -122,8 +122,6 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         }while (_input.contains("--") || _input.contains("++") ||
                     _input.contains("-+") || _input.contains("+-"));
 
-        System.out.println("input = " + _input);
-
         this._canProcess = true;
         
     }    
