@@ -1,6 +1,7 @@
 package com.herra.back;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.LinkedList;
 import java.util.List;
@@ -564,6 +565,8 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         for(int i = last_to_remove; i >= first_to_remove; i--) list.remove(i);
 
         BigDecimal result = first_number.divide(second_number, 5, RoundingMode.HALF_UP);
+        result = result.round(MathContext.DECIMAL128);
+        System.out.println("float value = " + result.floatValue());
 
         if(first_to_remove > 0) {
             if(result.equals(result.abs())) {   // result is a positive number
@@ -584,12 +587,6 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         } else {
             list.add(first_to_remove, result.toString());
         }
-
-        // System.out.println("Divide");
-
-        // for(String str: list)
-        //     System.out.print(str);
-        // System.out.println();
 
         return list;
     }
