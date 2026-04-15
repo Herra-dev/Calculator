@@ -37,7 +37,7 @@ public abstract class AbstractCalculator implements Observer, Observable {
 //===================================================================
 //  SETTERS
 
-    public void setInput(String new_input)                  { this._input = new_input; this.setListInput(this.separeInput());}
+    public void setInput(String new_input)                  { this._input = new_input; this.arrangeUserInput(); this.setListInput(this.separeInput());}
     public void setAuthorization(boolean new_authorization) { this._canProcess = new_authorization; }
     public void setOutPut(String new_output)                { this._outPut = new_output; }
     public void setListInput(List<String> new_input_list)   { this._input_list = new_input_list; }
