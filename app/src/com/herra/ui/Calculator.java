@@ -155,6 +155,11 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
             this.setUserInput(this.getUserInput()+keyPressed);
             this.displayer_list.get(0).setText(this.getUserInput());
         }
+
+        this.calc.setInput(this.getUserInput());
+        
+        String outPut = this.calc.calcul();
+        this.displayer_list.get(1).setText(outPut);
     }
 
 //==================================================================================
@@ -196,7 +201,6 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
             if(event.getSource() == key_button.get(i) && key_button.get(i).getText().matches("[0-9]|\\p{Punct}")) {
                 this.setUserInput(this.getUserInput()+key_button.get(i).getText());
                 this.displayer_list.get(0).setText(this.getUserInput());
-                System.out.println("punctuation clicked");
             }
         }
 
