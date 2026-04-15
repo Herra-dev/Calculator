@@ -336,7 +336,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         BigDecimal result = first_number.add(second_number);
 
         // if first to remove is superior to zero(0), probably there is a number before it,
-        // so separe result's operator and number
+        // so result's operator and number must be separed
         if(first_to_remove > 0) {
             if(result.equals(result.abs())) {   // result is a positive number
                 list.add(first_to_remove, "+");
