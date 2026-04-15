@@ -166,6 +166,12 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             System.out.println("user input : " + this.getInput());
             System.out.println("testing user input ...");
             this.testUserInput();
+            List<String> list = this.getInputList();
+            System.out.println("input list = ");
+            for(String str: list)
+                System.out.print(str);
+            System.out.println("-----------------------------------");
+            
             System.out.println("testing parenthesis in input ...");
             this.testParenthesis();
             System.out.println("arrange user input ...");
@@ -187,7 +193,6 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * @return the result of the actual calcul
  */
     @Override public String calcul(List<String> list) {
-        System.out.println("no error, so am executed");
         // Quit function if during the test of user input an error of syntax was occured
         if(!this.getAuthorization()) return "0";
 
