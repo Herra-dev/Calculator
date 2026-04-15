@@ -171,6 +171,10 @@ public abstract class AbstractCalculator implements Observer, Observable {
         }
 
         if(list.get(list.size()-1) == "") list.remove(list.size()-1);
+        System.out.print("list : ");
+        for(String str: list)
+            System.out.print(str);
+        System.out.println();
 
         return list;
 
