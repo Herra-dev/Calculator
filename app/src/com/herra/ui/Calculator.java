@@ -199,7 +199,6 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
             if(event.getSource() == key_button.get(i) && key_button.get(i).getText().equals("Clear")){
                 this.setUserInput(new String());
                 this.displayer_list.get(0).setText(this.getUserInput());
-                this.displayer_list.get(1).setText("OUTPUT");
             }
             if(event.getSource() == key_button.get(i) && key_button.get(i).getText().matches("[0-9]|\\p{Punct}")) {
                 this.setUserInput(this.getUserInput()+key_button.get(i).getText());
