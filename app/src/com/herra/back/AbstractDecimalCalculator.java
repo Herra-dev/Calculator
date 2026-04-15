@@ -95,12 +95,12 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         
         int index_found = 0;
         int from_index = 0;
-        // check each element at index, index of an operator "/", + 1, and raise a _DivisionByZeroException if this element is equals zero
+        // check each element at index, index of an operator "/", + 1, and raise a _DivisionByZeroException if this element is equals to zero
         while((index_found = my_list.indexOf("/", from_index)) != -1) {
             from_index = index_found+1;
             
             // use a regular expression to check element after division sign
-            if(my_list.get(index_found+1).matches("0+")) {
+            if(my_list.get(index_found+1).matches("0++")) {
                 this.setOutPut("SYNTAX ERROR");
                 this._canProcess = false;
                 throw new _DivisionByZeroException("Division by zero");
