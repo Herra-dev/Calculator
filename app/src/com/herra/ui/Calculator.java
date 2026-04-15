@@ -199,6 +199,8 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
             if(event.getSource() == key_button.get(i) && key_button.get(i).getText().equals("Clear")){
                 this.setUserInput(new String());
                 this.displayer_list.get(0).setText(this.getUserInput());
+                this.displayer_list.get(1).setText("OUTPUT");
+                return;
             }
             if(event.getSource() == key_button.get(i) && key_button.get(i).getText().matches("[0-9]|\\p{Punct}")) {
                 this.setUserInput(this.getUserInput()+key_button.get(i).getText());
@@ -209,11 +211,14 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
         System.out.println("calculator user input = " + this.getUserInput());
 
         this.calc.setInput(this.getUserInput());
+        this.displayer_list.get(1).setForeground(Color.BLACK);
         
         this.calc.calcul();
         String outPut = this.calc.getOutput();
         System.out.println("output : " + outPut);
         this.displayer_list.get(1).setText(outPut);
+        if(this.displayer_list.get(1).getText().equals("SYNTAX ERROR"))
+            this.displayer_list.get(1).setForeground(Color.RED);
     }
 
 }
