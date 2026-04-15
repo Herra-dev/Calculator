@@ -170,9 +170,8 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         } catch (_SyntaxErrorException | _DivisionByZeroException e) {
             e.printStackTrace();
         }
-        System.out.println("after exception");
 
-        return "SYNTAX ERROR";        
+        return this.getOutput();        
     }
 
 //===================================================================
