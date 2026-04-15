@@ -289,6 +289,11 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  */
     @Override protected List<String> operatorPlus(List<String> list) {
 
+        System.out.println("adding two numbers ...");
+        for(String str: list)
+            System.out.print(str);
+        System.out.println();
+
         // if no authorization was not accorded(caused by user input syntax) returns a new empty LinkedList
         if(!this.getAuthorization()) return new LinkedList<String>();
 
@@ -341,11 +346,11 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             list.add(first_to_remove, result.toString());
         }
 
-        // System.out.println("add");
+        System.out.println("add");
 
-        // for(String str: list)
-        //     System.out.print(str);
-        // System.out.println();
+        for(String str: list)
+            System.out.print(str);
+        System.out.println();
 
         return list;
     }
