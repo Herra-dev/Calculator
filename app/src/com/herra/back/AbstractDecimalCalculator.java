@@ -258,6 +258,11 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             while(list.contains("+")) list = operatorPlus(list);
         }
 
+        System.out.println("list: ");
+        for(String str: list)
+            System.out.print(str);
+        System.out.println();
+
         output = list.get(0);
         System.out.println("output : " + output);
 
