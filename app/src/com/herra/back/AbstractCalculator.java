@@ -52,7 +52,7 @@ public abstract class AbstractCalculator implements Observer, Observable {
  * @throws _SyntaxErrorException when closed parenthesis {@code >} opened parenthesis
  */
     protected void testParenthesis() throws _SyntaxErrorException {
-        this.setAuthorization(true);
+        this.setAuthorization(true); // before testing, set authorization to true
         // if user input doesn't contains '(' or ')', it's not necessary to continue
         if(!this.getInput().contains("(") && !this.getInput().contains(")")) return;
 
@@ -172,11 +172,6 @@ public abstract class AbstractCalculator implements Observer, Observable {
         }
 
         if(list.get(list.size()-1) == "") list.remove(list.size()-1);
-        System.out.print("list : ");
-        for(String str: list)
-            System.out.print(str);
-        System.out.println();
-        System.out.println("Input separated successfully--------------------------");
 
         return list;
 

@@ -48,8 +48,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * 
  */
     @Override protected void testUserInput() throws _SyntaxErrorException, _DivisionByZeroException {
-        this.setAuthorization(true);
-        System.out.println("in user input testing : " + this.getInput());
+        this.setAuthorization(true); // before testing, set authorization to true
         // if the user input contains nothing or white space only, remove those last and quit function
         if (this._input.isBlank()) { this._input.strip(); _outPut = "0"; return; }
         
