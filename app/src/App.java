@@ -7,7 +7,7 @@ public class App {
         // Calculator calc = new Calculator();
         // calc.setVisible(true);
         DecimalCalculator calc = new DecimalCalculator("2/0");
-        // calc.calcul();
+        calc.calcul();
         System.out.println("can proceed : " + calc.getAuthorization());
         System.out.println("output: " + calc.getOutput());
     }

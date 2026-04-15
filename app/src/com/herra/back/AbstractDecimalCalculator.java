@@ -163,18 +163,14 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
     public String calcul() {
         try {
             this.testUserInput();
+            this.testParenthesis();
+            this.arrangeUserInput();
+            return this.calcul(this.getInputList());
         } catch (_SyntaxErrorException | _DivisionByZeroException e) {
             e.printStackTrace();
         }
-        try {
-            this.testParenthesis();
-        } catch (_SyntaxErrorException e) {
-            e.printStackTrace();
-        }
 
-        this.arrangeUserInput();
-
-        return this.calcul(this.getInputList());
+        return "SYNTAX ERROR";        
     }
 
 //===================================================================
