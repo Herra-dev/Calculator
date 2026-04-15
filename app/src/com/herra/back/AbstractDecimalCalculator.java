@@ -163,9 +163,13 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
     public String calcul() {
         try {
+            System.out.println("testing user input ...");
             this.testUserInput();
+            System.out.println("testing parenthesis in input ...");
             this.testParenthesis();
+            System.out.println("arrange user input ...");
             this.arrangeUserInput();
+            System.out.println("calcul ...");
             return this.calcul(this.getInputList());
         } catch (_SyntaxErrorException | _DivisionByZeroException e) {
             e.printStackTrace();
