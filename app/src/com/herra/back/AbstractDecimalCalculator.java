@@ -166,6 +166,11 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         } catch (_SyntaxErrorException | _DivisionByZeroException e) {
             e.printStackTrace();
         }
+        try {
+            this.testParenthesis();
+        } catch (_SyntaxErrorException e) {
+            e.printStackTrace();
+        }
 
         this.arrangeUserInput();
 
@@ -235,23 +240,12 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
                 for(int i = closed_parenthesis_index; i >= opened_parenthesis_index; i--) list.remove(i);
             }
             
-
-            for(String str: list)
-                    System.out.print(str);
-                System.out.println();
-
-                System.out.println("in parenthesis");
-
-            
         }
 
         if(list.contains("("))
             this.calcul(list);
 
     //-------------------------------------------------------------------------------
-
-        // if(list_copy.isEmpty())
-        //     list_copy.addAll(list);
 
         while(list.contains("/") || list.contains("%") || list.contains("*") || list.contains("+") || list.contains("-")) {
             while(list.contains("/")) list = operatorDivide(list);
