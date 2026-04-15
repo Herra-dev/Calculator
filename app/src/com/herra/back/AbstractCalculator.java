@@ -175,6 +175,7 @@ public abstract class AbstractCalculator implements Observer, Observable {
         for(String str: list)
             System.out.print(str);
         System.out.println();
+        System.out.println("Input separated successfully--------------------------");
 
         return list;
 
