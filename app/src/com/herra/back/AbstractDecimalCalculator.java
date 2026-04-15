@@ -48,6 +48,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * 
  */
     @Override protected void testUserInput() throws _SyntaxErrorException, _DivisionByZeroException {
+        System.out.println("in user input testing : " + this.getInput());
         // if the user input contains nothing or white space only, remove those last and quit function
         if (this._input.isBlank()) { this._input.strip(); _outPut = "0"; return; }
         
@@ -107,6 +108,8 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
                 throw new _DivisionByZeroException("Division by zero");
             }
         }
+
+        System.out.println("test user input passed");
 
         this._canProcess = true;
     }
@@ -170,7 +173,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             System.out.println("input list = ");
             for(String str: list)
                 System.out.print(str);
-            System.out.println("-----------------------------------");
+            System.out.println();
             
             System.out.println("testing parenthesis in input ...");
             this.testParenthesis();
