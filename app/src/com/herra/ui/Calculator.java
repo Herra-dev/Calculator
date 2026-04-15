@@ -158,7 +158,8 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
 
         this.calc.setInput(this.getUserInput());
         
-        String outPut = this.calc.calcul();
+        this.calc.calcul();
+        String outPut = this.calc.getOutput();
         this.displayer_list.get(1).setText(outPut);
     }
 

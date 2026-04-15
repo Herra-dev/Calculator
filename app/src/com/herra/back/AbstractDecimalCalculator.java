@@ -254,6 +254,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         output = list.get(0);
         System.out.println("output : " + output);
 
+        this.setOutPut(output);
         return output;
     }
 
