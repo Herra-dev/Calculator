@@ -169,6 +169,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         } catch (_SyntaxErrorException | _DivisionByZeroException e) {
             e.printStackTrace();
         }
+        System.out.println("after exception");
 
         return "SYNTAX ERROR";        
     }
@@ -181,6 +182,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * @return the result of the actual calcul
  */
     @Override public String calcul(List<String> list) {
+        System.out.println("no error, so am executed");
         // Quit function if during the test of user input an error of syntax was occured
         if(!this.getAuthorization()) return "0";
 
