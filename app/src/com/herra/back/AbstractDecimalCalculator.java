@@ -163,6 +163,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
     public String calcul() {
         try {
+            System.out.println("user input : " + this.getInput());
             System.out.println("testing user input ...");
             this.testUserInput();
             System.out.println("testing parenthesis in input ...");
