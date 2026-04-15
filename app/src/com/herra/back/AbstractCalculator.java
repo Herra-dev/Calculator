@@ -52,6 +52,7 @@ public abstract class AbstractCalculator implements Observer, Observable {
  * @throws _SyntaxErrorException when closed parenthesis {@code >} opened parenthesis
  */
     protected void testParenthesis() throws _SyntaxErrorException {
+        this.setAuthorization(true);
         // if user input doesn't contains '(' or ')', it's not necessary to continue
         if(!this.getInput().contains("(") && !this.getInput().contains(")")) return;
 
