@@ -193,7 +193,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
             if(opened_parenthesis_index > 0)
                 // if element before the opened parenthesis is a natural number or decimal number or a closed parenthesis
-                if(list.get(opened_parenthesis_index-1).matches("[0-9]++|[0-9]++\\p{Punct}[0-9]++") || list.get(opened_parenthesis_index-1).equals(")")) 
+                if(list.get(opened_parenthesis_index-1).matches("[0-9]++|[0-9]++[.]{1}[0-9]++|[.]{1}[0-9]++") || list.get(opened_parenthesis_index-1).equals(")")) 
                     add_multiplication_sign = true;
 
             for(int i = opened_parenthesis_index+1; i < list.size(); i++) {
@@ -204,10 +204,6 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
                 }
             }
 
-            // if(closed_parenthesis_index+1 <= list.size()) {
-            //     if(list.get(closed_parenthesis_index+1).matches("[0-9]++|[0-9]++[.]{1}[0-9]|[.]{1}[0-9]"))
-            //         list.add(closed_parenthesis_index+1, "*");
-            // }
 
             if(!(closed_parenthesis_index == opened_parenthesis_index+1)) {
                 int a = 0;
