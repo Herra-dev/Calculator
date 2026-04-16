@@ -189,7 +189,7 @@ public abstract class AbstractCalculator implements Observer, Observable {
 
     @Override public boolean update(Object _obj) {
         this.setInput((String)_obj);
-        this.calcul();
+        this.calcul(); // do calcul, this method (calcul()) updates automatically the output
 
         return true;
     }
