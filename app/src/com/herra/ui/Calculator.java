@@ -24,7 +24,8 @@ import java.util.List;
 
 public class Calculator extends JFrame implements KeyListener, Observable, ActionListener{
 
-    protected LinkedList<JLabel> _displayer_list = this.setDisplayer(); 
+    protected InputDisplayer _input_displayer= new InputDisplayer();
+    protected OutputDisplayer _output_Displayer = new OutputDisplayer();
     protected LinkedList<JButton> _key_button = this.setButton();
     protected JPanel _displayer_panel = new JPanel(new GridLayout(2, 1)); // two lines and one column
     protected JPanel _number_panel = new JPanel(new GridLayout(5, 4)); // four lines and three columns
@@ -38,13 +39,16 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
         this.setCalculatorProperty(); // set properties for the Calculator Window
 
         this.addButtonToPanel(_number_panel, _key_button);
-        this.addDisplayerToPanel(_displayer_panel, _displayer_list);
+        
+        this._displayer_panel.add(_input_displayer);
+        this._displayer_panel.add(_output_Displayer);
 
         this.getContentPane().add(_number_panel, BorderLayout.CENTER);
         this.getContentPane().add(_displayer_panel, BorderLayout.NORTH);
 
         this.addKeyListener(this);   
         this._addObserver(_calc); // add _calc(DecimalCalculator) as observer of this   
+        // this._calc._addObserver(this._displayer_list.get(1));
     }
 
 //==================================================================================
@@ -142,7 +146,7 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
         String keyPressed = event.getKeyChar()+"";
         if(keyPressed.matches("[0-9]|NumPad-[0-9]")) {
             this.setUserInput(this.getUserInput()+keyPressed);
-            this._displayer_list.get(0).setText(this.getUserInput());
+            this._input_displayer.setText(this.getUserInput());
         }
         if(KeyEvent.getKeyText(event.getKeyCode()).matches("Backspace")) {
             String __user_input = this.getUserInput();
@@ -150,13 +154,13 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
 
             for(int j = 0; j < __user_input.length()-1; j++) _temp__user_input += __user_input.charAt(j);
             this.setUserInput(_temp__user_input);
-            this._displayer_list.get(0).setText(this.getUserInput());
+            this._input_displayer.setText(this.getUserInput());
         }
         if(keyPressed.equals("+") || keyPressed.equals("-") || keyPressed.equals("*") ||
             keyPressed.equals("/") || keyPressed.equals("%") || keyPressed.equals(".")) {
             
             this.setUserInput(this.getUserInput()+keyPressed);
-            this._displayer_list.get(0).setText(this.getUserInput());
+            this._input_displayer.setText(this.getUserInput());
         }
 
         this._calc.setInput(this.getUserInput());
@@ -165,7 +169,7 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
         this._calc._calcul();
         String outPut = this._calc.getOutput();
         
-        this._displayer_list.get(1).setText(outPut);
+        this._output_Displayer.setText(outPut);
     }
 
 //==================================================================================
@@ -203,29 +207,29 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
 
                 for(int j = 0; j < __user_input.length()-1; j++) _temp__user_input += __user_input.charAt(j);
                 this.setUserInput(_temp__user_input);
-                this._displayer_list.get(0).setText(this.getUserInput());
+                this._input_displayer.setText(this.getUserInput());
             }
             if(event.getSource() == _key_button.get(i) && _key_button.get(i).getText().equals("Clear")){
                 this.setUserInput(new String());
-                this._displayer_list.get(0).setText(this.getUserInput());
-                this._displayer_list.get(1).setText("OUTPUT");
+                this._input_displayer.setText(this.getUserInput());
+                this._output_Displayer.setText("OUTPUT");
                 return;
             }
             if(event.getSource() == _key_button.get(i) && _key_button.get(i).getText().matches("[0-9]|\\p{Punct}")) {
                 this.setUserInput(this.getUserInput()+_key_button.get(i).getText());
-                this._displayer_list.get(0).setText(this.getUserInput());
+                this._input_displayer.setText(this.getUserInput());
             }
         }
 
         this._calc.setInput(this.getUserInput());
-        this._displayer_list.get(1).setForeground(Color.BLACK);
+        this._output_Displayer.setForeground(Color.BLACK);
         
         this._calc._calcul();
         String outPut = this._calc.getOutput();
         
-        this._displayer_list.get(1).setText(outPut);
-        if(this._displayer_list.get(1).getText().equals("SYNTAX ERROR"))
-            this._displayer_list.get(1).setForeground(Color.RED);
+        this._output_Displayer.setText(outPut);
+        if(this._output_Displayer.getText().equals("SYNTAX ERROR"))
+            this._output_Displayer.setForeground(Color.RED);
     }
 
 }
