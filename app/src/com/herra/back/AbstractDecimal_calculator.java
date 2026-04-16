@@ -9,11 +9,11 @@ import java.util.List;
 import com.herra.exception._DivisionByZeroException;
 import com.herra.exception._SyntaxErrorException;
 
-public class AbstractDecimalCalculator extends AbstractCalculator {
+public class AbstractDecimal_calculator extends Abstract_calculator {
 
 
 /**
- * <h2>countOccurrence</h2>{@link com.herra.back.AbstractCalculator#countCharacter(String, char)}<p> 
+ * <h2>countOccurrence</h2>{@link com.herra.back.Abstract_calculator#countCharacter(String, char)}<p> 
  * returns the occurrence of{@code ch} found in {@code str}
  * 
  * @param str {@code String} where search
@@ -32,7 +32,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
     }
 
 /**
- * <h2>testUserInput()</h2>{@link com.herra.back.AbstractCalculator#testUserInput() } <p>
+ * <h2>testUserInput()</h2>{@link com.herra.back.Abstract_calculator#testUserInput() } <p>
  * 
  * if user input:<p>
  * - starts with {@code *} or {@code /} or {@code %}, <p>
@@ -118,7 +118,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 //===================================================================
 
 /**
- * <h2>arrangeUserInput()</h2> {@link com.herra.back.AbstractDecimalCalculator#arrangeUserInput()}<p>
+ * <h2>arrangeUserInput()</h2> {@link com.herra.back.AbstractDecimal_calculator#arrangeUserInput()}<p>
  * 
  * Arrange user input: (Simplify arithmetic sign)<p>
  * examples:<p>
@@ -164,12 +164,12 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
 //===================================================================
 
-    @Override public String calcul() {
+    @Override public String _calcul() {
         try {
             this.testUserInput();
             this.testParenthesis();
             this.arrangeUserInput();
-            return this.calcul(this.getInputList());
+            return this._calcul(this.getInputList());
         } catch (_SyntaxErrorException | _DivisionByZeroException e) {
             e.printStackTrace();
         }
@@ -180,11 +180,11 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 //===================================================================
 
 /**
- * Do calcul
+ * Do _calcul
  * 
- * @return the result of the actual calcul
+ * @return the result of the actual _calcul
  */
-    @Override public String calcul(List<String> list) {
+    @Override public String _calcul(List<String> list) {
         // Quit function if during the test of user input an error of syntax was occured
         if(!this.getAuthorization()) return "0";
 
@@ -227,7 +227,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
                 //remove all elements between opened and closed parenthesis (both included) from list
                 for(int i = closed_parenthesis_index; i >= opened_parenthesis_index; i--) list.remove(i);
 
-                String temp_string = this.calcul(list_copy);
+                String temp_string = this._calcul(list_copy);
 
                 if(add_multiplication_sign) {
                     list.add(opened_parenthesis_index, "*");
@@ -243,7 +243,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         }
 
         if(list.contains("("))
-            this.calcul(list);
+            this._calcul(list);
 
     //-------------------------------------------------------------------------------
 
@@ -272,7 +272,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 /**
  * <h3>operatorPlus</h3>
  * 
- * {@link com.herra.back.AbstractDecimalCalculator#operatorPlus(List)}<p>
+ * {@link com.herra.back.AbstractDecimal_calculator#operatorPlus(List)}<p>
  * 
  * This method add two numbers ({@code double}), these number is taken from parameter{@code list}, example:<p> 
  * * If no plus{@code +}sign was found, returns the parameter {@code list}<p>
@@ -280,10 +280,10 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
  * 
  * @param list {@code List<String>}
  * 
- * @see com.herra.back.AbstractDecimalCalculator#operatorMinus(List)
- * @see com.herra.back.AbstractDecimalCalculator#operatorMultiply(List)
- * @see com.herra.back.AbstractDecimalCalculator#operatorDivide(List)
- * @see com.herra.back.AbstractDecimalCalculator#operatorModulo(List)
+ * @see com.herra.back.AbstractDecimal_calculator#operatorMinus(List)
+ * @see com.herra.back.AbstractDecimal_calculator#operatorMultiply(List)
+ * @see com.herra.back.AbstractDecimal_calculator#operatorDivide(List)
+ * @see com.herra.back.AbstractDecimal_calculator#operatorModulo(List)
  * 
  * @return {@code List<String>}
  * 
@@ -362,17 +362,17 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 /**
  * <h3>operatorMinus</h3>
  * 
- * {@link com.herra.back.AbstractDecimalCalculator#operatorMinus(List)}<p>
+ * {@link com.herra.back.AbstractDecimal_calculator#operatorMinus(List)}<p>
  * 
  * This method subtract two number.<p>
- * first and second numbers are taken from the parameter {@code list} in the same way function {@link com.herra.back.AbstractDecimalCalculator#operatorPlus(List)} take them.
+ * first and second numbers are taken from the parameter {@code list} in the same way function {@link com.herra.back.AbstractDecimal_calculator#operatorPlus(List)} take them.
  * 
  * @param list {@code List<String>}
  * 
- * @see com.herra.back.AbstractDecimalCalculator#operatorPlus(List)
- * @see com.herra.back.AbstractDecimalCalculator#operatorMultiply(List)
- * @see com.herra.back.AbstractDecimalCalculator#operatorDivide(List)
- * @see com.herra.back.AbstractDecimalCalculator#operatorModulo(List)
+ * @see com.herra.back.AbstractDecimal_calculator#operatorPlus(List)
+ * @see com.herra.back.AbstractDecimal_calculator#operatorMultiply(List)
+ * @see com.herra.back.AbstractDecimal_calculator#operatorDivide(List)
+ * @see com.herra.back.AbstractDecimal_calculator#operatorModulo(List)
  * 
  * @return {@code List<String>}
  * 
@@ -444,17 +444,17 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 /**
  * <h3>operatorMultiply</h3>
  * 
- * {@link com.herra.back.AbstractDecimalCalculator#operatorMultiply(List)}<p>
+ * {@link com.herra.back.AbstractDecimal_calculator#operatorMultiply(List)}<p>
  * 
  * This method multiply two number.<p>
- * first and second numbers are taken from the parameter {@code list} in the same way function {@link com.herra.back.AbstractDecimalCalculator#operatorPlus(List)} take them.
+ * first and second numbers are taken from the parameter {@code list} in the same way function {@link com.herra.back.AbstractDecimal_calculator#operatorPlus(List)} take them.
  *
  * @author Heriniaina {@link https://github.com/Herra-dev}
  * 
- * @see com.herra.back.AbstractDecimalCalculator#operatorPlus(List)
- * @see com.herra.back.AbstractDecimalCalculator#operatorMinus(List)
- * @see com.herra.back.AbstractDecimalCalculator#operatorDivide(List)
- * @see com.herra.back.AbstractDecimalCalculator#operatorModulo(List)
+ * @see com.herra.back.AbstractDecimal_calculator#operatorPlus(List)
+ * @see com.herra.back.AbstractDecimal_calculator#operatorMinus(List)
+ * @see com.herra.back.AbstractDecimal_calculator#operatorDivide(List)
+ * @see com.herra.back.AbstractDecimal_calculator#operatorModulo(List)
  */
     @Override protected List<String> operatorMultiply(List<String> list) {
 
@@ -525,17 +525,17 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 /**
  * <h3>operatorDivide</h3>
  * 
- * {@link com.herra.back.AbstractDecimalCalculator#operatorDivide(List)}<p>
+ * {@link com.herra.back.AbstractDecimal_calculator#operatorDivide(List)}<p>
  * 
  * This method divide two number.<p>
- * first and second numbers are taken from the parameter {@code list} in the same way function {@link com.herra.back.AbstractDecimalCalculator#operatorPlus(List)} take them.
+ * first and second numbers are taken from the parameter {@code list} in the same way function {@link com.herra.back.AbstractDecimal_calculator#operatorPlus(List)} take them.
  *
  * @author Heriniaina {@link https://github.com/Herra-dev}
  * 
- * @see com.herra.back.AbstractDecimalCalculator#operatorPlus(List)
- * @see com.herra.back.AbstractDecimalCalculator#operatorMinus(List)
- * @see com.herra.back.AbstractDecimalCalculator#operatorMultiply(List)
- * @see com.herra.back.AbstractDecimalCalculator#operatorModulo(List)
+ * @see com.herra.back.AbstractDecimal_calculator#operatorPlus(List)
+ * @see com.herra.back.AbstractDecimal_calculator#operatorMinus(List)
+ * @see com.herra.back.AbstractDecimal_calculator#operatorMultiply(List)
+ * @see com.herra.back.AbstractDecimal_calculator#operatorModulo(List)
  */
     @Override protected List<String> operatorDivide(List<String> list) {
 
@@ -614,17 +614,17 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 /**
  * <h3>operatorModulo</h3>
  * 
- * {@link com.herra.back.AbstractDecimalCalculator#operatorModulo(List)}<p>
+ * {@link com.herra.back.AbstractDecimal_calculator#operatorModulo(List)}<p>
  * 
  * This method find the modulo between two numbers.<p>
- * first and second numbers are taken from the parameter {@code list} in the same way function {@link com.herra.back.AbstractDecimalCalculator#operatorPlus(List)} take them.
+ * first and second numbers are taken from the parameter {@code list} in the same way function {@link com.herra.back.AbstractDecimal_calculator#operatorPlus(List)} take them.
  *
  * @author Heriniaina {@link https://github.com/Herra-dev}
  * 
- * @see com.herra.back.AbstractDecimalCalculator#operatorPlus(List)
- * @see com.herra.back.AbstractDecimalCalculator#operatorMinus(List)
- * @see com.herra.back.AbstractDecimalCalculator#operatorMultiply(List)
- * @see com.herra.back.AbstractDecimalCalculator#operatorDivide(List)
+ * @see com.herra.back.AbstractDecimal_calculator#operatorPlus(List)
+ * @see com.herra.back.AbstractDecimal_calculator#operatorMinus(List)
+ * @see com.herra.back.AbstractDecimal_calculator#operatorMultiply(List)
+ * @see com.herra.back.AbstractDecimal_calculator#operatorDivide(List)
  */
     @Override protected List<String> operatorModulo(List<String> list) {
 

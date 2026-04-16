@@ -1,14 +1,14 @@
-import com.herra.ui.Calculator;
+import com.herra.ui._calculator;
 
-// import com.herra.back.DecimalCalculator;
+// import com.herra.back.Decimal_calculator;
 
 public class App {
     public static void main(String[] args) {
-        Calculator calc = new Calculator();
-        calc.setVisible(true);
-        // DecimalCalculator calc = new DecimalCalculator("3%3/-3");
-        // calc.calcul();
-        // System.out.println("can proceed : " + calc.getAuthorization());
-        // System.out.println("output: " + calc.getOutput());
+        _calculator _calc = new _calculator();
+        _calc.setVisible(true);
+        // Decimal_calculator _calc = new Decimal_calculator("3%3/-3");
+        // _calc._calcul();
+        // System.out.println("can proceed : " + _calc.getAuthorization());
+        // System.out.println("output: " + _calc.getOutput());
     }
 }

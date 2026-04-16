@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.herra.back.DecimalCalculator;
+import com.herra.back.Decimal_calculator;
 import com.interfaces.sh.Observable;
 import com.interfaces.sh.Observer;
 
@@ -21,25 +21,26 @@ import java.awt.event.KeyListener;
 
 import java.util.LinkedList;
 
-public class Calculator extends JFrame implements KeyListener, Observable, ActionListener{
+public class _calculator extends JFrame implements KeyListener, Observable, ActionListener{
 
-    protected LinkedList<JLabel> displayer_list = this.setDisplayer(); 
-    protected LinkedList<JButton> key_button = this.setButton();
-    protected JPanel displayer_panel = new JPanel(new GridLayout(2, 1)); // two lines and one column
-    protected JPanel number_panel = new JPanel(new GridLayout(5, 4)); // four lines and three columns
-    protected String user_input = new String(); // String to stock user input
-    protected DecimalCalculator calc = new DecimalCalculator(new String());
+    protected LinkedList<JLabel> _displayer_list = this.setDisplayer(); 
+    protected LinkedList<JButton> _key_button = this.setButton();
+    protected JPanel _displayer_panel = new JPanel(new GridLayout(2, 1)); // two lines and one column
+    protected JPanel _number_panel = new JPanel(new GridLayout(5, 4)); // four lines and three columns
+    protected String _user_input = new String(); // String to stock user input
+    protected Decimal_calculator _calc = new Decimal_calculator(new String());
+    // protected List<Observer> 
 
 //==================================================================================
 
-    public Calculator() {
-        this.setCalculatorProperty(); // set properties for the Calculator Window
+    public _calculator() {
+        this.set_calculatorProperty(); // set properties for the _calculator Window
 
-        this.addButtonToPanel(number_panel, key_button);
-        this.addDisplayerToPanel(displayer_panel, displayer_list);
+        this.addButtonToPanel(_number_panel, _key_button);
+        this.addDisplayerToPanel(_displayer_panel, _displayer_list);
 
-        this.getContentPane().add(number_panel, BorderLayout.CENTER);
-        this.getContentPane().add(displayer_panel, BorderLayout.NORTH);
+        this.getContentPane().add(_number_panel, BorderLayout.CENTER);
+        this.getContentPane().add(_displayer_panel, BorderLayout.NORTH);
 
         this.addKeyListener(this);       
     }
@@ -47,20 +48,20 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
 //==================================================================================
 
     public String getUserInput() {
-        return this.user_input;
+        return this._user_input;
     }
 
 //==================================================================================
 
-    public void setUserInput(String new_user_input) {
-        this.user_input = new_user_input;
+    public void setUserInput(String new__user_input) {
+        this._user_input = new__user_input;
     }
 
 //==================================================================================
 
-    public void setCalculatorProperty() {
+    public void set_calculatorProperty() {
         this.setLocationRelativeTo(null);
-        this.setTitle("Calculator");
+        this.setTitle("_calculator");
         this.setSize(400, 400);
         this.setMinimumSize(new Dimension(400, 400));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -139,29 +140,29 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
         String keyPressed = event.getKeyChar()+"";
         if(keyPressed.matches("[0-9]|NumPad-[0-9]")) {
             this.setUserInput(this.getUserInput()+keyPressed);
-            this.displayer_list.get(0).setText(this.getUserInput());
+            this._displayer_list.get(0).setText(this.getUserInput());
         }
         if(KeyEvent.getKeyText(event.getKeyCode()).matches("Backspace")) {
-            String _user_input = this.getUserInput();
-            String _temp_user_input = new String();
+            String __user_input = this.getUserInput();
+            String _temp__user_input = new String();
 
-            for(int j = 0; j < _user_input.length()-1; j++) _temp_user_input += _user_input.charAt(j);
-            this.setUserInput(_temp_user_input);
-            this.displayer_list.get(0).setText(this.getUserInput());
+            for(int j = 0; j < __user_input.length()-1; j++) _temp__user_input += __user_input.charAt(j);
+            this.setUserInput(_temp__user_input);
+            this._displayer_list.get(0).setText(this.getUserInput());
         }
         if(keyPressed.equals("+") || keyPressed.equals("-") || keyPressed.equals("*") ||
             keyPressed.equals("/") || keyPressed.equals("%") || keyPressed.equals(".")) {
             
             this.setUserInput(this.getUserInput()+keyPressed);
-            this.displayer_list.get(0).setText(this.getUserInput());
+            this._displayer_list.get(0).setText(this.getUserInput());
         }
 
-        this.calc.setInput(this.getUserInput());
+        this._calc.setInput(this.getUserInput());
         
-        this.calc.calcul();
-        String outPut = this.calc.getOutput();
+        this._calc._calcul();
+        String outPut = this._calc.getOutput();
         
-        this.displayer_list.get(1).setText(outPut);
+        this._displayer_list.get(1).setText(outPut);
     }
 
 //==================================================================================
@@ -187,36 +188,36 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
 //==================================================================================
 
     @Override public void actionPerformed(ActionEvent event) {
-        for(int i = 0; i < key_button.size(); i++) {
-            if(event.getSource() == key_button.get(i) && key_button.get(i).getText().equals("Del")) {
-                String _user_input = this.getUserInput();
-                String _temp_user_input = new String();
+        for(int i = 0; i < _key_button.size(); i++) {
+            if(event.getSource() == _key_button.get(i) && _key_button.get(i).getText().equals("Del")) {
+                String __user_input = this.getUserInput();
+                String _temp__user_input = new String();
 
-                for(int j = 0; j < _user_input.length()-1; j++) _temp_user_input += _user_input.charAt(j);
-                this.setUserInput(_temp_user_input);
-                this.displayer_list.get(0).setText(this.getUserInput());
+                for(int j = 0; j < __user_input.length()-1; j++) _temp__user_input += __user_input.charAt(j);
+                this.setUserInput(_temp__user_input);
+                this._displayer_list.get(0).setText(this.getUserInput());
             }
-            if(event.getSource() == key_button.get(i) && key_button.get(i).getText().equals("Clear")){
+            if(event.getSource() == _key_button.get(i) && _key_button.get(i).getText().equals("Clear")){
                 this.setUserInput(new String());
-                this.displayer_list.get(0).setText(this.getUserInput());
-                this.displayer_list.get(1).setText("OUTPUT");
+                this._displayer_list.get(0).setText(this.getUserInput());
+                this._displayer_list.get(1).setText("OUTPUT");
                 return;
             }
-            if(event.getSource() == key_button.get(i) && key_button.get(i).getText().matches("[0-9]|\\p{Punct}")) {
-                this.setUserInput(this.getUserInput()+key_button.get(i).getText());
-                this.displayer_list.get(0).setText(this.getUserInput());
+            if(event.getSource() == _key_button.get(i) && _key_button.get(i).getText().matches("[0-9]|\\p{Punct}")) {
+                this.setUserInput(this.getUserInput()+_key_button.get(i).getText());
+                this._displayer_list.get(0).setText(this.getUserInput());
             }
         }
 
-        this.calc.setInput(this.getUserInput());
-        this.displayer_list.get(1).setForeground(Color.BLACK);
+        this._calc.setInput(this.getUserInput());
+        this._displayer_list.get(1).setForeground(Color.BLACK);
         
-        this.calc.calcul();
-        String outPut = this.calc.getOutput();
+        this._calc._calcul();
+        String outPut = this._calc.getOutput();
         
-        this.displayer_list.get(1).setText(outPut);
-        if(this.displayer_list.get(1).getText().equals("SYNTAX ERROR"))
-            this.displayer_list.get(1).setForeground(Color.RED);
+        this._displayer_list.get(1).setText(outPut);
+        if(this._displayer_list.get(1).getText().equals("SYNTAX ERROR"))
+            this._displayer_list.get(1).setForeground(Color.RED);
     }
 
 }
