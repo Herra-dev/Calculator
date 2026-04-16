@@ -43,7 +43,8 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
         this.getContentPane().add(_number_panel, BorderLayout.CENTER);
         this.getContentPane().add(_displayer_panel, BorderLayout.NORTH);
 
-        this.addKeyListener(this);       
+        this.addKeyListener(this);   
+        this._addObserver(_calc); // add _calc(DecimalCalculator) as observer of this   
     }
 
 //==================================================================================
@@ -159,6 +160,7 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
         }
 
         this._calc.setInput(this.getUserInput());
+        this._updateObserver(this.getUserInput());
         
         this._calc._calcul();
         String outPut = this._calc.getOutput();
@@ -187,7 +189,7 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
     @Override public boolean _updateObserver(Object _obj) {
         for(Observer obs: this._observer_list)
             obs.update(_obj);
-        
+
         return true;
     }
 
