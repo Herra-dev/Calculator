@@ -569,7 +569,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             }
             else if(list.get(first_number_index-1).equals("+")) --first_to_remove;
         }
-        // if element coming after multiplication sign is a subraction sign, negate second number 
+        // if element coming after modulo sign is a subraction sign, negate second number 
         if(list.get(division_sign_index+1).equals("-")) {
             second_number = second_number.negate();
             ++last_to_remove;
