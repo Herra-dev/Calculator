@@ -19,6 +19,7 @@ public abstract class AbstractCalculator implements Observer, Observable {
 
     protected abstract void testUserInput() throws _SyntaxErrorException, _DivisionByZeroException;
     protected abstract void arrangeUserInput();
+    protected abstract String calcul();
     protected abstract String calcul(List<String> list);
     protected abstract List<String> operatorPlus(List<String> list);
     protected abstract List<String> operatorMinus(List<String> list);
@@ -188,7 +189,8 @@ public abstract class AbstractCalculator implements Observer, Observable {
 
     @Override public boolean update(Object _obj) {
         this.setInput((String)_obj);
-        
+        this.calcul();
+
         return true;
     }
 

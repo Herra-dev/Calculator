@@ -164,7 +164,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
 
 //===================================================================
 
-    public String calcul() {
+    @Override public String calcul() {
         try {
             this.testUserInput();
             this.testParenthesis();
