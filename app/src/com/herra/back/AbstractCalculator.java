@@ -8,7 +8,7 @@ import com.herra.exception._SyntaxErrorException;
 import com.interfaces.sh.Observable;
 import com.interfaces.sh.Observer;
 
-public abstract class Abstract_calculator implements Observer, Observable {
+public abstract class AbstractCalculator implements Observer, Observable {
     protected String _input = new String("0");
     protected boolean _canProcess = true;
     protected String _outPut = new String("0");
@@ -48,7 +48,7 @@ public abstract class Abstract_calculator implements Observer, Observable {
 
 /**
  * <h3>testParenthesis</h3>
- * {@link com.herra.back.Abstract_calculator#testParenthesis()}<p>
+ * {@link com.herra.back.AbstractCalculator#testParenthesis()}<p>
  * <Strong>Test if all {@code parenthesis} is well placed in user input</strong>
  * 
  * @throws _SyntaxErrorException when closed parenthesis {@code >} opened parenthesis
@@ -99,7 +99,7 @@ public abstract class Abstract_calculator implements Observer, Observable {
 
 /**
  * <h3>countCharacter</h3>
- * {@link com.herra.back.Abstract_calculator#countCharacter(String, char)}<p>
+ * {@link com.herra.back.AbstractCalculator#countCharacter(String, char)}<p>
  * <i>Count occurence of parameter {@code charToFind} in {@code charSequence}</i>
  * 
  * @param charSequence  {@code String}
@@ -122,7 +122,7 @@ public abstract class Abstract_calculator implements Observer, Observable {
 
 /**
  * <h3>separeInput</h3>
- * {@link com.herra.back.Abstract_calculator#separeInput()}<p>
+ * {@link com.herra.back.AbstractCalculator#separeInput()}<p>
  * 
  * This methor separe user input and push each element into a list.<p>
  * <strong>Example:</strong>

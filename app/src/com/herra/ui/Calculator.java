@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import com.herra.back.Decimal_calculator;
+import com.herra.back.DecimalCalculator;
 import com.interfaces.sh.Observable;
 import com.interfaces.sh.Observer;
 
@@ -21,20 +21,20 @@ import java.awt.event.KeyListener;
 
 import java.util.LinkedList;
 
-public class _calculator extends JFrame implements KeyListener, Observable, ActionListener{
+public class Calculator extends JFrame implements KeyListener, Observable, ActionListener{
 
     protected LinkedList<JLabel> _displayer_list = this.setDisplayer(); 
     protected LinkedList<JButton> _key_button = this.setButton();
     protected JPanel _displayer_panel = new JPanel(new GridLayout(2, 1)); // two lines and one column
     protected JPanel _number_panel = new JPanel(new GridLayout(5, 4)); // four lines and three columns
     protected String _user_input = new String(); // String to stock user input
-    protected Decimal_calculator _calc = new Decimal_calculator(new String());
+    protected DecimalCalculator _calc = new DecimalCalculator(new String());
     // protected List<Observer> 
 
 //==================================================================================
 
-    public _calculator() {
-        this.set_calculatorProperty(); // set properties for the _calculator Window
+    public Calculator() {
+        this.setCalculatorProperty(); // set properties for the Calculator Window
 
         this.addButtonToPanel(_number_panel, _key_button);
         this.addDisplayerToPanel(_displayer_panel, _displayer_list);
@@ -59,9 +59,9 @@ public class _calculator extends JFrame implements KeyListener, Observable, Acti
 
 //==================================================================================
 
-    public void set_calculatorProperty() {
+    public void setCalculatorProperty() {
         this.setLocationRelativeTo(null);
-        this.setTitle("_calculator");
+        this.setTitle("Calculator");
         this.setSize(400, 400);
         this.setMinimumSize(new Dimension(400, 400));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);

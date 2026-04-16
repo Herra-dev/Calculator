@@ -1,6 +1,6 @@
 package app.test.com.herra.back;
 
-public class Test_Abstract_calculator {
+public class Test_AbstractCalculator {
 
     @Test 
     public void tst() {
