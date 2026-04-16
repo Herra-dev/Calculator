@@ -33,7 +33,7 @@ public class InputDisplayer extends JLabel implements Observable, Observer{
 
 //==========================================================================================
 
-    @Override public boolean _updateObserver() {
+    @Override public boolean _updateObserver(Object _obj) {
         for(Observer obs: _cObserver)
             obs.update(obs);
         return true;

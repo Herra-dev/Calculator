@@ -198,13 +198,17 @@ public abstract class AbstractCalculator implements Observer, Observable {
 //===================================================================
 
     @Override public boolean _addObserver(Observer _observer) {
-        
+        this._observer_List.add(_observer);
+
         return true;
     }
 
 //===================================================================
     
-    @Override public boolean _updateObserver() {
+    @Override public boolean _updateObserver(Object _obj) {
+        for(Observer obs: this._observer_List)
+            obs.update(_obj);
+
         return true;
     }
 

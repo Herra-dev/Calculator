@@ -180,7 +180,7 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
 
 //==================================================================================
 
-    @Override public boolean _updateObserver() {
+    @Override public boolean _updateObserver(Object _obj) {
         return true;
     }
 
