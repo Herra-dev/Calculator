@@ -599,6 +599,12 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             list.add(first_to_remove, result.toString());
         }
 
+        System.out.println("division");
+
+        for(String str: list)
+            System.out.println(str);
+        System.out.println();
+
         return list;
     }
 
@@ -630,16 +636,16 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         //--------------------------------------------------------------------------------
 
         int modulo_sign_index = list.indexOf("%");
-        System.out.println("index of % = " + modulo_sign_index);
+        
         int first_number_index = modulo_sign_index-1;
         int second_number_index = modulo_sign_index+1;
         int first_to_remove = first_number_index;
         int last_to_remove = second_number_index;
 
         BigDecimal first_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(modulo_sign_index-1)));
-        BigDecimal second_number = BigDecimal.valueOf((list.get(modulo_sign_index+1).equals("-")) 
-            ? java.lang.Double.parseDouble(list.get(modulo_sign_index+2)) 
-            : java.lang.Double.parseDouble(list.get(modulo_sign_index+1)));
+        BigDecimal second_number = BigDecimal.valueOf((list.get(modulo_sign_index+1).matches("[0-9]++")) 
+            ? java.lang.Double.parseDouble(list.get(modulo_sign_index+1)) 
+            : java.lang.Double.parseDouble(list.get(modulo_sign_index+2)));
 
         // if first number's index is superior to 0, 
         if(first_number_index > 0){

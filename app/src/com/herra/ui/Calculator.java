@@ -160,7 +160,7 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
         
         this.calc.calcul();
         String outPut = this.calc.getOutput();
-        System.out.println("output : " + outPut);
+        
         this.displayer_list.get(1).setText(outPut);
     }
 
@@ -208,14 +208,12 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
             }
         }
 
-        System.out.println("calculator user input = " + this.getUserInput());
-
         this.calc.setInput(this.getUserInput());
         this.displayer_list.get(1).setForeground(Color.BLACK);
         
         this.calc.calcul();
         String outPut = this.calc.getOutput();
-        System.out.println("output : " + outPut);
+        
         this.displayer_list.get(1).setText(outPut);
         if(this.displayer_list.get(1).getText().equals("SYNTAX ERROR"))
             this.displayer_list.get(1).setForeground(Color.RED);
