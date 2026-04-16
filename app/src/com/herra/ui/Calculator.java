@@ -20,6 +20,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class Calculator extends JFrame implements KeyListener, Observable, ActionListener{
 
@@ -29,7 +30,7 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
     protected JPanel _number_panel = new JPanel(new GridLayout(5, 4)); // four lines and three columns
     protected String _user_input = new String(); // String to stock user input
     protected DecimalCalculator _calc = new DecimalCalculator(new String());
-    // protected List<Observer> 
+    protected List<Observer> _observer_list = new LinkedList<Observer>();
 
 //==================================================================================
 
