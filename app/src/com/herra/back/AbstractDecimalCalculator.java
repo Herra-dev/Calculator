@@ -553,6 +553,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         int first_to_remove = first_number_index;
         int last_to_remove = second_number_index;
 
+        // if element coming just after the modulo sign is a plus sign, removes this last
         if(list.get(division_sign_index+1).matches("[+]{1}")) list.remove(division_sign_index+1);
 
         BigDecimal first_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(division_sign_index-1)));
@@ -642,6 +643,7 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         int first_to_remove = first_number_index;
         int last_to_remove = second_number_index;
 
+        // if element coming just after the modulo sign is a plus sign, removes this last
         if(list.get(modulo_sign_index+1).matches("[+]{1}")) list.remove(modulo_sign_index+1);
 
         BigDecimal first_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(modulo_sign_index-1)));
