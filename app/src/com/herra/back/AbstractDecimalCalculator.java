@@ -553,6 +553,8 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         int first_to_remove = first_number_index;
         int last_to_remove = second_number_index;
 
+        if(list.get(division_sign_index+1).matches("[+]{1}")) list.remove(division_sign_index+1);
+
         BigDecimal first_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(division_sign_index-1)));
         BigDecimal second_number = BigDecimal.valueOf((list.get(division_sign_index+1).equals("-")) 
             ? java.lang.Double.parseDouble(list.get(division_sign_index+2)) 
@@ -639,6 +641,8 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
         int second_number_index = modulo_sign_index+1;
         int first_to_remove = first_number_index;
         int last_to_remove = second_number_index;
+
+        if(list.get(modulo_sign_index+1).matches("[+]{1}")) list.remove(modulo_sign_index+1);
 
         BigDecimal first_number = BigDecimal.valueOf(java.lang.Double.parseDouble(list.get(modulo_sign_index-1)));
         BigDecimal second_number = BigDecimal.valueOf((list.get(modulo_sign_index+1).matches("[0-9]++")) 
