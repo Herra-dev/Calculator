@@ -583,11 +583,9 @@ public class AbstractDecimalCalculator extends AbstractCalculator {
             if(result.equals(result.abs())) {   // result is a positive number
                 if(list.get(first_to_remove-1).equals("*") || list.get(first_to_remove-1).equals("/")) {
                     list.add(first_to_remove, result.abs().toString());
-                    System.out.println("not a number");
                 } else {
                     list.add(first_to_remove, result.abs().toString());
                     list.add(first_to_remove, "+");
-                    System.out.println("a number");
                 }
             }
             else {                              // result is a negative number
