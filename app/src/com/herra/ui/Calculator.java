@@ -48,7 +48,7 @@ public class Calculator extends JFrame implements KeyListener, Observable, Actio
 
         this.addKeyListener(this);   
         this._addObserver(_calc); // add _calc(DecimalCalculator) as observer of this   
-        // this._calc._addObserver(this._displayer_list.get(1));
+        this._calc._addObserver(this._output_Displayer);
     }
 
 //==================================================================================
