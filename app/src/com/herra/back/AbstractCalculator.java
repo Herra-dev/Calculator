@@ -13,6 +13,7 @@ public abstract class AbstractCalculator implements Observer, Observable {
     protected boolean _canProcess = true;
     protected String _outPut = new String("0");
     protected List<String> _input_list = new LinkedList<String>();
+    protected List<Observer> _observer_List = new LinkedList<Observer>();
 
 //===================================================================
 //  ABSTRACT METHODS
@@ -197,6 +198,7 @@ public abstract class AbstractCalculator implements Observer, Observable {
 //===================================================================
 
     @Override public boolean _addObserver(Observer _observer) {
+        
         return true;
     }
 
